@@ -2,7 +2,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-named-as-default
 import NavBar from './NavBar/NavBar';
-import './header.scss';
+import './Header.scss';
 
 const Header = () => {
   return (

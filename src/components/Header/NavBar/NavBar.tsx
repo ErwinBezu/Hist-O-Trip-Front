@@ -7,7 +7,7 @@ import {
 } from 'react-icons/ai';
 import { BsFillPersonFill } from 'react-icons/bs';
 import Categories from '../../Categories/Categories';
-import './navBar.scss';
+import './NavBar.scss';
 
 const NavBar = () => {
   return (
