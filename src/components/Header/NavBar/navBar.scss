@@ -1,0 +1,10 @@
+@use '../../../styles/variables' as *;
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.logo {
+  width: 300px;
+}
