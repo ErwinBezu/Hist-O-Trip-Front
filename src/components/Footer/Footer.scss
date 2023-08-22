@@ -1,0 +1,15 @@
+@use '../../styles/variables' as *;
+
+.footer-container {
+  background-color: $color-tertiary;
+  font-family: $text-alternate;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+
+  a {
+    text-decoration: none;
+    color: $color-primary;
+  }
+}
