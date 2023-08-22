@@ -1,10 +1,35 @@
 @use '../../../styles/variables' as *;
 
+.logo {
+  width: 300px;
+}
+
 .navbar-container {
   display: flex;
   justify-content: space-around;
+
+  .suggest-btn {
+    background-color: $color-secondary;
+    color: $color-primary;
+    padding: 5px 50px;
+    border-radius: 30px;
+    border-style: none;
+  }
+  .menu-btn {
+    display: flex;
+  }
 }
 
-.logo {
-  width: 300px;
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+
+  nav {
+    width: 80%;
+    ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

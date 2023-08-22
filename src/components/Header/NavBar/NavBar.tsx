@@ -25,14 +25,16 @@ const NavBar = () => {
           </button>
         </div>
         <div>
-          <button type="button">Proposer un lieu</button>
-          <button type="button">
+          <button type="button" className="suggest-btn">
+            Proposer un lieu
+          </button>
+          <button type="button" className="menu-btn">
             <AiOutlineMenu />
             <BsFillPersonFill />
           </button>
         </div>
       </div>
-      <div>
+      <div className="filter-container">
         <Categories />
         <button type="button">
           <AiOutlineControl /> Filtre
