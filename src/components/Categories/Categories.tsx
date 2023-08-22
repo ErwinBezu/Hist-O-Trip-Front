@@ -5,6 +5,8 @@ import Icon from './Icon';
 
 import categories from '../../data/categories.json';
 
+import './Categories.scss';
+
 const Categories = () => {
   return (
     <nav>

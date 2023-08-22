@@ -12,9 +12,12 @@
 	},
 	"dependencies": {
 		"@wonderflow/react-components": "^12.4.0",
+		"@wonderflow/symbols": "^12.4.0",
+		"@wonderflow/themes": "^12.4.0",
+		"@wonderflow/tokens": "^12.4.0",
 		"react": "^18.2.0",
 		"react-components": "^0.5.1",
-		"react-devtools": "^4.28.0",
+		"react-devtools": "^2.1.7",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.10.1"
 	},

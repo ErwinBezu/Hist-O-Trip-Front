@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Renaissance"
+  },
+  {
+    "id": 2,
+    "name": "Guerre de Cent Ans"
+  },
+  {
+    "id": 3,
+    "name": "Première Guerre Mondiale"
+  },
+  {
+    "id": 4,
+    "name": "Seconde Guerre Mondiale"
+  },
+  {
+    "id": 5,
+    "name": "Guerre de 1870"
+  },
+  {
+    "id": 6,
+    "name": "Histoire Sociale"
+  },
+  {
+    "id": 7,
+    "name": "Guerre des Gaules"
+  },
+  {
+    "id": 8,
+    "name": "Bataille de la Somme"
+  },
+  {
+    "id": 9,
+    "name": "Bataille de Verdun"
+  },
+  {
+    "id": 10,
+    "name": "Ligne Maginot"
+  }
+]

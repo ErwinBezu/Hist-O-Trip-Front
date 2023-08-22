@@ -1,5 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -7,9 +7,11 @@ import {
 } from 'react-icons/ai';
 import { BsFillPersonFill } from 'react-icons/bs';
 import Categories from '../../Categories/Categories';
+import Filter from '../Filter/Filter';
 import './NavBar.scss';
 
 const NavBar = () => {
+  const [isVisible, setIsVisisble] = useState(false);
   return (
     <>
       <div className="navbar-container">
@@ -36,9 +38,10 @@ const NavBar = () => {
       </div>
       <div className="filter-container">
         <Categories />
-        <button type="button">
+        <button type="button" onClick={() => setIsVisisble(true)}>
           <AiOutlineControl /> Filtre
         </button>
+        {isVisible && <Filter setIsVisible={setIsVisisble} />}
       </div>
     </>
   );
