@@ -1,5 +1,4 @@
 /* eslint-disable react/function-component-definition */
-import React, { useEffect, useState } from 'react';
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -34,6 +33,7 @@ const NavBar = () => {
           </button>
         </div>
       </div>
+
       <div className="filter-container">
         <button type="button" className="previous-btn">
           &lt;
@@ -44,6 +44,15 @@ const NavBar = () => {
         </button>
         <button type="button" className="filter-btn">
           <AiOutlineControl /> Filtre
+        </button>
+      </div>
+
+      <div className="mobilebar-container">
+        <button type="button" className="menu-btn">
+          <BsFillPersonFill />
+        </button>
+        <button type="button" className="filter-btn">
+          <AiOutlineControl />
         </button>
       </div>
     </>

@@ -1,10 +1,17 @@
 import './Card.scss';
 import places from '../../data/places.json';
+import { useState } from 'react';
 
 const Card = () => {
+  const [visibleCards, setVisibleCards] = useState(12);
+
+  const loadMoreCards = () => {
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
+  };
+
   return (
     <div className="cards-container">
-      {places.map((place) => (
+      {places.slice(0, visibleCards).map((place) => (
         <article key={place.id}>
           <img src={place.pictures[0].url} alt="avatar" />
           <div className="content">
@@ -16,6 +23,11 @@ const Card = () => {
           </div>
         </article>
       ))}
+      {visibleCards < places.length && (
+        <button className="load-more-button" onClick={loadMoreCards}>
+          Afficher plus
+        </button>
+      )}
     </div>
   );
 };
