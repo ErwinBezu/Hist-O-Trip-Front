@@ -15,9 +15,9 @@ const Card = () => {
         <article key={place.id}>
           <img src={place.pictures[0].url} alt="avatar" />
           <div className="content">
-            <h2> {place.name}</h2>
-            <h3>
-              {place.postcode} - {place.city}
+            <h2 className="placename-card"> {place.name}</h2>
+            <h3 className="placecity-card">
+              <span className="zipcode">{place.postcode}</span> - {place.city}
             </h3>
             <span> {place.rating}</span>
           </div>
