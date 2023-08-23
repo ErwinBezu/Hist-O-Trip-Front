@@ -7,7 +7,8 @@ const Tags = () => {
 <ul>
         {tags.map((tag, key) => (
           <li key={key}>
-            {tag.name}
+            <label ><input type="checkbox" /> {tag.name}</label>
+            
           </li>
         ))}
       </ul>

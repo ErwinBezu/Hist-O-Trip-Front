@@ -15,7 +15,7 @@ const NavBar = () => {
   return (
     <>
       <div className="navbar-container">
-        <img
+        {/* <img
           src="../src/assets/logo.png"
           alt="logo Hist'O'Trip"
           className="logo"
@@ -37,7 +37,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className="filter-container">
-        <Categories />
+        <Categories /> */}
         <button type="button" onClick={() => setIsVisisble(true)}>
           <AiOutlineControl /> Filtre
         </button>

@@ -16,7 +16,8 @@ const Periodes = () => {
 <ul>
         {filteredPeriods.map((century, key) => (
           <li key={key}>
-            {century.period}
+            <label><input type="checkbox" />{century.period}</label>
+            
           </li>
         ))}
       </ul>

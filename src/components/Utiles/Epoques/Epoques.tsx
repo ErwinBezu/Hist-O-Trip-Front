@@ -7,7 +7,7 @@ const Epoques = () => {
 <ul>
         {centuries.map((century, key) => (
           <li key={key}>
-            {century.century}
+            <label ><input type="checkbox" />{century.century}</label>
           </li>
         ))}
       </ul>
