@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 const Home = () => {
   return (
     <>
+
       <Header />
       <Card />
       <Footer />

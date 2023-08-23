@@ -1,4 +1,5 @@
-/* eslint-disable react/function-component-definition */
+import React, { useState } from 'react';
+
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -6,13 +7,15 @@ import {
 } from 'react-icons/ai';
 import { BsFillPersonFill } from 'react-icons/bs';
 import Categories from '../../Categories/Categories';
+import Filter from '../Filter/Filter';
 import './NavBar.scss';
 
 const NavBar = () => {
+  const [isVisible, setIsVisisble] = useState(false);
   return (
     <>
       <div className="navbar-container">
-        <img
+         <img
           src="../src/assets/logo.png"
           alt="logo Hist'O'Trip"
           className="logo"
@@ -35,6 +38,10 @@ const NavBar = () => {
       </div>
 
       <div className="filter-container">
+
+        
+        
+
         <button type="button" className="previous-btn">
           &lt;
         </button>
@@ -42,18 +49,20 @@ const NavBar = () => {
         <button type="button" className="next-btn">
           &gt;
         </button>
-        <button type="button" className="filter-btn">
+        <button type="button" onClick={() => setIsVisisble(true)} className="filter-btn">
           <AiOutlineControl /> Filtre
         </button>
+        {isVisible && <Filter setIsVisible={setIsVisisble} />}
       </div>
 
       <div className="mobilebar-container">
         <button type="button" className="menu-btn">
           <BsFillPersonFill />
         </button>
-        <button type="button" className="filter-btn">
+        <button type="button" onClick={() => setIsVisisble(true)} className="filter-btn">
           <AiOutlineControl />
         </button>
+        {isVisible && <Filter setIsVisible={setIsVisisble} />}
       </div>
     </>
   );
