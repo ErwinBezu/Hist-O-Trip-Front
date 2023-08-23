@@ -2,5 +2,8 @@
 
 .header-container {
   background: $color-gradient-header;
-  font-family: 'Akshar', sans-serif;
+  font-family: $text-alternate;
+  position: sticky;
+  top: 0;
+  padding: 5px 10px 0 10px;
 }

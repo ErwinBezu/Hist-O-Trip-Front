@@ -1,35 +1,230 @@
 @use '../../../styles/variables' as *;
 
-.logo {
-  width: 300px;
-}
-
 .navbar-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 
-  .suggest-btn {
-    background-color: $color-secondary;
-    color: $color-primary;
-    padding: 5px 50px;
-    border-radius: 30px;
-    border-style: none;
+  .logo {
+    width: 30%;
   }
-  .menu-btn {
+
+  .search-container {
     display: flex;
+    padding-left: 30px;
+
+    input {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border: 1px solid $color-tertiary;
+      border-right: none;
+      width: 80%;
+      padding: 5px 20px;
+      background-color: $color-primary;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border: 1px solid $color-tertiary;
+      border-left: none;
+      padding: 5px 20px;
+      background-color: $color-primary;
+    }
+  }
+  .suggest-menu-container {
+    display: none;
   }
 }
 
 .filter-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 10px;
+
+  ::-webkit-scrollbar {
+    display: none; /* scrollbar hiding for Chrome */
+  }
+
+  .previous-btn,
+  .next-btn,
+  .filter-btn {
+    display: none;
+  }
 
   nav {
-    width: 80%;
+    width: 100%;
+
     ul {
       list-style-type: none;
+      padding: 0;
       display: flex;
       justify-content: space-between;
+      gap: 35px;
+      overflow-x: auto;
+      scrollbar-width: none; /* scrollbar hiding for Firefox */
+
+      li {
+        svg {
+          width: 100%;
+          font-size: 2rem;
+          color: $color-tertiary;
+          transition: 1s;
+          &:hover {
+            color: $color-secondary;
+            transition: 0.2s;
+          }
+        }
+        span {
+          font-size: 0.8em;
+        }
+        &:hover {
+          color: $color-secondary;
+          transition: 0.2s;
+        }
+      }
     }
   }
 }
+
+.mobilebar-container {
+  background-color: $color-primary;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .menu-btn,
+  .filter-btn {
+    border-style: none;
+    svg {
+      width: 100%;
+      font-size: 2rem;
+      color: $color-tertiary;
+      background-color: $color-primary;
+    }
+  }
+}
+
+@media screen and (min-width: 551px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-around;
+
+    .logo {
+      width: 20%;
+    }
+    .suggest-menu-container {
+      display: flex;
+
+      .suggest-btn,
+      .menu-btn {
+        display: none;
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-around;
+
+    .logo {
+      width: 20%;
+    }
+    .suggest-menu-container {
+      display: flex;
+
+      .suggest-btn {
+        display: none;
+      }
+      .menu-btn {
+        display: flex;
+        gap: 5px;
+        border-style: none;
+        border-radius: 30px;
+        padding: 5px 10px;
+      }
+    }
+  }
+  .mobilebar-container {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 951px) {
+  .navbar-container {
+    .logo {
+      width: 20%;
+    }
+    .suggest-menu-container {
+      .suggest-btn {
+        display: block;
+        background-color: $color-secondary;
+        color: $color-primary;
+        padding: 5px 50px;
+        border-radius: 30px;
+        border-style: none;
+      }
+      .menu-btn {
+        display: flex;
+      }
+    }
+  }
+}
+
+// @media screen and (min-width: 951px) {
+//   .logo {
+//     width: 10%;
+//   }
+
+//   .navbar-container {
+//     display: flex;
+//     justify-content: space-around;
+//     .suggest-menu-container {
+//       display: block;
+//       .suggest-btn {
+//         background-color: $color-secondary;
+//         color: $color-primary;
+//         padding: 5px 50px;
+//         border-radius: 30px;
+//         border-style: none;
+//       }
+//       .menu-btn {
+//         display: flex;
+//       }
+//     }
+//   }
+
+//   .filter-container {
+//     display: flex;
+//     justify-content: space-around;
+//     .previous-btn,
+//     .next-btn {
+//       display: block;
+//       background-color: $color-secondary;
+//       border-style: none;
+//       border-radius: 50%;
+//       width: 25px;
+//       color: $color-primary;
+//     }
+
+//     nav {
+//       width: 80%;
+//       ul {
+//         list-style-type: none;
+//         display: flex;
+//         justify-content: space-between;
+//       }
+//     }
+//   }
+// }

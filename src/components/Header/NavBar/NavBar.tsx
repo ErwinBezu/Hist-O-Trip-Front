@@ -1,5 +1,5 @@
-/* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
+
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -15,18 +15,18 @@ const NavBar = () => {
   return (
     <>
       <div className="navbar-container">
-        {/* <img
+         <img
           src="../src/assets/logo.png"
           alt="logo Hist'O'Trip"
           className="logo"
         />
-        <div>
+        <div className="search-container">
           <input type="text" placeholder="Rechercher un Lieu" />
           <button type="button">
             <AiOutlineSearch />
           </button>
         </div>
-        <div>
+        <div className="suggest-menu-container">
           <button type="button" className="suggest-btn">
             Proposer un lieu
           </button>
@@ -36,10 +36,31 @@ const NavBar = () => {
           </button>
         </div>
       </div>
+
       <div className="filter-container">
-        <Categories /> */}
-        <button type="button" onClick={() => setIsVisisble(true)}>
+
+        
+        
+
+        <button type="button" className="previous-btn">
+          &lt;
+        </button>
+        <Categories />
+        <button type="button" className="next-btn">
+          &gt;
+        </button>
+        <button type="button" onClick={() => setIsVisisble(true)} className="filter-btn">
           <AiOutlineControl /> Filtre
+        </button>
+        {isVisible && <Filter setIsVisible={setIsVisisble} />}
+      </div>
+
+      <div className="mobilebar-container">
+        <button type="button" className="menu-btn">
+          <BsFillPersonFill />
+        </button>
+        <button type="button" onClick={() => setIsVisisble(true)} className="filter-btn">
+          <AiOutlineControl />
         </button>
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
       </div>

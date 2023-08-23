@@ -13,7 +13,7 @@ const Categories = () => {
       <ul>
         {categories.map((category, index) => (
           <li key={index}>
-            <Icon name={category.icon} /> {category.name}
+            <Icon name={category.icon} /> <span>{category.name}</span>
           </li>
         ))}
       </ul>
