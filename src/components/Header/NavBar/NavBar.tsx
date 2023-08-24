@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   AiOutlineSearch,
@@ -15,11 +16,9 @@ const NavBar = () => {
   return (
     <>
       <div className="navbar-container">
-         <img
-          src="../src/assets/logo.png"
-          alt="logo Hist'O'Trip"
-          className="logo"
-        />
+        <Link to="/" className="logo">
+          <img src="../src/assets/logo.png" alt="logo Hist'O'Trip" />
+        </Link>
         <div className="search-container">
           <input type="text" placeholder="Rechercher un Lieu" />
           <button type="button">
@@ -38,10 +37,6 @@ const NavBar = () => {
       </div>
 
       <div className="filter-container">
-
-        
-        
-
         <button type="button" className="previous-btn">
           &lt;
         </button>
@@ -49,7 +44,11 @@ const NavBar = () => {
         <button type="button" className="next-btn">
           &gt;
         </button>
-        <button type="button" onClick={() => setIsVisisble(true)} className="filter-btn">
+        <button
+          type="button"
+          onClick={() => setIsVisisble(true)}
+          className="filter-btn"
+        >
           <AiOutlineControl /> Filtre
         </button>
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
@@ -59,7 +58,11 @@ const NavBar = () => {
         <button type="button" className="menu-btn">
           <BsFillPersonFill />
         </button>
-        <button type="button" onClick={() => setIsVisisble(true)} className="filter-btn">
+        <button
+          type="button"
+          onClick={() => setIsVisisble(true)}
+          className="filter-btn"
+        >
           <AiOutlineControl />
         </button>
         {isVisible && <Filter setIsVisible={setIsVisisble} />}

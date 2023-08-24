@@ -7,9 +7,11 @@
   justify-content: center;
   padding: 10px 10px 0 10px;
 
-  article {
+  .article-card {
     width: calc((100% / 1) - 20px);
     margin-bottom: 10px;
+    text-decoration: none;
+    color: $color-tertiary;
 
     img {
       width: 100%;
@@ -41,7 +43,7 @@
 
 @media screen and (min-width: 551px) {
   .cards-container {
-    article {
+    .article-card {
       width: calc((100% / 2) - 20px);
     }
   }
@@ -49,7 +51,7 @@
 
 @media screen and (min-width: 951px) {
   .cards-container {
-    article {
+    .article-card {
       width: calc((100% / 3) - 20px);
     }
   }
@@ -57,7 +59,7 @@
 
 @media screen and (min-width: 1129px) {
   .cards-container {
-    article {
+    .article-card {
       width: calc((100% / 4) - 20px);
     }
   }
@@ -65,7 +67,7 @@
 
 @media screen and (min-width: 1641px) {
   .cards-container {
-    article {
+    .article-card {
       width: calc((100% / 5) - 20px);
     }
   }
@@ -73,7 +75,7 @@
 
 @media screen and (min-width: 1881px) {
   .cards-container {
-    article {
+    .article-card {
       width: calc((100% / 6) - 20px);
     }
   }
