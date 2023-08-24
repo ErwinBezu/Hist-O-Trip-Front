@@ -34,5 +34,8 @@
   "workbench.iconTheme": "material-icon-theme",
   "cSpell.words": [
     "airbnb"
-  ]
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
