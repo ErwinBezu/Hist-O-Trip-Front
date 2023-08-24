@@ -1,7 +1,7 @@
 import './Card.scss';
 import places from '../../data/places.json';
 import { useState } from 'react';
-
+import Place from '../Place/Place'
 const Card = () => {
   const [visibleCards, setVisibleCards] = useState(12);
 
@@ -13,7 +13,7 @@ const Card = () => {
     <div className="cards-container">
       {places.slice(0, visibleCards).map((place) => (
         <article key={place.id}>
-          <img src={place.pictures[0].url} alt="avatar" />
+          <img src={place.pictures[0].url} alt="avatar"/>
           <div className="content">
             <h2 className="placename-card"> {place.name}</h2>
             <h3 className="placecity-card">
