@@ -27,6 +27,7 @@ const App = () => {
       {/* <Route path="/mentions_legales" element={<LegalMentions />} />
       <Route path="/proposer" element={<Suggest />} /> */}
       <Route path="/:id/:slug" element={<Place />} />
+
     </Routes>
   );
 };
