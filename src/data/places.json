@@ -18,6 +18,7 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": 1,
     "pictures": [
       {
         "id": 1,
