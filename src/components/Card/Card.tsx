@@ -1,7 +1,10 @@
 import './Card.scss';
 import places from '../../data/places.json';
 import { useState } from 'react';
+import Place from '../Place/Place'
+
 import { Link } from 'react-router-dom';
+
 
 const Card = () => {
   const [visibleCards, setVisibleCards] = useState(12);
@@ -13,6 +16,7 @@ const Card = () => {
   return (
     <div className="cards-container">
       {places.slice(0, visibleCards).map((place) => (
+
         <Link to={`/${place.id}/${place.slug}`} className="article-card">
           <article key={place.id}>
             <img src={place.pictures[0].url} alt="avatar" />
