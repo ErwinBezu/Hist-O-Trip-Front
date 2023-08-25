@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 
 import './Card.scss';
 import places from '../../data/places.json';
-import { useState } from 'react';
-import Place from '../Place/Place'
-
+import Place from '../Place/Place';
 
 import { Link } from 'react-router-dom';
 import { useCardPlaces } from '../contexts/CardsContext';
@@ -19,11 +17,9 @@ type Place = {
   rating: number;
 };
 
-
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   const placesCardData: Place[] = useCardPlaces();
-
 
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
@@ -31,14 +27,12 @@ const Card: React.FC = () => {
 
   return (
     <div className="cards-container">
-
       {placesCardData.slice(0, visibleCards).map((place) => (
         <Link
           to={`/${place.id}/${place.slug}`}
           className="article-card"
           key={place.id}
         >
-
           <article key={place.id}>
             <img src={place.pictures[0].url} alt="avatar" />
             <div className="content">
