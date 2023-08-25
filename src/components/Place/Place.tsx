@@ -75,6 +75,15 @@ const Place: React.FC = () => {
   const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
+  // useEffect(() => {
+  //   // Find the singlePostData based on the id and slug
+  //   const foundPostData = placesData.find(
+  //     (postItem) => postItem.id === parseInt(id) && postItem.slug === slug
+  //   );
+
+  //   setSinglePostData(foundPostData || defaultPostData); // Use foundPostData or defaultPostData if not found
+  // }, [id, slug, location]);
+
   useEffect(() => {
     // Fetch the specific place data based on the ID
     fetch(`URL/api/places/${id}`)
