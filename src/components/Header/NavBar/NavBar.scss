@@ -21,6 +21,7 @@
       width: 80%;
       padding: 5px 20px;
       background-color: $color-primary;
+      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
 
       &:focus {
         outline: none;
@@ -33,6 +34,7 @@
       border-left: none;
       padding: 5px 20px;
       background-color: $color-primary;
+      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
     }
   }
   .suggest-menu-container {
@@ -118,7 +120,7 @@
 @media screen and (min-width: 551px) {
   .navbar-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
     .logo {
       width: 20%;
@@ -136,7 +138,7 @@
 @media screen and (min-width: 768px) {
   .navbar-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
     .logo {
       width: 20%;
@@ -167,6 +169,7 @@
       width: 20%;
     }
     .suggest-menu-container {
+      gap: 50px;
       .suggest-btn {
         display: block;
         background-color: $color-secondary;
