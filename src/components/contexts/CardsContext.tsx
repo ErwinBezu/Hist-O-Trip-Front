@@ -4,7 +4,7 @@ import { useCategories } from './CategoryContext';
 const CardContext = createContext([]);
 
 export const CardProvider = ({ children }) => {
-  const { selectedCategory } = useCategories;
+  const { selectedCategory } = useCategories();
   const [placesCardData, setPlacesCardData] = useState([]);
 
   useEffect(() => {

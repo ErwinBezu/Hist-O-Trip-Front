@@ -20,18 +20,13 @@ const Categories = () => {
   return (
     <nav>
       <ul>
-        {/* {categoriesData.map((category) => (
-          <li key={category.id}>
-            <Icon name={category.icon} /> <span>{category.name}</span>
-          </li> 
-        ))}*/}
         {categoriesData.map((category) => (
           <li
             key={category.id}
             onClick={() => handleCategorySelect(category)}
             className={selectedCategory === category ? 'selected' : ''}
           >
-            {category.name}
+            <Icon name={category.icon} /> <span>{category.name}</span>
           </li>
         ))}
       </ul>
