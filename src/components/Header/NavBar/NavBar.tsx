@@ -9,10 +9,12 @@ import {
 import { BsFillPersonFill } from 'react-icons/bs';
 import Categories from '../../Categories/Categories';
 import Filter from '../Filter/Filter';
+import LogForm from '../LogForm/LogForm';
 import './NavBar.scss';
 
 const NavBar = () => {
   const [isVisible, setIsVisisble] = useState(false);
+  const [isHiddenLogForm, setIsHiddenLogForm] = useState(false);
   return (
     <>
       <div className="navbar-container">
@@ -55,9 +57,14 @@ const NavBar = () => {
       </div>
 
       <div className="mobilebar-container">
-        <button type="button" className="menu-btn">
+        <button
+          type="button"
+          onClick={() => setIsHiddenLogForm(true)}
+          className="menu-btn"
+        >
           <BsFillPersonFill />
         </button>
+        {isHiddenLogForm && <LogForm setIsHiddenLogForm={setIsHiddenLogForm} />}
         <button
           type="button"
           onClick={() => setIsVisisble(true)}

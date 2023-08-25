@@ -1,0 +1,21 @@
+@use '../../../styles/variables' as *;
+
+.modal-container {
+  background-color: $color-primary;
+  width: 100vw;
+  height: 100vh;
+  .head-container {
+    padding-top: 15px;
+    .login-title {
+      text-align: center;
+    }
+  }
+
+  .login-main-container {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
