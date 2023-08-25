@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import './Place.scss';
 import placesData from '../../data/places.json';
@@ -91,7 +91,10 @@ const Place: React.FC = () => {
       </div>
       <div className='place-container'>
       <div className="place-picture">
+      <Link to="/">
         <button className='place-back-btn'> <IoIosArrowBack /> </button>
+      </Link>
+        
         <img src={singlePostData?.pictures[0].url} alt="picture" />
         <div className='place-tags'>
           <p>Période</p>

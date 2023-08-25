@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
   AiOutlineSearch,
   AiOutlineMenu,
   AiOutlineControl,
+  AiOutlineHome,
 } from 'react-icons/ai';
 import { BsFillPersonFill } from 'react-icons/bs';
 import Categories from '../../Categories/Categories';
 import Filter from '../Filter/Filter';
 import './NavBar.scss';
+import UserProfil from '../../UserProfil/UserProfil';
+import {Context} from '../../App/App';
 
 const NavBar = () => {
-  const [isVisible, setIsVisisble] = useState(false);
+  const {isVisible, setIsVisisble, menueVisible, setMenueVisible} = useContext(Context);
+
   return (
     <>
       <div className="navbar-container">
@@ -29,10 +33,11 @@ const NavBar = () => {
           <button type="button" className="suggest-btn">
             Proposer un lieu
           </button>
-          <button type="button" className="menu-btn">
+          <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
             <AiOutlineMenu />
             <BsFillPersonFill />
           </button>
+          {menueVisible && <UserProfil setMenueVisible={setMenueVisible} />}
         </div>
       </div>
 
@@ -55,9 +60,9 @@ const NavBar = () => {
       </div>
 
       <div className="mobilebar-container">
-        <button type="button" className="menu-btn">
-          <BsFillPersonFill />
-        </button>
+        <Link to="/">
+        <button className='home-mobile-btn'>< AiOutlineHome/> </button>
+        </Link>
         <button
           type="button"
           onClick={() => setIsVisisble(true)}
@@ -66,6 +71,10 @@ const NavBar = () => {
           <AiOutlineControl />
         </button>
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
+        <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
+          <BsFillPersonFill />
+        </button>
+        {menueVisible && <UserProfil setMenueVisible={setMenueVisible} />}
       </div>
     </>
   );

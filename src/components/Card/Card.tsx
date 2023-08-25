@@ -1,25 +1,37 @@
 import './Card.scss';
 import places from '../../data/places.json';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Place from '../Place/Place'
 
 import { Link } from 'react-router-dom';
+import { Context } from '../App/App';
 
 
 const Card = () => {
   const [visibleCards, setVisibleCards] = useState(12);
-
+  const {setMenueVisible} = useContext(Context)
+  const {resultAPI, setResultAPI} = useContext(Context);
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
+  
+  const {selectedCate} = useContext(Context);
+  console.log(selectedCate);
+
+  // useEffect(() => {
+  //   fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCate}`)
+  //   .then((response) => response.json())
+  //     .then((data) => {
+  //         setResultAPI(data);
+  //     })},[selectedCate])
 
   return (
-    <div className="cards-container">
-      {places.slice(0, visibleCards).map((place) => (
+    <div className="cards-container" onClick={() => setMenueVisible(false)}>
+      {resultAPI?.map((place, id) => (
 
         <Link to={`/${place.id}/${place.slug}`} className="article-card">
-          <article key={place.id}>
-            <img src={place.pictures[0].url} alt="avatar" />
+          <article key={id}>
+            {/* <img src={place.pictures[0].url} alt="avatar" /> */}
             <div className="content">
               <h2 className="placename-card"> {place.name}</h2>
               <h3 className="placecity-card">

@@ -4,6 +4,8 @@ import './Home.scss';
 import Header from '../Header/Header';
 import Card from '../Card/Card';
 import Footer from '../Footer/Footer';
+import UserProfil from '../UserProfil/UserProfil'
+import UserEditProfil from '../UserProfil/UserEditProfil';
 
 export type Category = {
   id: number;
