@@ -3,16 +3,23 @@ import React, { useState } from 'react';
 
 import Icon from './Icon';
 
-import categories from '../../data/categories.json';
 import { useCategories } from '../contexts/CategoryContext';
-
 import './Categories.scss';
 
-const Categories = () => {
-  const categoriesData = useCategories();
-  const [selectedCategory, setSelectedCategory] = useState(null);
+interface Category {
+  id: number;
+  name: string;
+  icon: string;
+  // Autres propriétés si nécessaires
+}
 
-  const handleCategorySelect = (category) => {
+const Categories = () => {
+  const categoriesData: Category[] = useCategories();
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
+
+  const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
   };
   console.log(selectedCategory?.id);
@@ -21,13 +28,13 @@ const Categories = () => {
     <nav>
       <ul>
         {categoriesData.map((category) => (
-          <li
+          <button
             key={category.id}
             onClick={() => handleCategorySelect(category)}
             className={selectedCategory === category ? 'selected' : ''}
           >
             <Icon name={category.icon} /> <span>{category.name}</span>
-          </li>
+          </button>
         ))}
       </ul>
     </nav>

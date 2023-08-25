@@ -1,15 +1,28 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import React, {
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+} from 'react';
 import { useCategories } from './CategoryContext';
 
-const CardContext = createContext([]);
+// interface CardProviderProps {
+//   children: ReactNode;
+//   // ReactNode est un type pour n'importe quel élément React (composants, texte, etc.)
+// }
 
+const CardContext = createContext([]);
+// : React.FC<CardProviderProps>
 export const CardProvider = ({ children }) => {
   const { selectedCategory } = useCategories();
   const [placesCardData, setPlacesCardData] = useState([]);
 
   useEffect(() => {
-    if (selectedCategory) {
-      fetch(`URL/api/places/category/${selectedCategory.id}`)
+    if (selectedCategory && selectedCategory.id) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places/category/${selectedCategory.id}`
+      )
         .then((response) => response.json())
         .then((data) => {
           setPlacesCardData(data);

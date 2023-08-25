@@ -10,7 +10,11 @@ import {
   GiMilitaryFort,
 } from 'react-icons/gi';
 
-const Icon = ({ name }) => {
+interface IconProps {
+  name: string;
+}
+
+const Icon: React.FC<IconProps> = ({ name }) => {
   return (
     <div>
       {name === 'LuCastle' && <LuCastle />}

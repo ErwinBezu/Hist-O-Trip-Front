@@ -86,7 +86,7 @@ const Place: React.FC = () => {
 
   useEffect(() => {
     // Fetch the specific place data based on the ID
-    fetch(`URL/api/places/${id}`)
+    fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setSinglePostData(data);
