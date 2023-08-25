@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import './Place.scss';
 import placesData from '../../data/places.json';
 import Footer from '../Footer/Footer';
-import {IoIosArrowBack} from 'react-icons/io';
+import { IoIosArrowBack } from 'react-icons/io';
 
 type Picture = {
   id: number;
@@ -72,16 +72,20 @@ const Place: React.FC = () => {
   const [singlePostData, setSinglePostData] = useState<PlaceData | undefined>(
     undefined
   );
-  const { id, slug } = useParams<{ id: string; slug: string }>(); // Destructure id and slug
+  const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
   useEffect(() => {
-    // Find the singlePostData based on the id and slug
-    const foundPostData = placesData.find(
-      (postItem) => postItem.id === parseInt(id) && postItem.slug === slug
-    );
-
-    setSinglePostData(foundPostData || defaultPostData); // Use foundPostData or defaultPostData if not found
+    // Fetch the specific place data based on the ID
+    fetch(`URL/api/places/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSinglePostData(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching place data:', error);
+        setSinglePostData(defaultPostData);
+      });
   }, [id, slug, location]);
 
   return (
@@ -89,35 +93,37 @@ const Place: React.FC = () => {
       <div className="place-header-container">
         <Header />
       </div>
-      <div className='place-container'>
-      <div className="place-picture">
-        <button className='place-back-btn'> <IoIosArrowBack /> </button>
-        <img src={singlePostData?.pictures[0].url} alt="picture" />
-        <div className='place-tags'>
-          <p>Période</p>
-          <p>Epoque</p>
-          <p>Catégorie</p>
-          <p>Tags</p>
+      <div className="place-container">
+        <div className="place-picture">
+          <button className="place-back-btn">
+            {' '}
+            <IoIosArrowBack />{' '}
+          </button>
+          <img src={singlePostData?.pictures[0].url} alt="picture" />
+          <div className="place-tags">
+            <p>Période</p>
+            <p>Epoque</p>
+            <p>Catégorie</p>
+            <p>Tags</p>
           </div>
-      </div>
-      <div className="place-name">
-        <h2>{singlePostData?.name}</h2>
-      </div>
-      <div className="place-description">
-        <p>{singlePostData?.description}</p>
-      </div>
-      <div className="place-infos">
-        <p>Adresse: {singlePostData?.adress}</p>
-        <p>Horaires: {singlePostData?.opening_hours}</p>
-        <p>Tarifs: {singlePostData?.price}</p>
-        <p>
-          Site Web:{' '}
-          <a href={singlePostData?.website}>{singlePostData?.website}</a>
-        </p>
-      </div>
-      {/* <div className="place-review"><h3>Commentaires</h3>
+        </div>
+        <div className="place-name">
+          <h2>{singlePostData?.name}</h2>
+        </div>
+        <div className="place-description">
+          <p>{singlePostData?.description}</p>
+        </div>
+        <div className="place-infos">
+          <p>Adresse: {singlePostData?.adress}</p>
+          <p>Horaires: {singlePostData?.opening_hours}</p>
+          <p>Tarifs: {singlePostData?.price}</p>
+          <p>
+            Site Web:{' '}
+            <a href={singlePostData?.website}>{singlePostData?.website}</a>
+          </p>
+        </div>
+        {/* <div className="place-review"><h3>Commentaires</h3>
       </div> */}
-      
       </div>
       <div className="place-footer">
         <Footer />
