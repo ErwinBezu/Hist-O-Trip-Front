@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import './Place.scss';
 import placesData from '../../data/places.json';
 import Footer from '../Footer/Footer';
 import { IoIosArrowBack } from 'react-icons/io';
+import Error404 from '../Error/Error404';
 
 type Picture = {
   id: number;
@@ -76,26 +77,44 @@ const Place: React.FC = () => {
   const location = useLocation();
 
   // useEffect(() => {
-  //   // Find the singlePostData based on the id and slug
   //   const foundPostData = placesData.find(
   //     (postItem) => postItem.id === parseInt(id) && postItem.slug === slug
   //   );
 
-  //   setSinglePostData(foundPostData || defaultPostData); // Use foundPostData or defaultPostData if not found
+  //   if (foundPostData) {
+  //     console.log(foundPostData);
+  //     setSinglePostData(foundPostData || defaultPostData);
+  //   } else {
+
+  //     setSinglePostData(defaultPostData);
+  //   }
   // }, [id, slug, location]);
 
+  // if (!singlePostData || singlePostData === defaultPostData) {
+  //   return <Error404 />;
+  // }
+
   useEffect(() => {
-    // Fetch the specific place data based on the ID
-    fetch(`URL/api/places/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setSinglePostData(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching place data:', error);
-        setSinglePostData(defaultPostData);
-      });
+    if (id && slug) {
+      fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.id === parseInt(id) && data.slug === slug) {
+            setSinglePostData(data);
+          } else {
+            setSinglePostData(defaultPostData);
+          }
+        })
+        .catch((error) => {
+          console.error('Pas bon', error);
+          setSinglePostData(defaultPostData);
+        });
+    }
   }, [id, slug, location]);
+
+  if (!singlePostData || singlePostData === defaultPostData) {
+    return <Error404 />;
+  }
 
   return (
     <>
@@ -104,10 +123,11 @@ const Place: React.FC = () => {
       </div>
       <div className="place-container">
         <div className="place-picture">
-          <button className="place-back-btn">
-            {' '}
-            <IoIosArrowBack />{' '}
-          </button>
+          <Link to="/" className="place-back-btn">
+            <button>
+              <IoIosArrowBack />
+            </button>
+          </Link>
           <img src={singlePostData?.pictures[0].url} alt="picture" />
           <div className="place-tags">
             <p>Période</p>
@@ -127,7 +147,7 @@ const Place: React.FC = () => {
           <p>Horaires: {singlePostData?.opening_hours}</p>
           <p>Tarifs: {singlePostData?.price}</p>
           <p>
-            Site Web:{' '}
+            Site Web:
             <a href={singlePostData?.website}>{singlePostData?.website}</a>
           </p>
         </div>

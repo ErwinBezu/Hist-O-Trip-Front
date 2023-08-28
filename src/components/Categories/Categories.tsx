@@ -1,32 +1,46 @@
 /* eslint-disable react/function-component-definition */
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Icon from './Icon';
-
-import categories from '../../data/categories.json';
-import { useCategories } from '../contexts/CategoryContext';
+import { CategoriesList, SelectedCategory } from '../contexts/index';
+import categoriesList from '../../data/categories.json';
 
 import './Categories.scss';
 
-const Categories = () => {
-  const categoriesData = useCategories();
-  const [selectedCategory, setSelectedCategory] = useState(null);
+type Category = {
+  id: number;
+  name: string;
+  icon: string;
+};
 
-  const handleCategorySelect = (category) => {
+const Categories = () => {
+  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+  //   null
+  // );
+  const categoriesList = useContext(CategoriesList);
+
+  const { selectedCategory, setSelectedCategory } =
+    useContext(SelectedCategory);
+
+  const categoryName = selectedCategory?.name;
+  const categoryId = selectedCategory?.id;
+  const categoryIcon = selectedCategory?.icon;
+
+  const [resultAPI, setResultAPI] = useState();
+
+  const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
   };
-  console.log(selectedCategory?.id);
+
+  console.log(categoryId);
 
   return (
     <nav>
       <ul>
-        {categoriesData.map((category) => (
-          <li
-            key={category.id}
-            onClick={() => handleCategorySelect(category)}
-            className={selectedCategory === category ? 'selected' : ''}
-          >
-            <Icon name={category.icon} /> <span>{category.name}</span>
+        {categoriesList.map((category: Category) => (
+          <li key={category.id} onClick={() => handleCategorySelect(category)}>
+            <Icon name={category.icon} />
+            <span>{category.name}</span>
           </li>
         ))}
       </ul>
