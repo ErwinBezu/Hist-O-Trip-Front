@@ -35,37 +35,37 @@
     "icon": "GiMilitaryFort"
   },
   {
-    "id": 1,
+    "id": 8,
     "name": "Châteaux",
     "icon": "LuCastle"
   },
   {
-    "id": 2,
+    "id": 9,
     "name": "Musées",
     "icon": "MdOutlineMuseum"
   },
   {
-    "id": 3,
+    "id": 10,
     "name": "Eglises",
     "icon": "PiChurchThin"
   },
   {
-    "id": 4,
+    "id": 11,
     "name": "Monastères",
     "icon": "GiChurch"
   },
   {
-    "id": 5,
+    "id": 12,
     "name": "Villages",
     "icon": "GiVillage"
   },
   {
-    "id": 6,
+    "id": 13,
     "name": "Mémorials",
     "icon": "GiMartyrMemorial"
   },
   {
-    "id": 7,
+    "id": 14,
     "name": "Blockhaus",
     "icon": "GiMilitaryFort"
   }

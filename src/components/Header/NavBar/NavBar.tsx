@@ -17,7 +17,7 @@ const NavBar = () => {
     <>
       <div className="navbar-container">
         <Link to="/" className="logo">
-          <img src="../src/assets/logo.png" alt="logo Hist'O'Trip" />
+          <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
         <div className="search-container">
           <input type="text" placeholder="Rechercher un Lieu" />

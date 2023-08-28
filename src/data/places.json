@@ -18,7 +18,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
-    "category": 1,
+    "category": [
+      {
+        "id": 1,
+        "name": "Châteaux",
+        "icon": "LuCastle"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -48,6 +54,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -77,6 +90,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 1,
+        "name": "Châteaux",
+        "icon": "LuCastle"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -106,6 +126,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 1,
+        "name": "Châteaux",
+        "icon": "LuCastle"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -135,6 +162,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 1,
+        "name": "Châteaux",
+        "icon": "LuCastle"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -164,6 +198,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 1,
+        "name": "Châteaux",
+        "icon": "LuCastle"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -193,6 +234,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -222,6 +270,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -251,6 +306,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -280,6 +342,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -309,6 +378,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -338,6 +414,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -367,6 +450,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -396,6 +486,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -425,6 +522,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -454,6 +558,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -483,6 +594,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -512,6 +630,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -541,6 +666,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -570,6 +702,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -599,6 +738,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -628,6 +774,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -657,6 +810,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
@@ -686,6 +846,13 @@
     "accessibility": "Oui",
     "guided_tour": "oui",
     "slug": "chateau_de_falaise",
+    "category": [
+      {
+        "id": 2,
+        "name": "Musées",
+        "icon": "MdOutlineMuseum"
+      }
+    ],
     "pictures": [
       {
         "id": 1,
