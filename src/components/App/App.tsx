@@ -5,14 +5,22 @@ import Place from '../Place/Place';
 import './App.scss';
 import React, { createContext, useState } from 'react';
 import Error404 from '../Error/Error404';
-export const Context = React.createContext();
+
+type ContextType = {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  menueVisible: boolean;
+  setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  editVisible: boolean;
+  setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const Context = React.createContext<ContextType | undefined>(undefined);
 
 const App = () => {
-  const [isVisible, setIsVisisble] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [menueVisible, setMenueVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
-  const [selectedCate, setSelectedCate] = useState();
-  const [resultAPI, setResultAPI] = useState();
 
   // const url = useLocation();
 
@@ -20,14 +28,10 @@ const App = () => {
     <Context.Provider
       value={{
         isVisible,
-        setIsVisisble,
+        setIsVisible,
         menueVisible,
-        resultAPI,
-        setResultAPI,
         setMenueVisible,
         editVisible,
-        selectedCate,
-        setSelectedCate,
         setEditVisible,
       }}
     >

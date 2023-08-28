@@ -12,10 +12,16 @@ import Categories from '../../Categories/Categories';
 import Filter from '../Filter/Filter';
 import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
-import {Context} from '../../App/App';
+import { Context } from '../../App/App';
 
 const NavBar = () => {
-  const {isVisible, setIsVisisble, menueVisible, setMenueVisible} = useContext(Context);
+  const context = useContext(Context);
+
+  if (!context) {
+    // Le contexte n'est pas encore défini, vous pouvez choisir de rendre un état de chargement
+    return <div>Loading...</div>;
+  }
+  const { isVisible, setIsVisible, menueVisible, setMenueVisible } = context;
 
   return (
     <>
@@ -33,11 +39,15 @@ const NavBar = () => {
           <button type="button" className="suggest-btn">
             Proposer un lieu
           </button>
-          <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
+          <button
+            type="button"
+            className="menu-btn"
+            onClick={() => setMenueVisible((prevstate) => !prevstate)}
+          >
             <AiOutlineMenu />
             <BsFillPersonFill />
           </button>
-          {menueVisible && <UserProfil setMenueVisible={setMenueVisible} />}
+          {menueVisible && <UserProfil />}
         </div>
       </div>
 
@@ -51,30 +61,36 @@ const NavBar = () => {
         </button>
         <button
           type="button"
-          onClick={() => setIsVisisble(true)}
+          onClick={() => setIsVisible(true)}
           className="filter-btn"
         >
           <AiOutlineControl /> Filtre
         </button>
-        {isVisible && <Filter setIsVisible={setIsVisisble} />}
+        {isVisible && <Filter setIsVisible={setIsVisible} />}
       </div>
 
       <div className="mobilebar-container">
         <Link to="/">
-        <button className='home-mobile-btn'>< AiOutlineHome/> </button>
+          <button className="home-mobile-btn">
+            <AiOutlineHome />{' '}
+          </button>
         </Link>
         <button
           type="button"
-          onClick={() => setIsVisisble(true)}
+          onClick={() => setIsVisible(true)}
           className="filter-btn"
         >
           <AiOutlineControl />
         </button>
-        {isVisible && <Filter setIsVisible={setIsVisisble} />}
-        <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
+        {isVisible && <Filter setIsVisible={setIsVisible} />}
+        <button
+          type="button"
+          className="menu-btn"
+          onClick={() => setMenueVisible((prevstate) => !prevstate)}
+        >
           <BsFillPersonFill />
         </button>
-        {menueVisible && <UserProfil setMenueVisible={setMenueVisible} />}
+        {menueVisible && <UserProfil />}
       </div>
     </>
   );
