@@ -4,7 +4,12 @@ import './Home.scss';
 import Header from '../Header/Header';
 import Card from '../Card/Card';
 import Footer from '../Footer/Footer';
+
+import UserProfil from '../UserProfil/UserProfil'
+import UserEditProfil from '../UserProfil/UserEditProfil';
+
 import { CategoriesList, SelectedCategory } from '../contexts/index';
+
 
 type Category = {
   id: number;

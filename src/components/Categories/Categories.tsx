@@ -6,6 +6,7 @@ import { CategoriesList, SelectedCategory } from '../contexts/index';
 import categoriesList from '../../data/categories.json';
 
 import './Categories.scss';
+import { Context } from '../App/App';
 
 type Category = {
   id: number;
@@ -14,6 +15,7 @@ type Category = {
 };
 
 const Categories = () => {
+
   // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
   //   null
   // );
@@ -43,6 +45,9 @@ const Categories = () => {
             <span>{category.name}</span>
           </li>
         ))}
+        {/* {categoriesData.map((category) => (
+          <li key={category.id}>{category.name}</li>
+        ))} */}
       </ul>
     </nav>
   );

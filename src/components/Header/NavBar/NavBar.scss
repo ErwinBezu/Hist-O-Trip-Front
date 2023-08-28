@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Akshar', sans-serif;
 
   .logo {
     width: 25%;
@@ -100,13 +101,14 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 30px 0;
+  padding: 10px 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
 
   .menu-btn,
-  .filter-btn {
+  .filter-btn,
+  .home-mobile-btn {
     border-style: none;
     svg {
       width: 100%;
@@ -231,3 +233,4 @@
 //     }
 //   }
 // }
+
