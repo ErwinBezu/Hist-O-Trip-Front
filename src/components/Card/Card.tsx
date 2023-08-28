@@ -4,7 +4,7 @@ import Place from '../Place/Place';
 import { Link } from 'react-router-dom';
 import { Context } from '../App/App';
 import { SelectedCategory } from '../contexts';
-import Map from '../Map/Map';
+import MapHistory from '../MapHistory/MapHistory';
 
 import placesCardData from '../../data/places.json';
 
@@ -58,7 +58,7 @@ const Card: React.FC = () => {
 
   return (
     <div className="cards-container" onClick={() => setMenueVisible(false)}>
-      <Map />
+      <MapHistory />
       {placesCardData
         // .filter((placeDataItem) =>
         //   selectedCategory

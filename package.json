@@ -16,7 +16,6 @@
 		"@wonderflow/symbols": "^12.4.0",
 		"@wonderflow/themes": "^12.4.0",
 		"@wonderflow/tokens": "^12.4.0",
-		"leaflet": "^1.9.4",
 		"maplibre-gl": "^3.3.0",
 		"react": "^18.2.0",
 		"react-components": "^0.5.1",
