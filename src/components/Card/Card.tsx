@@ -1,15 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import './Card.scss';
 import places from '../../data/places.json';
-import { useContext, useEffect, useState } from 'react';
-import Place from '../Place/Place'
-
+import Place from '../Place/Place';
 import { Link } from 'react-router-dom';
 import { Context } from '../App/App';
-
-
-import { Link } from 'react-router-dom';
 import { SelectedCategory } from '../contexts';
 
 import placesCardData from '../../data/places.json';
@@ -38,9 +32,8 @@ const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   // const placesCardData: Place[] = useCardPlaces();
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const {setMenueVisible} = useContext(Context);
+  const { setMenueVisible } = useContext(Context);
   const { selectedCategory } = useContext(SelectedCategory);
-
 
   console.log(selectedCategory?.name);
   console.log(placesCardData);
@@ -57,12 +50,11 @@ const Card: React.FC = () => {
     }
   }, [selectedCategory]);
 
-
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
-  
-  const {selectedCate} = useContext(Context);
+
+  const { selectedCate } = useContext(Context);
   console.log(selectedCate);
 
   // useEffect(() => {
@@ -73,7 +65,6 @@ const Card: React.FC = () => {
   //     })},[selectedCate])
 
   return (
-
     <div className="cards-container" onClick={() => setMenueVisible(false)}>
       {placesCardData
         // .filter((placeDataItem) =>
@@ -104,7 +95,6 @@ const Card: React.FC = () => {
           </Link>
         ))}
       {visibleCards < placesCardData.length && (
-
         <button className="load-more-button" onClick={loadMoreCards}>
           Afficher plus
         </button>
