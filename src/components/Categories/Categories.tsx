@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React, { useContext, useEffect, useState } from 'react';
 
 import Icon from './Icon';
@@ -15,7 +14,6 @@ type Category = {
 };
 
 const Categories = () => {
-
   // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
   //   null
   // );

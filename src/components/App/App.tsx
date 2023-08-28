@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from '../Home/Home';
 import Place from '../Place/Place';

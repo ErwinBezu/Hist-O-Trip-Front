@@ -1,6 +1,4 @@
-/* eslint-disable react/function-component-definition */
 import React from 'react';
-// eslint-disable-next-line import/no-named-as-default
 import NavBar from './NavBar/NavBar';
 import './Header.scss';
 
