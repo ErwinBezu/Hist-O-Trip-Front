@@ -1,17 +1,3 @@
-// /* eslint-disable react/function-component-definition */
-// import Home from '../Home/Home';
-// import Place from '../Place/Place';
-// import './App.scss';
-
-// const App = () => {
-//   return (
-//    // <Home />
-//   <Place />
-//   )
-// };
-
-// export default App;
-
 /* eslint-disable react/function-component-definition */
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from '../Home/Home';
@@ -19,6 +5,9 @@ import Place from '../Place/Place';
 import './App.scss';
 import React, { createContext, useState } from 'react';
 export const Context = React.createContext();
+
+import Error404 from '../Error/Error404';
+
 
 const App = () => {
   const [isVisible, setIsVisisble] = useState(false);
@@ -28,6 +17,7 @@ const App = () => {
   const [resultAPI, setResultAPI] = useState();
   
   // const url = useLocation();
+
   return (
     <Context.Provider value={{isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
       <Routes>
@@ -36,7 +26,8 @@ const App = () => {
       {/* <Route path="/mentions_legales" element={<LegalMentions />} />
       <Route path="/proposer" element={<Suggest />} /> */}
       <Route path="/:id/:slug" element={<Place />} />
-      
+      <Route path="*" element={<Error404 />} />
+
     </Routes>
     </Context.Provider>
   );

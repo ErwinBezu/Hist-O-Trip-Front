@@ -13,8 +13,6 @@
   .search-container {
     display: flex;
     padding-left: 30px;
-    
-    
 
     input {
       border-top-left-radius: 30px;
@@ -24,7 +22,7 @@
       width: 80%;
       padding: 5px 20px;
       background-color: $color-primary;
-      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.20);
+      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
 
       &:focus {
         outline: none;
@@ -37,7 +35,7 @@
       border-left: none;
       padding: 5px 20px;
       background-color: $color-primary;
-      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.20);
+      box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
     }
   }
   .suggest-menu-container {

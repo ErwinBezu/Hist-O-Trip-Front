@@ -2,33 +2,48 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import Icon from './Icon';
-
-import categories from '../../data/categories.json';
-import { useCategories } from '../contexts/CategoryContext';
+import { CategoriesList, SelectedCategory } from '../contexts/index';
+import categoriesList from '../../data/categories.json';
 
 import './Categories.scss';
 import { Context } from '../App/App';
 
-const Categories = () => {
-  // const categoriesData = useCategories();
-  const {selectedCate, setSelectedCate} = useContext(Context);
-  const {resultAPI, setResultAPI} = useContext(Context);
+type Category = {
+  id: number;
+  name: string;
+  icon: string;
+};
 
-  useEffect(() => {
-    fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCate}`)
-    .then((response) => response.json())
-      .then((data) => {
-        setResultAPI(data);
-      })},[selectedCate])
-      console.log(resultAPI);
+const Categories = () => {
+
+  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+  //   null
+  // );
+  const categoriesList = useContext(CategoriesList);
+
+  const { selectedCategory, setSelectedCategory } =
+    useContext(SelectedCategory);
+
+  const categoryName = selectedCategory?.name;
+  const categoryId = selectedCategory?.id;
+  const categoryIcon = selectedCategory?.icon;
+
+  const [resultAPI, setResultAPI] = useState();
+
+  const handleCategorySelect = (category: Category) => {
+    setSelectedCategory(category);
+  };
+
+  console.log(categoryId);
 
   return (
     <nav>
       <ul>
-         {categories.map((category, id) => (
-          <li key={id} onClick={() => setSelectedCate(id)}>
-            <Icon name={category.icon} /> <span>{category.name}</span>
-          </li> 
+        {categoriesList.map((category: Category) => (
+          <li key={category.id} onClick={() => handleCategorySelect(category)}>
+            <Icon name={category.icon} />
+            <span>{category.name}</span>
+          </li>
         ))}
         {/* {categoriesData.map((category) => (
           <li key={category.id}>{category.name}</li>

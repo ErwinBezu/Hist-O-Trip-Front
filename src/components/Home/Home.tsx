@@ -4,31 +4,46 @@ import './Home.scss';
 import Header from '../Header/Header';
 import Card from '../Card/Card';
 import Footer from '../Footer/Footer';
+
 import UserProfil from '../UserProfil/UserProfil'
 import UserEditProfil from '../UserProfil/UserEditProfil';
 
-export type Category = {
-  id: number;
-  slug: string;
-  name: string;
-};
+import { CategoriesList, SelectedCategory } from '../contexts/index';
 
-export type Post = {
+
+type Category = {
   id: number;
-  categoryId: number;
-  slug: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: Category;
+  name: string;
+  icon: string;
 };
 
 const Home = () => {
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
+
+  useEffect(() => {
+    fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
+      .then((response) => response.json())
+      .then((data) => {
+        setCategoriesList(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+  console.log(categoriesList);
+
   return (
     <>
-      <Header />
-      <Card />
-      <Footer />
+      <SelectedCategory.Provider
+        value={{ selectedCategory, setSelectedCategory }}
+      >
+        <CategoriesList.Provider value={categoriesList}>
+          <Header />
+          <Card />
+          <Footer />
+        </CategoriesList.Provider>
+      </SelectedCategory.Provider>
     </>
   );
 };
