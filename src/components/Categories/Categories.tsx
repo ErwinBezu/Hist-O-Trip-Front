@@ -37,17 +37,12 @@ const Categories = () => {
   return (
     <nav>
       <ul>
-        {categoriesList.map(
-          (category: { id: number; name: string; icon: string }) => (
-            <li
-              key={(category as Category).id}
-              onClick={() => handleCategorySelect(category)}
-            >
-              <Icon name={(category as Category).icon} />{' '}
-              <span>{(category as Category).name}</span>
-            </li>
-          )
-        )}
+        {categoriesList.map((category: Category) => (
+          <li key={category.id} onClick={() => handleCategorySelect(category)}>
+            <Icon name={category.icon} />
+            <span>{category.name}</span>
+          </li>
+        ))}
       </ul>
     </nav>
   );

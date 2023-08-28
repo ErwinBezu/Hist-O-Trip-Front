@@ -35,7 +35,7 @@ const Card: React.FC = () => {
   const { selectedCategory } = useContext(SelectedCategory);
 
   console.log(selectedCategory?.name);
-
+  console.log(placesCardData);
   useEffect(() => {
     if (selectedCategory) {
       fetch(
