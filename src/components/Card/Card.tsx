@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Card.scss';
 import Place from '../Place/Place';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { Context } from '../App/App';
 import { SelectedCategory } from '../contexts';
-import MapHistory from '../MapHistory/MapHistory';
+import MapPlaces from '../MapPlaces/MapPlaces';
 
 import placesCardData from '../../data/places.json';
 
@@ -37,8 +37,6 @@ const Card: React.FC = () => {
   };
   const { selectedCategory } = useContext(SelectedCategory);
 
-  console.log(selectedCategory?.name);
-  console.log(placesCardData);
   useEffect(() => {
     if (selectedCategory) {
       fetch(
@@ -58,7 +56,7 @@ const Card: React.FC = () => {
 
   return (
     <div className="cards-container" onClick={() => setMenueVisible(false)}>
-      <MapHistory />
+      <MapPlaces />
       {placesCardData
         // .filter((placeDataItem) =>
         //   selectedCategory

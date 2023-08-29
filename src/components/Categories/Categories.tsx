@@ -5,7 +5,6 @@ import { CategoriesList, SelectedCategory } from '../contexts/index';
 import categoriesList from '../../data/categories.json';
 
 import './Categories.scss';
-import { Context } from '../App/App';
 
 type Category = {
   id: number;
@@ -25,8 +24,6 @@ const Categories = () => {
   const categoryName = selectedCategory?.name;
   const categoryId = selectedCategory?.id;
   const categoryIcon = selectedCategory?.icon;
-
-  const [resultAPI, setResultAPI] = useState();
 
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
