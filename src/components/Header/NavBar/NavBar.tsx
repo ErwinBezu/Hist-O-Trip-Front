@@ -9,6 +9,7 @@ import {
 } from 'react-icons/ai';
 import { BsFillPersonFill } from 'react-icons/bs';
 import Categories from '../../Categories/Categories';
+import Login from '../../Auth/Login/Login';
 import Filter from '../Filter/Filter';
 import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
@@ -60,6 +61,7 @@ const NavBar = () => {
       </div>
 
       <div className="mobilebar-container">
+      {menueVisible && <Login  setMenueVisible={setMenueVisible} />}
         <Link to="/">
         <button className='home-mobile-btn'>< AiOutlineHome/> </button>
         </Link>
@@ -71,10 +73,11 @@ const NavBar = () => {
           <AiOutlineControl />
         </button>
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
+        
         <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
           <BsFillPersonFill />
         </button>
-        {menueVisible && <UserProfil setMenueVisible={setMenueVisible} />}
+        
       </div>
     </>
   );

@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import './Card.scss';
 import places from '../../data/places.json';
-import { useContext, useEffect, useState } from 'react';
 import Place from '../Place/Place'
 
-import { Link } from 'react-router-dom';
 import { Context } from '../App/App';
 
 
