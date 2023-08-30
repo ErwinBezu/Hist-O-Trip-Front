@@ -16,7 +16,27 @@ import UserProfil from '../../UserProfil/UserProfil';
 import {Context} from '../../App/App';
 
 const NavBar = () => {
-  const {isVisible, setIsVisisble, menueVisible, setMenueVisible} = useContext(Context);
+  const {isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible, setMenueVisible} = useContext(Context);
+  const [isBottom, setIsBottom] = useState(false);
+
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY;
+
+    if (scrollTop + windowHeight >= documentHeight) {
+      setIsBottom(true);
+    }else {
+      setIsBottom(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  },[]);
 
   return (
     <>
@@ -30,7 +50,10 @@ const NavBar = () => {
             <AiOutlineSearch />
           </button>
         </div>
+
         <div className="suggest-menu-container">
+          {isLoggedIn ? (
+          <>
           <button type="button" className="suggest-btn">
             Proposer un lieu
           </button>
@@ -38,7 +61,13 @@ const NavBar = () => {
             <AiOutlineMenu />
             <BsFillPersonFill />
           </button>
-          {menueVisible && <UserProfil setMenueVisible={setMenueVisible} />}
+          </>
+          ) : (
+          <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
+          <BsFillPersonFill />
+        </button> )}
+          
+          {menueVisible && (isLoggedIn ? <UserProfil setMenueVisible={setMenueVisible} /> : <Login/>)}
         </div>
       </div>
 
@@ -60,22 +89,23 @@ const NavBar = () => {
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
       </div>
 
-      <div className="mobilebar-container">
-      {menueVisible && <Login  setMenueVisible={setMenueVisible} />}
+        
+      <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
+      {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         <Link to="/">
-        <button className='home-mobile-btn'>< AiOutlineHome/> </button>
+        <button className='home-mobile-btn'>< AiOutlineHome/> Home</button>
         </Link>
         <button
           type="button"
           onClick={() => setIsVisisble(true)}
           className="filter-btn"
         >
-          <AiOutlineControl />
+          <AiOutlineControl /> Filter
         </button>
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
         
         <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
-          <BsFillPersonFill />
+          <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
         
       </div>

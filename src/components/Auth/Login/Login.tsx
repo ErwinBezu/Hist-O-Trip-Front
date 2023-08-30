@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import SignIn from '../SignIn/SignIn';
 import './Login.scss'
+import { Context } from '../../App/App';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const {signInModal, setSignInModal, isLoggedIn, setIsLoggedIn} = useContext(Context);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +30,7 @@ function Login() {
         Cookies.set('jwtToken', data.token);
         console.log("c'est bon ");
         setError('');
+        setIsLoggedIn(true);
         // Rediriger ou effectuer d'autres actions en fonction de la réussite de l'authentification
       } else {
         setError('Identifiants invalides');
@@ -34,6 +39,26 @@ function Login() {
       console.error('Erreur lors de l\'authentification :', error);
     }
   };
+  
+  const token = Cookies.get('jwtToken');
+  function parseJwt(token) {
+    // terminate operation if token is invalid
+    if (!token) {
+      return;
+    }
+
+    // Split the token and taken the second
+    const base64Url = token.split(".")[1];
+
+    // Replace "-" with "+"; "_" with "/"
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return JSON.parse(window.atob(base64));
+  }
+
+const user = parseJwt(token);
+
+  console.log("lutilisateur est :", user);
+    
 
   return (
     <div className='login-container'>
@@ -55,6 +80,8 @@ function Login() {
         <button type="submit">Se connecter</button>
       </form>
       {error && <p>{error}</p>}
+      <button onClick={() => setSignInModal(prevstate => !prevstate)}>Inscription</button>
+      {signInModal && <SignIn />}
     </div>
     </div>
   );

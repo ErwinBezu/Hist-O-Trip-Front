@@ -16,6 +16,7 @@
 		"@wonderflow/symbols": "^12.4.0",
 		"@wonderflow/themes": "^12.4.0",
 		"@wonderflow/tokens": "^12.4.0",
+		"jsonwebtoken": "^9.0.1",
 		"react": "^18.2.0",
 		"react-components": "^0.5.1",
 		"react-devtools": "^2.1.7",
@@ -26,6 +27,7 @@
 		"usehooks-ts": "^2.9.1"
 	},
 	"devDependencies": {
+		"@types/jsonwebtoken": "^9.0.2",
 		"@types/react": "^18.0.28",
 		"@types/react-dom": "^18.0.11",
 		"@typescript-eslint/eslint-plugin": "^5.58.0",

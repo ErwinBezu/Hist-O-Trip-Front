@@ -7,6 +7,7 @@ import React, { createContext, useState } from 'react';
 export const Context = React.createContext();
 
 import Error404 from '../Error/Error404';
+import Cookies from 'js-cookie';
 
 
 const App = () => {
@@ -15,11 +16,12 @@ const App = () => {
   const [editVisible, setEditVisible] = useState(false);
   const [selectedCate, setSelectedCate] = useState();
   const [resultAPI, setResultAPI] = useState();
-  
+  const [signInModal, setSignInModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
   // const url = useLocation();
 
   return (
-    <Context.Provider value={{isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
+    <Context.Provider value={{signInModal, setSignInModal, isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
       <Routes>
       <Route path="/" element={<Home />} />
       {/* <Route path="/contact" element={<Contact />} /> */}

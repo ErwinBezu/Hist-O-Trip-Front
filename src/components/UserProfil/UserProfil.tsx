@@ -3,9 +3,16 @@ import './UserProfil.scss';
 import UserEditProfil from './UserEditProfil';
 import { Context } from '../App/App';
 import { AiOutlineClose } from 'react-icons/ai';
+import Cookies from 'js-cookie';
+
 
 const UserProfil = () => {
-  const {editVisible, setEditVisible, setMenueVisible} = useContext(Context);
+  const {isLoggedIn, setIsLoggedIn, editVisible, setEditVisible, setMenueVisible} = useContext(Context);
+  
+  const handleLogout = () => {
+    Cookies.remove('jwtToken');
+    window.location.reload();
+  }
 
   useEffect(() => {
     if (editVisible) {
@@ -39,10 +46,12 @@ const UserProfil = () => {
               <button className='profil-proposition-btn'>
                 Mes propositions
                 </button>
-                <button className='profil-deco-btn'>
+                
+                <button type="submit" className='profil-deco-btn' onClick={handleLogout}>
                 Se déconnecter
 
                 </button>
+                
         </div>
       </div>
     
