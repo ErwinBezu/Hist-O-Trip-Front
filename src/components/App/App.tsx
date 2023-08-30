@@ -16,12 +16,12 @@ const App = () => {
   const [editVisible, setEditVisible] = useState(false);
   const [selectedCate, setSelectedCate] = useState();
   const [resultAPI, setResultAPI] = useState();
-  const [signInModal, setSignInModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
   // const url = useLocation();
 
   return (
-    <Context.Provider value={{signInModal, setSignInModal, isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
+    <Context.Provider value={{signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
       <Routes>
       <Route path="/" element={<Home />} />
       {/* <Route path="/contact" element={<Contact />} /> */}

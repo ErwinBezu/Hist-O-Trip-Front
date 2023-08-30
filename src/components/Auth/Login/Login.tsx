@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
 import './Login.scss'
 import { Context } from '../../App/App';
 
@@ -8,7 +8,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {signInModal, setSignInModal, isLoggedIn, setIsLoggedIn} = useContext(Context);
+  const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn} = useContext(Context);
   
 
   const handleSubmit = async (e) => {
@@ -80,8 +80,8 @@ const user = parseJwt(token);
         <button type="submit">Se connecter</button>
       </form>
       {error && <p>{error}</p>}
-      <button onClick={() => setSignInModal(prevstate => !prevstate)}>Inscription</button>
-      {signInModal && <SignIn />}
+      <button onClick={() => setSignUpModal(prevstate => !prevstate)}>Inscription</button>
+      {signUpModal && <SignUp />}
     </div>
     </div>
   );

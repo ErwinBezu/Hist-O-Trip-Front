@@ -1,34 +1,34 @@
 import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import './SignIn.scss';
+import './SignUp.scss';
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <div>
       <>
-    <div className="signIn-bg"></div>
-    <form className="signIn-container">
-      <div className="signIn-header">
-        <label className='signIn-back-btn'><IoIosArrowBack/></label> 
+    <div className="signUp-bg"></div>
+    <form className="signUp-container">
+      <div className="signUp-header">
+        <label className='signUp-back-btn'><IoIosArrowBack/></label> 
           <h2>
           Terminer mon inscription
           </h2>
           </div>
-          <div className="signIn-content">
-            <div className='signIn-pseudo'>
+          <div className="signUp-content">
+            <div className='signUp-pseudo'>
               <input type="text" placeholder='Pseudo'/>
               </div>
-              <div className="signIn-name">
+              <div className="signUp-name">
                 <input type="text" placeholder='Prénom' />
                 <input type="text" placeholder='Nom' />
               </div>
-              <div className="signIn-inofs">
+              <div className="signUp-inofs">
               <input type="email" placeholder='Adresse e-mail' />
               <input type="password" placeholder='Mot de passe' />
               </div>
-            <button className='signIn-validation' type="submit">S'inscrire</button>
+            <button className='signUp-validation' type="submit">S'inscrire</button>
           </div>
-          <div className="signIn-footer">
+          <div className="signUp-footer">
 
           </div>
     </form>
@@ -37,4 +37,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
