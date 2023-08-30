@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import './MapPlaces.scss';
 import { SelectedCategory, SinglePlace } from '../contexts';
+import L from 'leaflet';
 
 interface Picture {
   url: string;
@@ -42,34 +43,30 @@ type PlaceData = {
   guided_tour: string;
   slug: string;
   pictures: Picture[];
-  category: Category[];
+  categories: Category[];
   tags: Tags[];
 };
 
 const MapPlaces = () => {
-  // const [placesData, setPlacesData] = useState<PlaceData | undefined>(
-  //   undefined
-  // );
-
-  const { id } = useParams<{ id?: string }>();
-  const location = useLocation();
-
+  const { singlePlaceData } = useContext(SinglePlace);
+  const [placesData, setPlacesData] = useState<PlaceData | undefined>(
+    undefined
+  );
   const [placesCardData, setPlacesCardData] = useState<PlaceData[]>([]);
 
-  const { singlePlaceData } = useContext(SinglePlace);
+  const location = useLocation();
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
 
-  console.log('singlePlaceData dans MapPlaces :', singlePlaceData);
-
-  // useEffect(() => {
-  //   fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setPlacesData(data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Pas bon', error);
-  //     });
-  // }, [placesData]);
+  useEffect(() => {
+    fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPlacesData(data);
+      })
+      .catch((error) => {
+        console.error('Pas bon', error);
+      });
+  }, []);
 
   const { selectedCategory } = useContext(SelectedCategory);
 
@@ -86,11 +83,26 @@ const MapPlaces = () => {
     }
   }, [selectedCategory]);
 
-  return location.pathname.includes(`/${id}`) ? (
-    <h1>{singlePlaceData?.name}</h1>
-  ) : (
+  let defaultMapCenter: [number, number] = [45.71301, 5.12916];
+
+  let singlePlaceCenter: [number, number] | null = null;
+  console.log(singlePlaceData);
+  console.log(singlePlaceData?.coordinate);
+
+  if (singlePlaceData) {
+    const [latStr, lngStr] = singlePlaceData?.coordinate.split('/');
+    const lat = parseFloat(latStr);
+    const lng = parseFloat(lngStr);
+    if (!isNaN(lat) && !isNaN(lng)) {
+      singlePlaceCenter = [lat, lng];
+    }
+  }
+  console.log(singlePlaceCenter);
+  console.log(location.pathname.includes(`/${id}/${slug}`));
+
+  return location.pathname.includes(`/${id}/${slug}`) ? (
     <MapContainer
-      center={[45.71301, 5.12916]}
+      center={singlePlaceCenter || defaultMapCenter}
       zoom={15}
       style={{ width: '100%', height: '80vh' }}
     >
@@ -100,7 +112,15 @@ const MapPlaces = () => {
         zoomOffset={-1}
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {/* {Array.isArray(placesData) &&
+      <Marker
+        position={singlePlaceCenter || defaultMapCenter}
+        icon={L.divIcon({ className: 'custom-marker', iconSize: [24, 24] })}
+      >
+        <Popup className="pop-up">
+          <p>{singlePlaceData?.name}</p>
+        </Popup>
+      </Marker>
+      {Array.isArray(placesData) &&
         placesData.map((data, index: number) => {
           const { id, slug, coordinate, name, pictures, category } = data;
           if (coordinate) {
@@ -121,10 +141,30 @@ const MapPlaces = () => {
                         alt={picture.name}
                         className="img-map"
                       />
-                    ))} */}
+                    ))}
+                  </Popup>
+                </Marker>
+              );
+            }
+          }
+          return null;
+        })}
+    </MapContainer>
+  ) : (
+    <MapContainer
+      center={defaultMapCenter}
+      zoom={15}
+      style={{ width: '100%', height: '80vh' }}
+    >
+      <TileLayer
+        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+        tileSize={512}
+        zoomOffset={-1}
+        attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
       {Array.isArray(placesCardData) &&
         placesCardData.map((data, index: number) => {
-          const { id, slug, coordinate, name, pictures, category } = data;
+          const { id, slug, coordinate, name, pictures, categories } = data;
           if (coordinate) {
             const [latStr, lngStr] = coordinate.split('/');
             const lat = parseFloat(latStr);

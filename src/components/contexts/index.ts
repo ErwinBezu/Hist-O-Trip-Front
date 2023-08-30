@@ -14,10 +14,10 @@ type Picture = {
   url: string;
 };
 
-// type Tags = {
-//   id: number;
-//   name: string;
-// };
+type Tags = {
+  id: number;
+  name: string;
+};
 
 type PlaceData = {
   id: number;
@@ -39,13 +39,11 @@ type PlaceData = {
   guided_tour: string;
   slug: string;
   pictures: Picture[];
-  category: Category[];
-  // tags: Tags[];
+  categories: Category[];
+  tags: Tags[];
 };
 
 export const CategoriesList = createContext<Category[]>([]);
-
-// export const SelectedCategory = createContext<Category | null>(null);
 
 export const SelectedCategory = createContext<{
   selectedCategory: Category | null;
@@ -57,10 +55,6 @@ export const SelectedCategory = createContext<{
 
 export const SinglePlace = createContext<{
   singlePlaceData: PlaceData | undefined;
-  setSinglePlaceData: React.Dispatch<
-    React.SetStateAction<PlaceData | undefined>
-  >;
 }>({
   singlePlaceData: undefined,
-  setSinglePlaceData: () => {},
 });

@@ -8,6 +8,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import Error404 from '../Error/Error404';
 import MapPlaces from '../MapPlaces/MapPlaces';
 import { SinglePlace } from '../contexts';
+import Icon from '../Categories/Icon';
 
 type Picture = {
   id: number;
@@ -20,6 +21,10 @@ type Category = {
   id: number;
   name: string;
   icon: string;
+};
+type Tags = {
+  id: number;
+  name: string;
 };
 
 type PlaceData = {
@@ -42,7 +47,8 @@ type PlaceData = {
   guided_tour: string;
   slug: string;
   pictures: Picture[];
-  category: Category[];
+  categories: Category[];
+  tags: Tags[];
 };
 
 const Place: React.FC = () => {
@@ -89,6 +95,11 @@ const Place: React.FC = () => {
     }
   }, [id, slug, location]);
 
+  if (!singlePlaceData) {
+    return <Error404 />;
+  }
+
+  console.log(singlePlaceData?.categories);
   return (
     <>
       <div className="place-header-container">
@@ -106,6 +117,12 @@ const Place: React.FC = () => {
             <p>Période</p>
             <p>Epoque</p>
             <p>Catégorie</p>
+            {singlePlaceData.categories.map((cat) => (
+              <>
+                <span key={cat.id}>{cat.name}</span>
+                <Icon name={cat.icon} />
+              </>
+            ))}
             <p>Tags</p>
           </div>
         </div>
@@ -124,11 +141,13 @@ const Place: React.FC = () => {
             <a href={singlePlaceData?.website}>{singlePlaceData?.website}</a>
           </p>
         </div>
+        <div className="place-map">
+          <SinglePlace.Provider value={{ singlePlaceData }}>
+            <MapPlaces />
+          </SinglePlace.Provider>
+        </div>
         {/* <div className="place-review"><h3>Commentaires</h3>
       </div> */}
-        <SinglePlace.Provider value={{ singlePlaceData, setSinglePlaceData }}>
-          <MapPlaces />
-        </SinglePlace.Provider>
       </div>
       <div className="place-footer">
         <Footer />
