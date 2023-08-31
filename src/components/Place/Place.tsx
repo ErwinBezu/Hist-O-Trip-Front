@@ -6,6 +6,9 @@ import placesData from '../../data/places.json';
 import Footer from '../Footer/Footer';
 import { IoIosArrowBack } from 'react-icons/io';
 import Error404 from '../Error/Error404';
+import MapPlaces from '../MapPlaces/MapPlaces';
+import { SinglePlace } from '../contexts';
+import Icon from '../Categories/Icon';
 
 type Picture = {
   id: number;
@@ -14,15 +17,29 @@ type Picture = {
   place_id: string;
   url: string;
 };
+type Category = {
+  id: number;
+  name: string;
+  icon: string;
+};
+type Tags = {
+  id: number;
+  name: string;
+};
 
-// Define the type for a place
+type Centuries = {
+  id: number;
+  period: string;
+  century: string;
+};
+
 type PlaceData = {
   id: number;
   name: string;
   subtitle: string;
   coordinate: string;
   adress: string;
-  postcode: string;
+  placecode: string;
   city: string;
   country: string;
   website: string;
@@ -36,61 +53,34 @@ type PlaceData = {
   guided_tour: string;
   slug: string;
   pictures: Picture[];
-};
-
-const defaultPostData = {
-  title: 'N/A',
-  id: -1,
-  name: 'N/A',
-  subtitle: 'N/A',
-  coordinate: 'N/A',
-  adress: 'N/A',
-  postcode: 'N/A',
-  city: 'N/A',
-  country: 'N/A',
-  website: 'N/A',
-  phone: 'N/A',
-  description: 'N/A',
-  user_id: 'N/A',
-  price: 'N/A',
-  opening_hours: 'N/A',
-  rating: 'N/A',
-  accessibility: 'N/A',
-  guided_tour: 'N/A',
-  slug: 'N/A',
-  pictures: [
-    {
-      id: -1,
-      name: 'N/A',
-      picture_legend: 'N/A',
-      place_id: 'N/A',
-      url: 'N/A',
-    },
-  ],
+  categories: Category[];
+  tags: Tags[];
+  centuries: Centuries[];
 };
 
 const Place: React.FC = () => {
-  const [singlePostData, setSinglePostData] = useState<PlaceData | undefined>(
+  const [singlePlaceData, setSinglePlaceData] = useState<PlaceData | undefined>(
     undefined
   );
+  console.log(singlePlaceData);
   const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
   // useEffect(() => {
-  //   const foundPostData = placesData.find(
-  //     (postItem) => postItem.id === parseInt(id) && postItem.slug === slug
+  //   const foundPlaceData = placesData.find(
+  //     (PlaceItem) => PlaceItem.id === parseInt(id) && PlaceItem.slug === slug
   //   );
 
-  //   if (foundPostData) {
-  //     console.log(foundPostData);
-  //     setSinglePostData(foundPostData || defaultPostData);
+  //   if (foundPlaceData) {
+  //     console.log(foundPlaceData);
+  //     setSinglePlaceData(foundPlaceData || defaultPlaceData);
   //   } else {
 
-  //     setSinglePostData(defaultPostData);
+  //     setSinglePlaceData(defaultPlaceData);
   //   }
   // }, [id, slug, location]);
 
-  // if (!singlePostData || singlePostData === defaultPostData) {
+  // if (!singlePlaceData || singlePlaceData === defaultPlaceData) {
   //   return <Error404 />;
   // }
 
@@ -100,22 +90,23 @@ const Place: React.FC = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.id === parseInt(id) && data.slug === slug) {
-            setSinglePostData(data);
+            setSinglePlaceData(data);
           } else {
-            setSinglePostData(defaultPostData);
+            return <Error404 />;
           }
         })
         .catch((error) => {
           console.error('Pas bon', error);
-          setSinglePostData(defaultPostData);
+          return <Error404 />;
         });
     }
   }, [id, slug, location]);
 
-  if (!singlePostData || singlePostData === defaultPostData) {
+  if (!singlePlaceData) {
     return <Error404 />;
   }
 
+  console.log(singlePlaceData.centuries[0].period);
   return (
     <>
       <div className="place-header-container">
@@ -128,28 +119,54 @@ const Place: React.FC = () => {
               <IoIosArrowBack />
             </button>
           </Link>
-          <img src={singlePostData?.pictures[0].url} alt="picture" />
+          <img src={singlePlaceData?.pictures[0].url} alt="picture" />
           <div className="place-tags">
             <p>Période</p>
+            {singlePlaceData.centuries.map((cent) => (
+              <>
+                <span key={cent.id}>{cent.period}</span>{' '}
+              </>
+            ))}
             <p>Epoque</p>
+            {singlePlaceData.centuries.map((cent) => (
+              <>
+                <span key={cent.id}>{cent.century}</span>{' '}
+              </>
+            ))}
             <p>Catégorie</p>
+            {singlePlaceData.categories.map((cat) => (
+              <>
+                <span key={cat.id}>{cat.name}</span>
+                <Icon name={cat.icon} />
+              </>
+            ))}
             <p>Tags</p>
+            {singlePlaceData.tags.map((item) => (
+              <>
+                <span key={item.id}>{item.name}</span>{' '}
+              </>
+            ))}
           </div>
         </div>
         <div className="place-name">
-          <h2>{singlePostData?.name}</h2>
+          <h2>{singlePlaceData?.name}</h2>
         </div>
         <div className="place-description">
-          <p>{singlePostData?.description}</p>
+          <p>{singlePlaceData?.description}</p>
         </div>
         <div className="place-infos">
-          <p>Adresse: {singlePostData?.adress}</p>
-          <p>Horaires: {singlePostData?.opening_hours}</p>
-          <p>Tarifs: {singlePostData?.price}</p>
+          <p>Adresse: {singlePlaceData?.adress}</p>
+          <p>Horaires: {singlePlaceData?.opening_hours}</p>
+          <p>Tarifs: {singlePlaceData?.price}</p>
           <p>
             Site Web:
-            <a href={singlePostData?.website}>{singlePostData?.website}</a>
+            <a href={singlePlaceData?.website}>{singlePlaceData?.website}</a>
           </p>
+        </div>
+        <div className="place-map">
+          <SinglePlace.Provider value={{ singlePlaceData }}>
+            <MapPlaces />
+          </SinglePlace.Provider>
         </div>
         {/* <div className="place-review"><h3>Commentaires</h3>
       </div> */}

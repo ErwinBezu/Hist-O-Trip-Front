@@ -13,9 +13,10 @@ import Login from '../../Auth/Login/Login';
 import Filter from '../Filter/Filter';
 import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
-import {Context} from '../../App/App';
+import { Context } from '../../App/App';
 
 const NavBar = () => {
+
   const {isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible, setMenueVisible} = useContext(Context);
   const [isBottom, setIsBottom] = useState(false);
 
@@ -38,6 +39,15 @@ const NavBar = () => {
     }
   },[]);
 
+  const context = useContext(Context);
+
+  if (!context) {
+    // Le contexte n'est pas encore défini, vous pouvez choisir de rendre un état de chargement
+    return <div>Loading...</div>;
+  }
+  const { isVisible, setIsVisible, menueVisible, setMenueVisible } = context;
+
+
   return (
     <>
       <div className="navbar-container">
@@ -57,10 +67,15 @@ const NavBar = () => {
           <button type="button" className="suggest-btn">
             Proposer un lieu
           </button>
-          <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
+          <button
+            type="button"
+            className="menu-btn"
+            onClick={() => setMenueVisible((prevstate) => !prevstate)}
+          >
             <AiOutlineMenu />
             <BsFillPersonFill />
           </button>
+
           </>
           ) : (
           <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
@@ -68,6 +83,7 @@ const NavBar = () => {
         </button> )}
           
           {menueVisible && (isLoggedIn ? <UserProfil setMenueVisible={setMenueVisible} /> : <Login/>)}
+
         </div>
       </div>
 
@@ -81,33 +97,37 @@ const NavBar = () => {
         </button>
         <button
           type="button"
-          onClick={() => setIsVisisble(true)}
+          onClick={() => setIsVisible(true)}
           className="filter-btn"
         >
           <AiOutlineControl /> Filtre
         </button>
-        {isVisible && <Filter setIsVisible={setIsVisisble} />}
+        {isVisible && <Filter setIsVisible={setIsVisible} />}
       </div>
 
         
       <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
       {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         <Link to="/">
+
         <button className='home-mobile-btn'>< AiOutlineHome/> Home</button>
+
         </Link>
         <button
           type="button"
-          onClick={() => setIsVisisble(true)}
+          onClick={() => setIsVisible(true)}
           className="filter-btn"
         >
           <AiOutlineControl /> Filter
         </button>
+
         {isVisible && <Filter setIsVisible={setIsVisisble} />}
         
         <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
         
+
       </div>
     </>
   );

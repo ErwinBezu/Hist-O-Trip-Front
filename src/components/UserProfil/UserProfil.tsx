@@ -7,12 +7,23 @@ import Cookies from 'js-cookie';
 
 
 const UserProfil = () => {
+
   const {isLoggedIn, setIsLoggedIn, editVisible, setEditVisible, setMenueVisible} = useContext(Context);
   
   const handleLogout = () => {
     Cookies.remove('jwtToken');
     window.location.reload();
   }
+
+  // ! a verifier le fonctionnement
+  const context = useContext(Context);
+
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+  const { editVisible, setEditVisible, setMenueVisible } = context;
+  // ! Fin du code à verifier
+
 
   useEffect(() => {
     if (editVisible) {
@@ -25,9 +36,9 @@ const UserProfil = () => {
       document.body.style.overflow = 'auto'; // Remettre le scroll normal lorsque le composant est démonté
     };
   }, [editVisible]);
-  
 
   return (
+
 
      <div className="Profil-container">
         <div className="profil-header">
@@ -53,9 +64,10 @@ const UserProfil = () => {
                 </button>
                 
         </div>
+
       </div>
-    
-  )
+    </div>
+  );
 };
 
 export default UserProfil;
