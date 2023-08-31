@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Card.scss';
+
 import Place from '../Place/Place';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Context } from '../App/App';
