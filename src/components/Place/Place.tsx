@@ -27,6 +27,12 @@ type Tags = {
   name: string;
 };
 
+type Centuries = {
+  id: number;
+  period: string;
+  century: string;
+};
+
 type PlaceData = {
   id: number;
   name: string;
@@ -49,6 +55,7 @@ type PlaceData = {
   pictures: Picture[];
   categories: Category[];
   tags: Tags[];
+  centuries: Centuries[];
 };
 
 const Place: React.FC = () => {
@@ -99,7 +106,7 @@ const Place: React.FC = () => {
     return <Error404 />;
   }
 
-  console.log(singlePlaceData?.categories);
+  console.log(singlePlaceData.centuries[0].period);
   return (
     <>
       <div className="place-header-container">
@@ -115,7 +122,17 @@ const Place: React.FC = () => {
           <img src={singlePlaceData?.pictures[0].url} alt="picture" />
           <div className="place-tags">
             <p>Période</p>
+            {singlePlaceData.centuries.map((cent) => (
+              <>
+                <span key={cent.id}>{cent.period}</span>{' '}
+              </>
+            ))}
             <p>Epoque</p>
+            {singlePlaceData.centuries.map((cent) => (
+              <>
+                <span key={cent.id}>{cent.century}</span>{' '}
+              </>
+            ))}
             <p>Catégorie</p>
             {singlePlaceData.categories.map((cat) => (
               <>
@@ -124,6 +141,11 @@ const Place: React.FC = () => {
               </>
             ))}
             <p>Tags</p>
+            {singlePlaceData.tags.map((item) => (
+              <>
+                <span key={item.id}>{item.name}</span>{' '}
+              </>
+            ))}
           </div>
         </div>
         <div className="place-name">
