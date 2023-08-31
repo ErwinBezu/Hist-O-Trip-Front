@@ -17,10 +17,10 @@ type Category = {
 };
 
 const Home = () => {
-  const [categoriesList, setCategoriesList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
+  const [categoriesList, setCategoriesList] = useState([]);
 
   useEffect(() => {
     fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
