@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Château de Falaise",
     "subtitle": "Le château de Guillaume le Conquérant",
-    "coordinate": "49.89326, -0.20395",
+    "coordinate": [-0.20395, 49.89326],
     "adress": "Place Guillaume le Conquérant",
     "postcode": "14700",
     "city": "Falaise",

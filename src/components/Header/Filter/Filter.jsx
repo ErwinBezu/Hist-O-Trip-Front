@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Filter.scss';
+import './Filter.scss';
 import Categories from '../../Categories/Categories';
 import Epoques from '../../Utiles/Epoques/Epoques';
 import Periodes from '../../Utiles/Periodes/Periodes';
