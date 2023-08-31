@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import Icon from './Icon';
 import { CategoriesList, SelectedCategory } from '../contexts/index';
-import categoriesList from '../../data/categories.json';
 
 import './Categories.scss';
 

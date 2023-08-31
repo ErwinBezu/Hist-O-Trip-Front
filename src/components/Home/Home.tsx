@@ -20,28 +20,15 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
-  const [categoriesList, setCategoriesList] = useState([]);
-
-  useEffect(() => {
-    fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
-      .then((response) => response.json())
-      .then((data) => {
-        setCategoriesList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-  console.log(categoriesList);
 
   return (
     <>
       <SelectedCategory.Provider
         value={{ selectedCategory, setSelectedCategory }}
       >
-        <CategoriesList.Provider value={categoriesList}>
-          <Header />
-          <Card />
-          <Footer />
-        </CategoriesList.Provider>
+        <Header />
+        <Card />
+        <Footer />
       </SelectedCategory.Provider>
     </>
   );

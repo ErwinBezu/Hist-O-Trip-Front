@@ -16,8 +16,21 @@ import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
 
 const NavBar = () => {
+  const context = useContext(Context);
 
-  const {isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible, setMenueVisible} = useContext(Context);
+  if (!context) {
+    return;
+  }
+
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    isVisible,
+    setIsVisible,
+    menueVisible,
+    setMenueVisible,
+  } = context;
+
   const [isBottom, setIsBottom] = useState(false);
 
   const handleScroll = () => {
@@ -27,7 +40,7 @@ const NavBar = () => {
 
     if (scrollTop + windowHeight >= documentHeight) {
       setIsBottom(true);
-    }else {
+    } else {
       setIsBottom(false);
     }
   };
@@ -36,17 +49,8 @@ const NavBar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-    }
-  },[]);
-
-  const context = useContext(Context);
-
-  if (!context) {
-    // Le contexte n'est pas encore défini, vous pouvez choisir de rendre un état de chargement
-    return <div>Loading...</div>;
-  }
-  const { isVisible, setIsVisible, menueVisible, setMenueVisible } = context;
-
+    };
+  }, []);
 
   return (
     <>
@@ -63,27 +67,30 @@ const NavBar = () => {
 
         <div className="suggest-menu-container">
           {isLoggedIn ? (
-          <>
-          <button type="button" className="suggest-btn">
-            Proposer un lieu
-          </button>
-          <button
-            type="button"
-            className="menu-btn"
-            onClick={() => setMenueVisible((prevstate) => !prevstate)}
-          >
-            <AiOutlineMenu />
-            <BsFillPersonFill />
-          </button>
-
-          </>
+            <>
+              <button type="button" className="suggest-btn">
+                Proposer un lieu
+              </button>
+              <button
+                type="button"
+                className="menu-btn"
+                onClick={() => setMenueVisible((prevstate) => !prevstate)}
+              >
+                <AiOutlineMenu />
+                <BsFillPersonFill />
+              </button>
+            </>
           ) : (
-          <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
-          <BsFillPersonFill />
-        </button> )}
-          
-          {menueVisible && (isLoggedIn ? <UserProfil setMenueVisible={setMenueVisible} /> : <Login/>)}
+            <button
+              type="button"
+              className="menu-btn"
+              onClick={() => setMenueVisible((prevstate) => !prevstate)}
+            >
+              <BsFillPersonFill />
+            </button>
+          )}
 
+          {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         </div>
       </div>
 
@@ -105,13 +112,12 @@ const NavBar = () => {
         {isVisible && <Filter setIsVisible={setIsVisible} />}
       </div>
 
-        
       <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
-      {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
+        {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         <Link to="/">
-
-        <button className='home-mobile-btn'>< AiOutlineHome/> Home</button>
-
+          <button className="home-mobile-btn">
+            <AiOutlineHome /> Home
+          </button>
         </Link>
         <button
           type="button"
@@ -121,13 +127,15 @@ const NavBar = () => {
           <AiOutlineControl /> Filter
         </button>
 
-        {isVisible && <Filter setIsVisible={setIsVisisble} />}
-        
-        <button type="button" className="menu-btn" onClick={() => setMenueVisible(prevstate => !prevstate)}>
+        {isVisible && <Filter setIsVisible={setIsVisible} />}
+
+        <button
+          type="button"
+          className="menu-btn"
+          onClick={() => setMenueVisible((prevstate) => !prevstate)}
+        >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
-        
-
       </div>
     </>
   );

@@ -9,6 +9,7 @@ import LegalMentions from '../Page/Form/LegalMentions';
 import SuggestForm from '../Page/Form/SuggestForm';
 import ContactForm from '../Page/Form/ContactForm';
 import Cookies from 'js-cookie';
+import { CategoriesList, CenturiesList, TagsList } from '../contexts';
 
 type ContextType = {
   isVisible: boolean;
@@ -17,8 +18,11 @@ type ContextType = {
   setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
   editVisible: boolean;
   setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  signUpModal: boolean;
+  setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
 
@@ -26,7 +30,12 @@ const App: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [menueVisible, setMenueVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
+
   const [categoriesList, setCategoriesList] = useState([]);
+  const [centuriesList, setCenturiesList] = useState([]);
+  const [tagsList, setTagsList] = useState([]);
 
   useEffect(() => {
     fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
@@ -36,28 +45,60 @@ const App: React.FC = () => {
       })
       .catch((err) => console.error(err));
   }, []);
-  console.log(categoriesList);
 
-  const [selectedCate, setSelectedCate] = useState();
-  const [resultAPI, setResultAPI] = useState();
-  const [signUpModal, setSignUpModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
+  useEffect(() => {
+    fetch('http://ludoviclebris-server.eddi.cloud/api/api/tags')
+      .then((response) => response.json())
+      .then((data) => {
+        setTagsList(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://ludoviclebris-server.eddi.cloud/api/api/centuries')
+      .then((response) => response.json())
+      .then((data) => {
+        setCenturiesList(data);
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   // const url = useLocation();
 
   return (
-    <Context.Provider value={{signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/" element={<Page />}>
-          <Route path="/contact" element={<ContactForm />} />
-          <Route path="/mentions_legales" element={<LegalMentions />} />
-          <Route path="/proposer" element={<SuggestForm />} />
-        </Route>
-        <Route path="/:id/:slug" element={<Place />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
-    </Context.Provider>
+    <CenturiesList.Provider value={centuriesList}>
+      <CategoriesList.Provider value={categoriesList}>
+        <TagsList.Provider value={tagsList}>
+          <Context.Provider
+            value={{
+              signUpModal,
+              setSignUpModal,
+              isLoggedIn,
+              setIsLoggedIn,
+              isVisible,
+              setIsVisible,
+              menueVisible,
+              setMenueVisible,
+              editVisible,
+              setEditVisible,
+            }}
+          >
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Page />}>
+                <Route path="/contact" element={<ContactForm />} />
+                <Route path="/mentions_legales" element={<LegalMentions />} />
+                <Route path="/proposer" element={<SuggestForm />} />
+              </Route>
+              <Route path="/:id/:slug" element={<Place />} />
+              <Route path="*" element={<Error404 />} />
+            </Routes>
+          </Context.Provider>
+        </TagsList.Provider>
+      </CategoriesList.Provider>
+    </CenturiesList.Provider>
   );
 };
 

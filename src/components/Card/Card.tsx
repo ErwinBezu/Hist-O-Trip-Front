@@ -57,7 +57,7 @@ const Card: React.FC = () => {
 
   return (
     <div className="cards-container" onClick={() => setMenueVisible(false)}>
-      <MapPlaces />
+      {/* <MapPlaces /> */}
       {placesCardData
         // .filter((placeDataItem) =>
         //   selectedCategory

@@ -19,6 +19,12 @@ type Tags = {
   name: string;
 };
 
+type Centuries = {
+  id: number;
+  period: string;
+  century: string;
+};
+
 type PlaceData = {
   id: number;
   name: string;
@@ -41,9 +47,12 @@ type PlaceData = {
   pictures: Picture[];
   categories: Category[];
   tags: Tags[];
+  centuries: Centuries[];
 };
 
 export const CategoriesList = createContext<Category[]>([]);
+export const CenturiesList = createContext<Centuries[]>([]);
+export const TagsList = createContext<Tags[]>([]);
 
 export const SelectedCategory = createContext<{
   selectedCategory: Category | null;
