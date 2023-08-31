@@ -4,6 +4,7 @@ import Place from '../Place/Place';
 import './App.scss';
 import React, { createContext, useState } from 'react';
 import Error404 from '../Error/Error404';
+import Contact from '../Contact/Contact';
 
 type ContextType = {
   isVisible: boolean;
@@ -16,7 +17,7 @@ type ContextType = {
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
 
-const App = () => {
+const App: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [menueVisible, setMenueVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
@@ -36,7 +37,7 @@ const App = () => {
     >
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/contact" element={<Contact />} />
         {/* <Route path="/mentions_legales" element={<LegalMentions />} />
       <Route path="/proposer" element={<Suggest />} /> */}
         <Route path="/:id/:slug" element={<Place />} />
