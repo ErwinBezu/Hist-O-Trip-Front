@@ -28,6 +28,7 @@ const Home = () => {
       >
         <Header />
         <Card />
+        <FilterFooter />
         <Footer />
       </SelectedCategory.Provider>
     </>
