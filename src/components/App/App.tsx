@@ -8,6 +8,7 @@ import Page from '../Page/Page';
 import LegalMentions from '../Page/Form/LegalMentions';
 import SuggestForm from '../Page/Form/SuggestForm';
 import ContactForm from '../Page/Form/ContactForm';
+import Cookies from 'js-cookie';
 
 type ContextType = {
   isVisible: boolean;
@@ -17,6 +18,7 @@ type ContextType = {
   editVisible: boolean;
   setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
 
@@ -36,19 +38,15 @@ const App: React.FC = () => {
   }, []);
   console.log(categoriesList);
 
+  const [selectedCate, setSelectedCate] = useState();
+  const [resultAPI, setResultAPI] = useState();
+  const [signUpModal, setSignUpModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
   // const url = useLocation();
 
   return (
-    <Context.Provider
-      value={{
-        isVisible,
-        setIsVisible,
-        menueVisible,
-        setMenueVisible,
-        editVisible,
-        setEditVisible,
-      }}
-    >
+    <Context.Provider value={{signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, isVisible, setIsVisisble, menueVisible,resultAPI, setResultAPI, setMenueVisible, editVisible, selectedCate, setSelectedCate, setEditVisible}}>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/" element={<Page />}>

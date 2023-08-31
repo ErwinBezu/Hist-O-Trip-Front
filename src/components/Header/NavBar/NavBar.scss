@@ -95,28 +95,43 @@
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  } 
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
 .mobilebar-container {
   background-color: $color-primary;
   position: fixed;
   bottom: 0;
   left: 0;
+  border-top: 1px solid #d6d6d6;
   width: 100%;
-  padding: 10px 0;
+  padding: 5px 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
 
-  .menu-btn,
-  .filter-btn,
-  .home-mobile-btn {
-    border-style: none;
-    svg {
-      width: 100%;
-      font-size: 2rem;
-      color: $color-tertiary;
-      background-color: $color-primary;
-    }
+.mobilebar-container .menu-btn,
+.mobilebar-container .filter-btn,
+.mobilebar-container .home-mobile-btn {
+  border-style: none;
+  svg {
+    width: 100%;
+    font-size: 2rem;
+    color: $color-tertiary;
+    background-color: $color-primary;
   }
+}
+
+.mobilebar-container.hidden {
+  animation: fadeOut 0.2s ease-in-out forwards;
 }
 
 @media screen and (min-width: 551px) {
