@@ -57,7 +57,7 @@ function Login() {
 
 const user = parseJwt(token);
 
-  console.log("lutilisateur est :", user);
+  console.log("l'utilisateur est :", user);
     
 
   return (
