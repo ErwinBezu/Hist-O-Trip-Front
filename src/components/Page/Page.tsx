@@ -1,16 +1,16 @@
 import React from 'react';
 import Header from '../Header/Header';
-import Form from './Form/Form';
 import Footer from '../Footer/Footer';
+import { Outlet } from 'react-router-dom';
 
-const Contact: React.FC = () => {
+const Page: React.FC = () => {
   return (
     <>
       <Header />
-      <Form />
+      <Outlet />
       <Footer />
     </>
   );
 };
 
-export default Contact;
+export default Page;

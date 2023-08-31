@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
-const Form = () => {
-  const [pseudo, setPseudo] = useState<string>('');
+const ContactForm = () => {
+  const [pseudonym, setPseudonym] = useState<string>('');
   const [lastname, setLastname] = useState<string>('');
   const [firstname, setFirstname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -10,7 +10,7 @@ const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const resetForm = () => {
-    setPseudo('');
+    setPseudonym('');
     setLastname('');
     setFirstname('');
     setEmail('');
@@ -33,7 +33,7 @@ const Form = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            pseudo: pseudo,
+            pseudonym: pseudonym,
             lastname: lastname,
             firstname: firstname,
             email: email,
@@ -61,13 +61,13 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="pseudo">Pseudo:</label>
+        <label htmlFor="pseudonym">Pseudo:</label>
         <input
           type="text"
-          aria-label="pseudo"
-          id="pseudo"
-          value={pseudo}
-          onChange={(e) => setPseudo(e.target.value)}
+          aria-label="pseudonym"
+          id="pseudonym"
+          value={pseudonym}
+          onChange={(e) => setPseudonym(e.target.value)}
         />
       </div>
       <div>
@@ -118,40 +118,4 @@ const Form = () => {
   );
 };
 
-export default Form;
-// const [status, setStatus] = useState('Submit');
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setStatus('Sending...');
-//   const { pseudo, lastname, firstname, email, message } = e.target.elements;
-//   let details = {
-//     pseudo: pseudo.value,
-//     lastname: lastname.value,
-//     firstname: firstname.value,
-//     email: email.value,
-//     message: message.value,
-//   };
-//   let response = await fetch('URL_API', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json;charset=utf-8',
-//     },
-//     body: JSON.stringify(details),
-//   });
-//   setStatus('Submit');
-//   let result = await response.json();
-//   alert(result.status);
-// };
-
-// .then((res) => res.json())
-// .then((data) => {
-//   setPseudo('');
-//   setLastname('');
-//   setFirstname('');
-//   setEmail('');
-//   setMessage('');
-// })
-// .catch((err) => {
-//   console.log(err.message);
-// });
+export default ContactForm;
