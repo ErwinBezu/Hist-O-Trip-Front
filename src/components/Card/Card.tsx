@@ -4,7 +4,7 @@ import './Card.scss';
 import Place from '../Place/Place';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Context } from '../App/App';
-import { SelectedCategory } from '../contexts';
+import { SelectedCategory, SelectedCentury, SelectedTag } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
 
 import placesCardData from '../../data/places.json';
@@ -37,6 +37,8 @@ const Card: React.FC = () => {
     setMenueVisible: (value: boolean) => void;
   };
   const { selectedCategory } = useContext(SelectedCategory);
+  const { selectedCentury } = useContext(SelectedCentury);
+  const { selectedTag } = useContext(SelectedTag);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -50,6 +52,32 @@ const Card: React.FC = () => {
         .catch((err) => console.error(err));
     }
   }, [selectedCategory]);
+
+  useEffect(() => {
+    if (selectedCentury) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places/centuries/${selectedCentury.id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [selectedCentury]);
+
+  useEffect(() => {
+    if (selectedTag) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places/tags/${selectedTag.id}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [selectedTag]);
 
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);

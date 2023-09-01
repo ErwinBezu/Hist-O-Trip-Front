@@ -6,10 +6,11 @@ import Card from '../Card/Card';
 import Footer from '../Footer/Footer';
 import FilterFooter from '../FilterFooter/FilterFooter';
 
-import UserProfil from '../UserProfil/UserProfil';
-import UserEditProfil from '../UserProfil/UserEditProfil';
-
-import { CategoriesList, SelectedCategory } from '../contexts/index';
+import {
+  SelectedCategory,
+  SelectedCentury,
+  SelectedTag,
+} from '../contexts/index';
 
 type Category = {
   id: number;
@@ -17,20 +18,42 @@ type Category = {
   icon: string;
 };
 
+type Centuries = {
+  id: number;
+  period: string;
+  century: string;
+};
+
+type Tags = {
+  id: number;
+  name: string;
+};
+
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
 
+  const [selectedCentury, setSelectedCentury] = useState<Centuries | null>(
+    null
+  );
+
+  const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
   return (
     <>
       <SelectedCategory.Provider
         value={{ selectedCategory, setSelectedCategory }}
       >
-        <Header />
-        <Card />
-        <FilterFooter />
-        <Footer />
+        <SelectedCentury.Provider
+          value={{ selectedCentury, setSelectedCentury }}
+        >
+          <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
+            <Header />
+            <Card />
+            <FilterFooter />
+            <Footer />
+          </SelectedTag.Provider>
+        </SelectedCentury.Provider>
       </SelectedCategory.Provider>
     </>
   );
