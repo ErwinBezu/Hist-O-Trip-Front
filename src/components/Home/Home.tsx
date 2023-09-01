@@ -4,6 +4,7 @@ import './Home.scss';
 import Header from '../Header/Header';
 import Card from '../Card/Card';
 import Footer from '../Footer/Footer';
+import FilterFooter from '../FilterFooter/FilterFooter';
 
 import UserProfil from '../UserProfil/UserProfil';
 import UserEditProfil from '../UserProfil/UserEditProfil';
@@ -28,6 +29,7 @@ const Home = () => {
       >
         <Header />
         <Card />
+        <FilterFooter />
         <Footer />
       </SelectedCategory.Provider>
     </>
