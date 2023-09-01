@@ -62,6 +62,22 @@ export const SelectedCategory = createContext<{
   setSelectedCategory: () => {},
 });
 
+export const SelectedCentury = createContext<{
+  selectedCentury: Centuries | null;
+  setSelectedCentury: React.Dispatch<React.SetStateAction<Centuries | null>>;
+}>({
+  selectedCentury: { id: 0, century: '', period: '' },
+  setSelectedCentury: () => {},
+});
+
+export const SelectedTag = createContext<{
+  selectedTag: Tags | null;
+  setSelectedTag: React.Dispatch<React.SetStateAction<Tags | null>>;
+}>({
+  selectedTag: { id: 0, name: '' },
+  setSelectedTag: () => {},
+});
+
 export const SinglePlace = createContext<{
   singlePlaceData: PlaceData | undefined;
 }>({
