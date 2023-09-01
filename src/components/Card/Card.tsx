@@ -4,7 +4,12 @@ import './Card.scss';
 import Place from '../Place/Place';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Context } from '../App/App';
-import { SelectedCategory, SelectedCentury, SelectedTag } from '../contexts';
+import {
+  SelectedCategory,
+  SelectedCentury,
+  SelectedTag,
+  SearchInput,
+} from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
 
 import placesCardData from '../../data/places.json';
@@ -39,6 +44,23 @@ const Card: React.FC = () => {
   const { selectedCategory } = useContext(SelectedCategory);
   const { selectedCentury } = useContext(SelectedCentury);
   const { selectedTag } = useContext(SelectedTag);
+  const { searchInput } = useContext(SearchInput);
+
+  useEffect(() => {
+    if (searchInput) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places?search=${searchInput}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [searchInput]);
+
+  console.log('ici paname');
+  console.log(searchInput);
 
   useEffect(() => {
     if (selectedCategory) {

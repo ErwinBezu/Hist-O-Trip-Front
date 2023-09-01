@@ -83,3 +83,11 @@ export const SinglePlace = createContext<{
 }>({
   singlePlaceData: undefined,
 });
+
+export const SearchInput = createContext<{
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+}>({
+  searchInput: '',
+  setSearchInput: () => {},
+});

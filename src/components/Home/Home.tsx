@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import FilterFooter from '../FilterFooter/FilterFooter';
 
 import {
+  SearchInput,
   SelectedCategory,
   SelectedCentury,
   SelectedTag,
@@ -30,6 +31,8 @@ type Tags = {
 };
 
 const Home = () => {
+  const [searchInput, setSearchInput] = useState('');
+
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
@@ -41,20 +44,22 @@ const Home = () => {
   const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
   return (
     <>
-      <SelectedCategory.Provider
-        value={{ selectedCategory, setSelectedCategory }}
-      >
-        <SelectedCentury.Provider
-          value={{ selectedCentury, setSelectedCentury }}
+      <SearchInput.Provider value={{ searchInput, setSearchInput }}>
+        <SelectedCategory.Provider
+          value={{ selectedCategory, setSelectedCategory }}
         >
-          <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
-            <Header />
-            <Card />
-            <FilterFooter />
-            <Footer />
-          </SelectedTag.Provider>
-        </SelectedCentury.Provider>
-      </SelectedCategory.Provider>
+          <SelectedCentury.Provider
+            value={{ selectedCentury, setSelectedCentury }}
+          >
+            <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
+              <Header />
+              <Card />
+              <FilterFooter />
+              <Footer />
+            </SelectedTag.Provider>
+          </SelectedCentury.Provider>
+        </SelectedCategory.Provider>
+      </SearchInput.Provider>
     </>
   );
 };
