@@ -58,8 +58,6 @@ const NavBar = () => {
     setSearchInput(e.target.value);
   };
 
-  console.log(searchInput);
-
   return (
     <>
       <div className="navbar-container">

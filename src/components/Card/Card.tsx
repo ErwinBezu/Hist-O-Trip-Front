@@ -9,10 +9,10 @@ import {
   SelectedCentury,
   SelectedTag,
   SearchInput,
+  SelectedCenturies,
+  SelectedTags,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
-
-import placesCardData from '../../data/places.json';
 
 type Picture = {
   url: string;
@@ -38,13 +38,21 @@ const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   // const placesCardData: Place[] = useCardPlaces();
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const { setMenueVisible } = useContext(Context) as {
+  const { setMenueVisible, isVisible } = useContext(Context) as {
     setMenueVisible: (value: boolean) => void;
+    isVisible: boolean;
   };
   const { selectedCategory } = useContext(SelectedCategory);
   const { selectedCentury } = useContext(SelectedCentury);
   const { selectedTag } = useContext(SelectedTag);
   const { searchInput } = useContext(SearchInput);
+
+  const { selectedCenturies } = useContext(SelectedCenturies);
+  const { selectedTags } = useContext(SelectedTags);
+
+  console.log(selectedCategory);
+  console.log(selectedCenturies);
+  console.log(selectedTags);
 
   useEffect(() => {
     if (searchInput) {
@@ -59,11 +67,8 @@ const Card: React.FC = () => {
     }
   }, [searchInput]);
 
-  console.log('ici paname');
-  console.log(searchInput);
-
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && !isVisible) {
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
       )

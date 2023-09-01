@@ -114,10 +114,6 @@ const FilterFooter = () => {
     setSelectedTag(tag);
   };
 
-  console.log(selectedCentury);
-  console.log('ici période');
-  console.log(selectedCentury?.period);
-
   return (
     <>
       <div>

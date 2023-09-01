@@ -4,7 +4,7 @@ const ContactForm = () => {
   const [pseudonym, setPseudonym] = useState<string>('');
   const [lastname, setLastname] = useState<string>('');
   const [firstname, setFirstname] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const [mail, setMail] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -13,7 +13,7 @@ const ContactForm = () => {
     setPseudonym('');
     setLastname('');
     setFirstname('');
-    setEmail('');
+    setMail('');
     setMessage('');
     setError('');
     setIsSubmitting(false);
@@ -36,7 +36,7 @@ const ContactForm = () => {
             pseudonym: pseudonym,
             lastname: lastname,
             firstname: firstname,
-            email: email,
+            mail: mail,
             message: message,
           }),
         }
@@ -97,8 +97,8 @@ const ContactForm = () => {
         <input
           type="email"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={mail}
+          onChange={(e) => setMail(e.target.value)}
           required
         />
       </div>

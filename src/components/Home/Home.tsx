@@ -11,6 +11,8 @@ import {
   SelectedCategory,
   SelectedCentury,
   SelectedTag,
+  SelectedCenturies,
+  SelectedTags,
 } from '../contexts/index';
 
 type Category = {
@@ -31,6 +33,9 @@ type Tags = {
 };
 
 const Home = () => {
+  const [selectedCenturies, setSelectedCenturies] = useState<number[]>([]);
+  const [selectedTags, setSelectedTags] = useState<number[]>([]);
+
   const [searchInput, setSearchInput] = useState('');
 
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
@@ -44,22 +49,28 @@ const Home = () => {
   const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
   return (
     <>
-      <SearchInput.Provider value={{ searchInput, setSearchInput }}>
-        <SelectedCategory.Provider
-          value={{ selectedCategory, setSelectedCategory }}
+      <SelectedTags.Provider value={{ selectedTags, setSelectedTags }}>
+        <SelectedCenturies.Provider
+          value={{ selectedCenturies, setSelectedCenturies }}
         >
-          <SelectedCentury.Provider
-            value={{ selectedCentury, setSelectedCentury }}
-          >
-            <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
-              <Header />
-              <Card />
-              <FilterFooter />
-              <Footer />
-            </SelectedTag.Provider>
-          </SelectedCentury.Provider>
-        </SelectedCategory.Provider>
-      </SearchInput.Provider>
+          <SearchInput.Provider value={{ searchInput, setSearchInput }}>
+            <SelectedCategory.Provider
+              value={{ selectedCategory, setSelectedCategory }}
+            >
+              <SelectedCentury.Provider
+                value={{ selectedCentury, setSelectedCentury }}
+              >
+                <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
+                  <Header />
+                  <Card />
+                  <FilterFooter />
+                  <Footer />
+                </SelectedTag.Provider>
+              </SelectedCentury.Provider>
+            </SelectedCategory.Provider>
+          </SearchInput.Provider>
+        </SelectedCenturies.Provider>
+      </SelectedTags.Provider>
     </>
   );
 };

@@ -28,10 +28,10 @@ const Filter = ({ setIsVisible }) => {
               <h4>Périodes</h4>
               <Periodes />
             </div>
-            <div className="filter-epoques">
+            {/* <div className="filter-epoques">
               <h4>Epoques</h4>
               <Epoques />
-            </div>
+            </div> */}
             <div className="filter-tags">
               <h4>Tags</h4>
               <Tags />

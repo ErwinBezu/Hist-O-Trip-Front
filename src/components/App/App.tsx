@@ -65,8 +65,6 @@ const App: React.FC = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // const url = useLocation();
-
   return (
     <CenturiesList.Provider value={centuriesList}>
       <CategoriesList.Provider value={categoriesList}>

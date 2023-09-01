@@ -91,3 +91,19 @@ export const SearchInput = createContext<{
   searchInput: '',
   setSearchInput: () => {},
 });
+
+export const SelectedCenturies = createContext<{
+  selectedCenturies: number[];
+  setSelectedCenturies: (centuries: number[]) => void;
+}>({
+  selectedCenturies: [],
+  setSelectedCenturies: () => {},
+});
+
+export const SelectedTags = createContext<{
+  selectedTags: number[];
+  setSelectedTags: (tags: number[]) => void;
+}>({
+  selectedTags: [],
+  setSelectedTags: () => {},
+});
