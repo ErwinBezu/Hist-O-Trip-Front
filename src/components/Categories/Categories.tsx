@@ -12,9 +12,7 @@ type Category = {
 };
 
 const Categories = () => {
-  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-  //   null
-  // );
+  
   const categoriesList = useContext(CategoriesList);
 
   const { selectedCategory, setSelectedCategory } =
@@ -28,7 +26,8 @@ const Categories = () => {
     setSelectedCategory(category);
   };
 
-  console.log(categoryId);
+  
+  console.log(selectedCategory);
 
   return (
     <nav>
@@ -39,9 +38,7 @@ const Categories = () => {
             <span>{category.name}</span>
           </li>
         ))}
-        {/* {categoriesData.map((category) => (
-          <li key={category.id}>{category.name}</li>
-        ))} */}
+        
       </ul>
     </nav>
   );

@@ -9,7 +9,7 @@ import LegalMentions from '../Page/Form/LegalMentions';
 import SuggestForm from '../Page/Form/SuggestForm';
 import ContactForm from '../Page/Form/ContactForm';
 import Cookies from 'js-cookie';
-import { CategoriesList, CenturiesList, TagsList } from '../contexts';
+import { CategoriesList, CenturiesList, SelectedCategory, TagsList } from '../contexts';
 
 type ContextType = {
   isVisible: boolean;

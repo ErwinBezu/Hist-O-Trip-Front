@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { CenturiesList } from '../../contexts';
 
@@ -12,12 +12,18 @@ const Periodes = () => {
     }
     return false;
   });
+  const [selectedCentury, setSelectedCentury] = useState([]);
+
+  const handleCenturySelect = (century) => {
+    setSelectedCentury(century);
+  }
+  console.log(selectedCentury);
 
   return (
     <div className="periodes">
       <ul>
-        {filteredPeriods.map((century, key) => (
-          <li key={key}>
+        {filteredPeriods.map((century) => (
+          <li key={century.id} onClick={() => handleCenturySelect(century)}>
             <label>
               <input type="checkbox" />
               {century.period}

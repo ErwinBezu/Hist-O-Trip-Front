@@ -33,13 +33,13 @@ const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   // const placesCardData: Place[] = useCardPlaces();
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const { setMenueVisible } = useContext(Context) as {
+  const { setMenueVisible, isVisible} = useContext(Context) as {
     setMenueVisible: (value: boolean) => void;
   };
   const { selectedCategory } = useContext(SelectedCategory);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && !isVisible) {
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
       )
@@ -59,13 +59,6 @@ const Card: React.FC = () => {
     <div className="cards-container" onClick={() => setMenueVisible(false)}>
       {/* <MapPlaces /> */}
       {placesCardData
-        // .filter((placeDataItem) =>
-        //   selectedCategory
-        /* ? placeDataItem.category.some( */
-        //         (category) => category.id === selectedCategory.id
-        //       )
-        //     : true
-        // )
         .slice(0, visibleCards)
         .map((place) => (
           <Link
