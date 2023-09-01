@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { CategoriesList, CenturiesList, TagsList } from '../../contexts';
+import Cookies from 'js-cookie';
 
 type Category = {
   id: number;
@@ -20,7 +21,7 @@ type Centuries = {
 
 const SuggestForm = () => {
   const [name, setName] = useState<string>('');
-  const [postcode, setPostcode] = useState<number>();
+  const [postcode, setPostcode] = useState<string>();
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -37,7 +38,7 @@ const SuggestForm = () => {
 
   const resetForm = () => {
     setName('');
-    setPostcode(0);
+    setPostcode('');
     setCity('');
     setCountry('');
     setDescription('');
@@ -47,6 +48,7 @@ const SuggestForm = () => {
     setError('');
     setIsSubmitting(false);
   };
+  const token = Cookies.get('jwtToken');
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -60,12 +62,16 @@ const SuggestForm = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             name: name,
+            coordinate: '45.71301/5.12916',
             postcode: postcode,
             city: city,
             country: country,
+            pictures: [],
+            slug: name,
             description: description,
             is_valid: 0,
             categoriesId: categoriesId,
@@ -92,7 +98,8 @@ const SuggestForm = () => {
     }
   };
   console.log(categoriesId);
-
+  console.log(centuriesId);
+  console.log(tagsId);
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -108,11 +115,11 @@ const SuggestForm = () => {
       <div>
         <label htmlFor="postcode">Code Postal:</label>
         <input
-          type="number"
+          type="string"
           aria-label="postcode"
           id="postcode"
           value={postcode}
-          onChange={(e) => setPostcode(Number(e.target.value))}
+          onChange={(e) => setPostcode(e.target.value)}
           required
         />
       </div>
