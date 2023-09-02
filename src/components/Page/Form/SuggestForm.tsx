@@ -21,6 +21,7 @@ type Centuries = {
 
 const SuggestForm = () => {
   const [name, setName] = useState<string>('');
+  const [adress, setAdress] = useState<string>();
   const [postcode, setPostcode] = useState<string>();
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
@@ -38,6 +39,7 @@ const SuggestForm = () => {
 
   const resetForm = () => {
     setName('');
+    setAdress('');
     setPostcode('');
     setCity('');
     setCountry('');
@@ -67,6 +69,7 @@ const SuggestForm = () => {
           body: JSON.stringify({
             name: name,
             coordinate: '45.71301/5.12916',
+            adress: adress,
             postcode: postcode,
             city: city,
             country: country,
@@ -110,6 +113,17 @@ const SuggestForm = () => {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="adress">Adresse:</label>
+        <input
+          type="string"
+          aria-label="adress"
+          id="adress"
+          value={adress}
+          onChange={(e) => setAdress(e.target.value)}
+          required
         />
       </div>
       <div>

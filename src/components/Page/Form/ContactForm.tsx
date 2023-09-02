@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
+import './ContactForm.scss';
 
 const ContactForm = () => {
   const [pseudonym, setPseudonym] = useState<string>('');
@@ -59,10 +60,14 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="pseudonym">Pseudo:</label>
+    <form className="contactForm-container" onSubmit={handleSubmit}>
+      <h1 className="contactForm-title">Contactez-nous</h1>
+      <div className="item-container">
+        <label className="label-item" htmlFor="pseudonym">
+          Pseudo:
+        </label>
         <input
+          className="input-item"
           type="text"
           aria-label="pseudonym"
           id="pseudonym"
@@ -70,9 +75,12 @@ const ContactForm = () => {
           onChange={(e) => setPseudonym(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="lastname">Nom:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="lastname">
+          Nom<span>*</span>:
+        </label>
         <input
+          className="input-item"
           type="text"
           aria-label="lastname"
           id="lastname"
@@ -81,9 +89,12 @@ const ContactForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="firstname">Prénom:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="firstname">
+          Prénom<span>*</span>:
+        </label>
         <input
+          className="input-item"
           type="text"
           aria-label="firstname"
           id="firstname"
@@ -92,9 +103,12 @@ const ContactForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="email">Adresse e-mail:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="email">
+          Adresse e-mail<span>*</span>:
+        </label>
         <input
+          className="input-item"
           type="email"
           id="email"
           value={mail}
@@ -102,16 +116,19 @@ const ContactForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="message">Message:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="message">
+          Message<span>*</span>:
+        </label>
         <textarea
+          className="input-item"
           id="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
         />
       </div>
-      <button type="submit" disabled={isSubmitting}>
+      <button className="btn-style-var" type="submit" disabled={isSubmitting}>
         Envoyer
       </button>
     </form>

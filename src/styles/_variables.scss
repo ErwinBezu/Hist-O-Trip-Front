@@ -6,3 +6,19 @@ $color-tertiary: #2f2f2f;
 $color-tertiary-alt: #343434;
 
 $text-alternate: 'Akshar', sans-serif;
+
+$button-padding: 5px 25px;
+$button-border-radius: 30px;
+$button-border-style: none;
+$button-font-size: 1.2em;
+
+.btn-style-var {
+  display: block;
+  background-color: $color-secondary;
+  color: $color-primary;
+  padding: $button-padding;
+  border-radius: $button-border-radius;
+  border-style: $button-border-style;
+  font-family: $text-alternate;
+  font-size: $button-font-size;
+}

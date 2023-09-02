@@ -1,0 +1,38 @@
+@use '../../../styles/variables' as *;
+
+.contactForm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+
+  .contactForm-title {
+    font-size: 2.5em;
+  }
+  .item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 0 5px 0;
+
+    .label-item {
+      font-size: 1.2em;
+      span {
+        color: red;
+      }
+    }
+    .input-item {
+      width: 80vw;
+    }
+  }
+  .submitContact-btn {
+    display: block;
+    background-color: $color-secondary;
+    color: $color-primary;
+    padding: 5px 25px;
+    border-radius: 30px;
+    border-style: none;
+    font-family: 'Akshar', sans-serif;
+    font-size: 1.2em;
+  }
+}

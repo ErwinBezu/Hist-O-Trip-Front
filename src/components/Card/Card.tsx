@@ -157,12 +157,12 @@ const Card: React.FC = () => {
         </>
       )}
       {visibleCards < placesCardData.length && (
-        <button className="load-more-button" onClick={loadMoreCards}>
+        <button className="btn-style-var" onClick={loadMoreCards}>
           Afficher plus
         </button>
       )}
       <button
-        className="load-more-button"
+        className="btn-style-var"
         onClick={mapIsVisible ? toggleMapOff : toggleMapOn}
       >
         {mapIsVisible ? 'Afficher la liste' : 'Afficher la carte'}
