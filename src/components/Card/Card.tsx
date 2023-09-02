@@ -50,6 +50,8 @@ const Card: React.FC = () => {
   const { selectedCenturies } = useContext(SelectedCenturies);
   const { selectedTags } = useContext(SelectedTags);
 
+  const [mapIsVisible, setMapIsVisible] = useState(false);
+
   console.log(selectedCategory);
   console.log(selectedCenturies);
   console.log(selectedTags);
@@ -110,42 +112,61 @@ const Card: React.FC = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
+  const toggleMapOn = () => {
+    setMapIsVisible(true);
+  };
+  const toggleMapOff = () => {
+    setMapIsVisible(false);
+  };
+
   return (
     <div className="cards-container" onClick={() => setMenueVisible(false)}>
-      {/* <MapPlaces /> */}
-      {placesCardData
-        // .filter((placeDataItem) =>
-        //   selectedCategory
-        /* ? placeDataItem.category.some( */
-        //         (category) => category.id === selectedCategory.id
-        //       )
-        //     : true
-        // )
-        .slice(0, visibleCards)
-        .map((place) => (
-          <Link
-            to={`/${place.id}/${place.slug}`}
-            className="article-card"
-            key={place.id}
-          >
-            <article key={place.id}>
-              <img src={place.pictures[0].url} alt="avatar" />
-              <div className="content">
-                <h2 className="placename-card"> {place.name}</h2>
-                <h3 className="placecity-card">
-                  <span className="zipcode">{place.postcode}</span> -{' '}
-                  {place.city}
-                </h3>
-                <span> {place.rating}</span>
-              </div>
-            </article>
-          </Link>
-        ))}
+      {mapIsVisible ? (
+        // Affiche la carte si mapIsVisible est true
+        <MapPlaces />
+      ) : (
+        <>
+          {placesCardData
+            // .filter((placeDataItem) =>
+            //   selectedCategory
+            /* ? placeDataItem.category.some( */
+            //         (category) => category.id === selectedCategory.id
+            //       )
+            //     : true
+            // )
+            .slice(0, visibleCards)
+            .map((place) => (
+              <Link
+                to={`/${place.id}/${place.slug}`}
+                className="article-card"
+                key={place.id}
+              >
+                <article key={place.id}>
+                  <img src={place.pictures[0].url} alt="avatar" />
+                  <div className="content">
+                    <h2 className="placename-card"> {place.name}</h2>
+                    <h3 className="placecity-card">
+                      <span className="zipcode">{place.postcode}</span> -{' '}
+                      {place.city}
+                    </h3>
+                    <span> {place.rating}</span>
+                  </div>
+                </article>
+              </Link>
+            ))}
+        </>
+      )}
       {visibleCards < placesCardData.length && (
         <button className="load-more-button" onClick={loadMoreCards}>
           Afficher plus
         </button>
       )}
+      <button
+        className="load-more-button"
+        onClick={mapIsVisible ? toggleMapOff : toggleMapOn}
+      >
+        {mapIsVisible ? 'Afficher la liste' : 'Afficher la carte'}
+      </button>
     </div>
   );
 };
