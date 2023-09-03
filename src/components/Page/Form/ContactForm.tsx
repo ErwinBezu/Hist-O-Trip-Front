@@ -62,6 +62,9 @@ const ContactForm = () => {
   return (
     <form className="contactForm-container" onSubmit={handleSubmit}>
       <h1 className="contactForm-title">Contactez-nous</h1>
+      <p>
+        <span className="asterisk">*</span> champ obligatoire
+      </p>
       <div className="item-container">
         <label className="label-item" htmlFor="pseudonym">
           Pseudo:
@@ -77,7 +80,7 @@ const ContactForm = () => {
       </div>
       <div className="item-container">
         <label className="label-item" htmlFor="lastname">
-          Nom<span>*</span>:
+          Nom<span className="asterisk">*</span>:
         </label>
         <input
           className="input-item"
@@ -91,7 +94,7 @@ const ContactForm = () => {
       </div>
       <div className="item-container">
         <label className="label-item" htmlFor="firstname">
-          Prénom<span>*</span>:
+          Prénom<span className="asterisk">*</span>:
         </label>
         <input
           className="input-item"
@@ -105,7 +108,7 @@ const ContactForm = () => {
       </div>
       <div className="item-container">
         <label className="label-item" htmlFor="email">
-          Adresse e-mail<span>*</span>:
+          Adresse e-mail<span className="asterisk">*</span>:
         </label>
         <input
           className="input-item"
@@ -118,10 +121,10 @@ const ContactForm = () => {
       </div>
       <div className="item-container">
         <label className="label-item" htmlFor="message">
-          Message<span>*</span>:
+          Message<span className="asterisk">*</span>:
         </label>
         <textarea
-          className="input-item"
+          className="input-item input-textarea"
           id="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}

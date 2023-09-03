@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CategoriesList, CenturiesList, TagsList } from '../../contexts';
 import Cookies from 'js-cookie';
+import './SuggestForm.scss';
 
 type Category = {
   id: number;
@@ -104,10 +105,17 @@ const SuggestForm = () => {
   console.log(centuriesId);
   console.log(tagsId);
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Nom du lieu:</label>
+    <form className="contactForm-container" onSubmit={handleSubmit}>
+      <h1 className="contactForm-title">Proposez-nous un lieu</h1>
+      <p>
+        <span className="asterisk">*</span> champ obligatoire
+      </p>
+      <div className="item-container">
+        <label className="label-item" htmlFor="name">
+          Nom du lieu<span className="asterisk">*</span>:
+        </label>
         <input
+          className="input-item"
           type="text"
           aria-label="name"
           id="name"
@@ -115,9 +123,12 @@ const SuggestForm = () => {
           onChange={(e) => setName(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="adress">Adresse:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="adress">
+          Adresse:
+        </label>
         <input
+          className="input-item"
           type="string"
           aria-label="adress"
           id="adress"
@@ -126,9 +137,12 @@ const SuggestForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="postcode">Code Postal:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="postcode">
+          Code Postal<span className="asterisk">*</span>:
+        </label>
         <input
+          className="input-item"
           type="string"
           aria-label="postcode"
           id="postcode"
@@ -137,9 +151,12 @@ const SuggestForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="city">Ville:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="city">
+          Ville<span className="asterisk">*</span>:
+        </label>
         <input
+          className="input-item"
           type="text"
           aria-label="city"
           id="city"
@@ -148,9 +165,12 @@ const SuggestForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="country">Pays:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="country">
+          Pays<span className="asterisk">*</span>:
+        </label>
         <input
+          className="input-item"
           type="country"
           id="country"
           value={country}
@@ -158,18 +178,24 @@ const SuggestForm = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="description">description:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="description">
+          Description<span className="asterisk">*</span>:
+        </label>
         <textarea
+          className="input-item"
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
       </div>
-      <div>
-        <label htmlFor="categories">Catégories:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="categories">
+          Catégories<span className="asterisk">*</span>:
+        </label>
         <select
+          className="input-item"
           multiple
           id="categories"
           value={categoriesId}
@@ -186,9 +212,12 @@ const SuggestForm = () => {
         </select>
       </div>
 
-      <div>
-        <label htmlFor="tags">Tags:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="tags">
+          Tags<span className="asterisk">*</span>:
+        </label>
         <select
+          className="input-item"
           multiple
           id="tags"
           value={tagsId}
@@ -205,9 +234,12 @@ const SuggestForm = () => {
         </select>
       </div>
 
-      <div>
-        <label htmlFor="centuries">Siècles:</label>
+      <div className="item-container">
+        <label className="label-item" htmlFor="centuries">
+          Siècles<span className="asterisk">*</span>:
+        </label>
         <select
+          className="input-item"
           multiple
           id="centuries"
           value={centuriesId}
@@ -224,7 +256,7 @@ const SuggestForm = () => {
         </select>
       </div>
 
-      <button type="submit" disabled={isSubmitting}>
+      <button className="btn-style-var" type="submit" disabled={isSubmitting}>
         Envoyer
       </button>
     </form>
