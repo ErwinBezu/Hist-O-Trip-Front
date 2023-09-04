@@ -8,8 +8,34 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn} = useContext(Context);
+  const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData} = useContext(Context);
   
+  
+  const getUser = async (token) => {
+    try {
+      const response = await fetch('http://ludoviclebris-server.eddi.cloud/api/api/users/@me', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      if (response.ok) {
+        const usersData = await response.json();
+        setUserData(usersData);
+        // userData contient les données de l'utilisateur
+        console.log('Données de l\'utilisateur :', usersData);
+        return usersData;
+      } else {
+        console.error('Erreur lors de la récupération des données de l\'utilisateur');
+        return null;
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
+      return null;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +57,8 @@ function Login() {
         console.log("c'est bon ");
         setError('');
         setIsLoggedIn(true);
+        const user = await getUser(data.token);
+        console.log('Données de l\'utilisateur après authentification :', user);
         // Rediriger ou effectuer d'autres actions en fonction de la réussite de l'authentification
       } else {
         setError('Identifiants invalides');
@@ -41,24 +69,34 @@ function Login() {
   };
   
   const token = Cookies.get('jwtToken');
-  function parseJwt(token) {
+  console.log('le token :', token);
+  
+  const parseJwt = (token) => {
     // terminate operation if token is invalid
     if (!token) {
-      return;
+      console.error('Token is invalid or missing');
+      return null;
     }
-
-    // Split the token and taken the second
-    const base64Url = token.split(".")[1];
-
-    // Replace "-" with "+"; "_" with "/"
-    const base64 = base64Url.replace("-", "+").replace("_", "/");
-    return JSON.parse(window.atob(base64));
+  
+    try {
+      // Split the token and take the second part (the payload)
+      const base64Url = token.split(".")[1];
+      // Replace "-" with "+"; "_" with "/"
+      const base64 = base64Url.replace("-", "+").replace("_", "/");
+      // Decode the base64 payload
+      const decoded = JSON.parse(window.atob(base64));
+      return decoded;
+    } catch (error) {
+      console.error('Error parsing JWT:', error);
+      return null;
+    }
   }
 
 const user = parseJwt(token);
 
-  console.log("l'utilisateur est :", user);
-    
+  console.log('User :', user);
+  
+  
 
   return (
     <div className='login-container'>

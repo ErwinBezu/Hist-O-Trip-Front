@@ -7,11 +7,11 @@ const UserEditProfil = () => {
   const context = useContext(Context);
 
   if (!context) {
-    // Le contexte n'est pas encore défini, vous pouvez choisir de rendre un état de chargement
-    return <div>Loading...</div>;
+    return <div></div>;
   }
+  
 
-  const { setEditVisible } = context;
+  const { setEditVisible, userData } = context;
   return (
     <>
       <div
@@ -39,14 +39,14 @@ const UserEditProfil = () => {
             accept="image/*"
           />
           <div className="profil-edit-pseudo">
-            <input type="text" placeholder="Pseudo" />
+            <input type="text" placeholder={userData.pseudonym} />
           </div>
           <div className="profil-edit-name">
-            <input type="text" placeholder="Prénom" />
-            <input type="text" placeholder="Nom" />
+            <input type="text" placeholder={userData.lastname} />
+            <input type="text" placeholder={userData.firstname} />
           </div>
           <div className="profil-edit-inofs">
-            <input type="email" placeholder="Adresse e-mail" />
+            <input type="email" placeholder={userData.email} disabled="disabled"/>
             <input type="password" placeholder="Mot de passe" />
           </div>
           <button
