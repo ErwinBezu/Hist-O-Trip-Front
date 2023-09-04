@@ -33,14 +33,10 @@ const Periodes = () => {
       if (prevSelectedCenturies.includes(centuryId)) {
         return prevSelectedCenturies.filter((id) => id !== centuryId);
       } else {
-        // Sinon, ajoutez-le à la liste.
         return [...prevSelectedCenturies, centuryId];
       }
     });
   };
-
-  // console.log(centuriesByPeriod);
-  // console.log(selectedCenturies);
 
   return (
     <div className="periodes">

@@ -107,3 +107,11 @@ export const SelectedTags = createContext<{
   selectedTags: [],
   setSelectedTags: () => {},
 });
+
+export const MainSearchFilter = createContext<{
+  isFilterSubmitted: boolean;
+  setIsFilterSubmitted: (value: boolean) => void;
+}>({
+  isFilterSubmitted: false,
+  setIsFilterSubmitted: () => {},
+});

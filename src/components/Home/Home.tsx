@@ -13,6 +13,7 @@ import {
   SelectedTag,
   SelectedCenturies,
   SelectedTags,
+  MainSearchFilter,
 } from '../contexts/index';
 
 type Category = {
@@ -47,30 +48,37 @@ const Home = () => {
   );
 
   const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
+
+  const [isFilterSubmitted, setIsFilterSubmitted] = useState(false);
+
   return (
     <>
-      <SelectedTags.Provider value={{ selectedTags, setSelectedTags }}>
-        <SelectedCenturies.Provider
-          value={{ selectedCenturies, setSelectedCenturies }}
-        >
-          <SearchInput.Provider value={{ searchInput, setSearchInput }}>
-            <SelectedCategory.Provider
-              value={{ selectedCategory, setSelectedCategory }}
-            >
-              <SelectedCentury.Provider
-                value={{ selectedCentury, setSelectedCentury }}
+      <MainSearchFilter.Provider
+        value={{ isFilterSubmitted, setIsFilterSubmitted }}
+      >
+        <SelectedTags.Provider value={{ selectedTags, setSelectedTags }}>
+          <SelectedCenturies.Provider
+            value={{ selectedCenturies, setSelectedCenturies }}
+          >
+            <SearchInput.Provider value={{ searchInput, setSearchInput }}>
+              <SelectedCategory.Provider
+                value={{ selectedCategory, setSelectedCategory }}
               >
-                <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
-                  <Header />
-                  <Card />
-                  <FilterFooter />
-                  <Footer />
-                </SelectedTag.Provider>
-              </SelectedCentury.Provider>
-            </SelectedCategory.Provider>
-          </SearchInput.Provider>
-        </SelectedCenturies.Provider>
-      </SelectedTags.Provider>
+                <SelectedCentury.Provider
+                  value={{ selectedCentury, setSelectedCentury }}
+                >
+                  <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
+                    <Header />
+                    <Card />
+                    <FilterFooter />
+                    <Footer />
+                  </SelectedTag.Provider>
+                </SelectedCentury.Provider>
+              </SelectedCategory.Provider>
+            </SearchInput.Provider>
+          </SelectedCenturies.Provider>
+        </SelectedTags.Provider>
+      </MainSearchFilter.Provider>
     </>
   );
 };
