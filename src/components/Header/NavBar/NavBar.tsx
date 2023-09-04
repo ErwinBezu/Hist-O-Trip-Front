@@ -15,11 +15,25 @@ import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
 import { SearchInput } from '../../contexts';
 
+type ContextType = {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  menueVisible: boolean;
+  setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  editVisible: boolean;
+  setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  signUpModal: boolean;
+  setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const NavBar = () => {
   const context = useContext(Context);
 
   if (!context) {
-    return;
+    // Gérer le cas où le contexte n'est pas défini
+    return null;
   }
 
   const {
@@ -81,13 +95,13 @@ const NavBar = () => {
         <div className="suggest-menu-container">
           {isLoggedIn ? (
             <>
-              <button type="button" className="suggest-btn">
-                Proposer un lieu
-              </button>
+              <Link to="/proposer" className="suggest-btn">
+                <button type="button">Proposer un lieu</button>
+              </Link>
               <button
                 type="button"
                 className="menu-btn"
-                onClick={() => setMenueVisible((prevstate) => !prevstate)}
+                onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
               >
                 <AiOutlineMenu />
                 <BsFillPersonFill />
@@ -97,12 +111,11 @@ const NavBar = () => {
             <button
               type="button"
               className="menu-btn"
-              onClick={() => setMenueVisible((prevstate) => !prevstate)}
+              onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
             >
               <BsFillPersonFill />
             </button>
           )}
-
           {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         </div>
       </div>
@@ -145,7 +158,7 @@ const NavBar = () => {
         <button
           type="button"
           className="menu-btn"
-          onClick={() => setMenueVisible((prevstate) => !prevstate)}
+          onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>

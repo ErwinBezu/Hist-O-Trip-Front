@@ -12,6 +12,7 @@ import {
   SelectedCenturies,
   SelectedTags,
   MainSearchFilter,
+  SelectedPeriod,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
 
@@ -48,6 +49,8 @@ const Card: React.FC = () => {
   const { searchInput } = useContext(SearchInput);
 
   const { selectedCenturies } = useContext(SelectedCenturies);
+  const { selectedPeriod } = useContext(SelectedPeriod);
+
   const { selectedTags } = useContext(SelectedTags);
 
   const [mapIsVisible, setMapIsVisible] = useState(false);
@@ -98,6 +101,21 @@ const Card: React.FC = () => {
         .catch((err) => console.error(err));
     }
   }, [selectedCentury]);
+
+  useEffect(() => {
+    if (SelectedPeriod) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places/centuries/${selectedPeriod?.period}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('toto');
+          console.log(data);
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [selectedPeriod]);
 
   useEffect(() => {
     if (selectedTag) {

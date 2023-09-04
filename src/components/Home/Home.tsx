@@ -12,6 +12,7 @@ import {
   SelectedCentury,
   SelectedTag,
   SelectedCenturies,
+  SelectedPeriod,
   SelectedTags,
   MainSearchFilter,
 } from '../contexts/index';
@@ -47,6 +48,8 @@ const Home = () => {
     null
   );
 
+  const [selectedPeriod, setSelectedPeriod] = useState<Centuries | null>(null);
+
   const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
 
   const [isFilterSubmitted, setIsFilterSubmitted] = useState(false);
@@ -57,26 +60,32 @@ const Home = () => {
         value={{ isFilterSubmitted, setIsFilterSubmitted }}
       >
         <SelectedTags.Provider value={{ selectedTags, setSelectedTags }}>
-          <SelectedCenturies.Provider
-            value={{ selectedCenturies, setSelectedCenturies }}
+          <SelectedPeriod.Provider
+            value={{ selectedPeriod, setSelectedPeriod }}
           >
-            <SearchInput.Provider value={{ searchInput, setSearchInput }}>
-              <SelectedCategory.Provider
-                value={{ selectedCategory, setSelectedCategory }}
-              >
-                <SelectedCentury.Provider
-                  value={{ selectedCentury, setSelectedCentury }}
+            <SelectedCenturies.Provider
+              value={{ selectedCenturies, setSelectedCenturies }}
+            >
+              <SearchInput.Provider value={{ searchInput, setSearchInput }}>
+                <SelectedCategory.Provider
+                  value={{ selectedCategory, setSelectedCategory }}
                 >
-                  <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
-                    <Header />
-                    <Card />
-                    <FilterFooter />
-                    <Footer />
-                  </SelectedTag.Provider>
-                </SelectedCentury.Provider>
-              </SelectedCategory.Provider>
-            </SearchInput.Provider>
-          </SelectedCenturies.Provider>
+                  <SelectedCentury.Provider
+                    value={{ selectedCentury, setSelectedCentury }}
+                  >
+                    <SelectedTag.Provider
+                      value={{ selectedTag, setSelectedTag }}
+                    >
+                      <Header />
+                      <Card />
+                      <FilterFooter />
+                      <Footer />
+                    </SelectedTag.Provider>
+                  </SelectedCentury.Provider>
+                </SelectedCategory.Provider>
+              </SearchInput.Provider>
+            </SelectedCenturies.Provider>
+          </SelectedPeriod.Provider>
         </SelectedTags.Provider>
       </MainSearchFilter.Provider>
     </>

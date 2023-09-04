@@ -70,6 +70,14 @@ export const SelectedCentury = createContext<{
   setSelectedCentury: () => {},
 });
 
+export const SelectedPeriod = createContext<{
+  selectedPeriod: Centuries | null;
+  setSelectedPeriod: React.Dispatch<React.SetStateAction<Centuries | null>>;
+}>({
+  selectedPeriod: { id: 0, century: '', period: '' },
+  setSelectedPeriod: () => {},
+});
+
 export const SelectedTag = createContext<{
   selectedTag: Tags | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<Tags | null>>;
