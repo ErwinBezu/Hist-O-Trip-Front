@@ -83,3 +83,35 @@ export const SinglePlace = createContext<{
 }>({
   singlePlaceData: undefined,
 });
+
+export const SearchInput = createContext<{
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+}>({
+  searchInput: '',
+  setSearchInput: () => {},
+});
+
+export const SelectedCenturies = createContext<{
+  selectedCenturies: number[];
+  setSelectedCenturies: (centuries: number[]) => void;
+}>({
+  selectedCenturies: [],
+  setSelectedCenturies: () => {},
+});
+
+export const SelectedTags = createContext<{
+  selectedTags: number[];
+  setSelectedTags: (tags: number[]) => void;
+}>({
+  selectedTags: [],
+  setSelectedTags: () => {},
+});
+
+export const MainSearchFilter = createContext<{
+  isFilterSubmitted: boolean;
+  setIsFilterSubmitted: (value: boolean) => void;
+}>({
+  isFilterSubmitted: false,
+  setIsFilterSubmitted: () => {},
+});

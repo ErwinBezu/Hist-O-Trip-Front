@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LegalMentions = () => {
-  return <h1>COUCOu</h1>;
+  return <h1>Mentions légales</h1>;
 };
 
 export default LegalMentions;

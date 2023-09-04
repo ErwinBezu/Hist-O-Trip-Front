@@ -1,0 +1,32 @@
+@use '../../../styles/variables' as *;
+
+.contactForm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0;
+
+  .asterisk {
+    color: red;
+  }
+
+  .contactForm-title {
+    font-size: 2.5em;
+  }
+  .item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 0 5px 0;
+
+    .label-item {
+      font-size: 1.2em;
+    }
+    .input-item {
+      width: 80vw;
+    }
+    .input-textarea {
+      height: 100px;
+    }
+  }
+}

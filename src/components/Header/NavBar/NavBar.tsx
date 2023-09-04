@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -14,6 +13,7 @@ import Filter from '../Filter/Filter';
 import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
+import { SearchInput } from '../../contexts';
 
 const NavBar = () => {
   const context = useContext(Context);
@@ -52,6 +52,12 @@ const NavBar = () => {
     };
   }, []);
 
+  const { searchInput, setSearchInput } = useContext(SearchInput);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchInput(e.target.value);
+  };
+
   return (
     <>
       <div className="navbar-container">
@@ -59,10 +65,17 @@ const NavBar = () => {
           <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
         <div className="search-container">
-          <input type="text" placeholder="Rechercher un Lieu" />
-          <button type="button">
+          <input
+            type="text"
+            placeholder="Rechercher un Lieu"
+            name=""
+            id=""
+            value={searchInput}
+            onChange={handleChange}
+          />
+          <span className="search-btn">
             <AiOutlineSearch />
-          </button>
+          </span>
         </div>
 
         <div className="suggest-menu-container">

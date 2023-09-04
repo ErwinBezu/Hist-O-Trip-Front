@@ -4,10 +4,16 @@ import './Card.scss';
 import Place from '../Place/Place';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Context } from '../App/App';
-import { SelectedCategory, SelectedCentury, SelectedTag } from '../contexts';
+import {
+  SelectedCategory,
+  SelectedCentury,
+  SelectedTag,
+  SearchInput,
+  SelectedCenturies,
+  SelectedTags,
+  MainSearchFilter,
+} from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
-
-import placesCardData from '../../data/places.json';
 
 type Picture = {
   url: string;
@@ -31,17 +37,44 @@ type Place = {
 
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
-  // const placesCardData: Place[] = useCardPlaces();
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const { setMenueVisible } = useContext(Context) as {
+  const { setMenueVisible, isVisible } = useContext(Context) as {
     setMenueVisible: (value: boolean) => void;
+    isVisible: boolean;
   };
   const { selectedCategory } = useContext(SelectedCategory);
   const { selectedCentury } = useContext(SelectedCentury);
   const { selectedTag } = useContext(SelectedTag);
+  const { searchInput } = useContext(SearchInput);
+
+  const { selectedCenturies } = useContext(SelectedCenturies);
+  const { selectedTags } = useContext(SelectedTags);
+
+  const [mapIsVisible, setMapIsVisible] = useState(false);
+
+  const { isFilterSubmitted } = useContext(MainSearchFilter);
+
+  const categoryArray = [selectedCategory?.id];
+  console.log(categoryArray);
+  console.log(selectedCenturies);
+  console.log(selectedTags);
+  console.log(isFilterSubmitted);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (searchInput) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places?search=${searchInput}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [searchInput]);
+
+  useEffect(() => {
+    if (selectedCategory && !isVisible) {
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
       )
@@ -79,47 +112,87 @@ const Card: React.FC = () => {
     }
   }, [selectedTag]);
 
+  useEffect(() => {
+    if (isFilterSubmitted) {
+      fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
+        method: 'POST', // Changez la méthode en POST
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          categoriesId: categoryArray,
+          centuriesId: selectedCenturies,
+          tagsId: selectedTags,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('coucou');
+          console.log(data);
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [isFilterSubmitted]);
+
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
+  const toggleMapOn = () => {
+    setMapIsVisible(true);
+  };
+  const toggleMapOff = () => {
+    setMapIsVisible(false);
+  };
+
   return (
-    <div className="cards-container" onClick={() => setMenueVisible(false)}>
-      {/* <MapPlaces /> */}
-      {placesCardData
-        // .filter((placeDataItem) =>
-        //   selectedCategory
-        /* ? placeDataItem.category.some( */
-        //         (category) => category.id === selectedCategory.id
-        //       )
-        //     : true
-        // )
-        .slice(0, visibleCards)
-        .map((place) => (
-          <Link
-            to={`/${place.id}/${place.slug}`}
-            className="article-card"
-            key={place.id}
-          >
-            <article key={place.id}>
-              <img src={place.pictures[0].url} alt="avatar" />
-              <div className="content">
-                <h2 className="placename-card"> {place.name}</h2>
-                <h3 className="placecity-card">
-                  <span className="zipcode">{place.postcode}</span> -{' '}
-                  {place.city}
-                </h3>
-                <span> {place.rating}</span>
-              </div>
-            </article>
-          </Link>
-        ))}
-      {visibleCards < placesCardData.length && (
-        <button className="load-more-button" onClick={loadMoreCards}>
-          Afficher plus
+    <>
+      <div className="cards-container" onClick={() => setMenueVisible(false)}>
+        {mapIsVisible ? (
+          <MapPlaces />
+        ) : (
+          <>
+            {placesCardData.slice(0, visibleCards).map((place) => (
+              <Link
+                to={`/${place.id}/${place.slug}`}
+                className="article-card"
+                key={place.id}
+              >
+                <article key={place.id}>
+                  {place.pictures && place.pictures.length > 0 ? (
+                    <img src={place.pictures[0].url} alt="avatar" />
+                  ) : (
+                    <img src="" alt="Image par défaut" />
+                  )}
+                  <div className="content">
+                    <h2 className="placename-card"> {place.name}</h2>
+                    <h3 className="placecity-card">
+                      <span className="zipcode">{place.postcode}</span> -{' '}
+                      {place.city}
+                    </h3>
+                    {/* <span> {place.rating}</span> */}
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </>
+        )}
+      </div>
+      <div>
+        {visibleCards < placesCardData.length && (
+          <button className="btn-style-var" onClick={loadMoreCards}>
+            Afficher plus
+          </button>
+        )}
+        <button
+          className="btn-style-var"
+          onClick={mapIsVisible ? toggleMapOff : toggleMapOn}
+        >
+          {mapIsVisible ? 'Afficher la liste' : 'Afficher la carte'}
         </button>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -106,7 +106,6 @@ const Place: React.FC = () => {
     return <Error404 />;
   }
 
-  console.log(singlePlaceData.centuries[0].period);
   return (
     <>
       <div className="place-header-container">

@@ -7,6 +7,7 @@ import {
   SelectedCentury,
   SelectedTag,
 } from '../contexts';
+import './FilterFooter.scss';
 
 type Category = {
   id: number;
@@ -114,68 +115,89 @@ const FilterFooter = () => {
     setSelectedTag(tag);
   };
 
-  console.log(selectedCentury);
-  console.log('ici période');
-  console.log(selectedCentury?.period);
-
   return (
     <>
-      <div>
-        <h2 onClick={() => setSelectedFilter('categories')}>Categories :</h2>
-        {selectedFilter === 'categories' && (
-          <ul>
-            {randomCategories.map((category) => (
-              <li
-                key={category.id}
-                onClick={() => handleCategorySelect(category)}
-              >
-                {category.name}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <div className="filterFooter-container">
+        <div>
+          <h2
+            className="filterFooter-title"
+            onClick={() => setSelectedFilter('categories')}
+          >
+            Categories
+          </h2>
+          {selectedFilter === 'categories' && (
+            <ul>
+              {randomCategories.map((category) => (
+                <li
+                  key={category.id}
+                  onClick={() => handleCategorySelect(category)}
+                >
+                  {category.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-      <div>
-        <h2 onClick={() => setSelectedFilter('centuries')}>Siècles :</h2>
-        {selectedFilter === 'centuries' && (
-          <ul>
-            {randomCenturies.map((century) => (
-              <li key={century.id} onClick={() => handleCenturySelect(century)}>
-                {century.century}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+        <div>
+          <h2
+            className="filterFooter-title"
+            onClick={() => setSelectedFilter('centuries')}
+          >
+            Siècles
+          </h2>
+          {selectedFilter === 'centuries' && (
+            <ul>
+              {randomCenturies.map((century) => (
+                <li
+                  key={century.id}
+                  onClick={() => handleCenturySelect(century)}
+                >
+                  {century.century}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-      <div>
-        <h2 onClick={() => setSelectedFilter('periods')}>Périodes :</h2>
-        {selectedFilter === 'periods' && (
-          <ul>
-            {filteredPeriods.map((century) => (
-              <li
-                key={century.period}
-                onClick={() => handleCenturySelect(century)}
-              >
-                {century.period}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+        <div>
+          <h2
+            className="filterFooter-title"
+            onClick={() => setSelectedFilter('periods')}
+          >
+            Périodes
+          </h2>
+          {selectedFilter === 'periods' && (
+            <ul>
+              {filteredPeriods.map((century) => (
+                <li
+                  key={century.period}
+                  onClick={() => handleCenturySelect(century)}
+                >
+                  {century.period}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-      <div>
-        <h2 onClick={() => setSelectedFilter('tags')}>Tags :</h2>
-        {selectedFilter === 'tags' && (
-          <ul>
-            {randomTags.map((tag) => (
-              <li key={tag.id} onClick={() => handleTagSelect(tag)}>
-                {tag.name}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div>
+          <h2
+            className="filterFooter-title"
+            onClick={() => setSelectedFilter('tags')}
+          >
+            Tags
+          </h2>
+          {selectedFilter === 'tags' && (
+            <ul>
+              {randomTags.map((tag) => (
+                <li key={tag.id} onClick={() => handleTagSelect(tag)}>
+                  {tag.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </>
   );
