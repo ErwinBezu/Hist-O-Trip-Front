@@ -1,7 +1,8 @@
 import { IoIosArrowBack } from 'react-icons/io';
 import './UserEditProfil.scss';
-import { useContext } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { Context } from '../App/App';
+import Cookies from 'js-cookie';
 
 const UserEditProfil = () => {
   const context = useContext(Context);
@@ -9,16 +10,54 @@ const UserEditProfil = () => {
   if (!context) {
     return <div></div>;
   }
+ 
+
+  const { setEditVisible } = context;
+  const storedUserData = localStorage.getItem('userData');
+  const userData = JSON.parse(storedUserData);
+
+  
+  console.log('userdata ici', userData);
+  const token = Cookies.get('jwtToken');
+  console.log('ici token', token);
   
 
-  const { setEditVisible, userData } = context;
+  const [firstname, setFirstname] = useState(userData.firstname || '');
+  const [lastname, setLastname] = useState(userData.lastname || '');
+  const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
+  const [password, setPassword] = useState('');
+
+  
+
+  const handleEdit = async (e, token) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/users/${userData.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ firstname, lastname, pseudonym }),
+        }
+      );
+      if (response.ok) {
+        console.log('Les données ont bien été changées');
+      }
+    } catch (error) {
+      console.error('Erreur de changement des infos');
+    }
+  };
+
   return (
     <>
       <div
         className="edit-profil-bg"
         onClick={() => setEditVisible(false)}
       ></div>
-      <form className="profil-edit-container">
+      <form className="profil-edit-container" onSubmit={(e) => handleEdit(e, token)}>
         <div className="profil-edit-header">
           <label
             className="profil-edit-back-btn"
@@ -39,20 +78,44 @@ const UserEditProfil = () => {
             accept="image/*"
           />
           <div className="profil-edit-pseudo">
-            <input type="text" placeholder={userData.pseudonym} />
+            <input
+              type="text"
+              placeholder={userData.pseudonym}
+              onChange={(e) => setPseudonym(e.target.value)}
+              value={pseudonym}
+            />
           </div>
           <div className="profil-edit-name">
-            <input type="text" placeholder={userData.lastname} />
-            <input type="text" placeholder={userData.firstname} />
+            <input
+              type="text"
+              placeholder={userData.lastname}
+              onChange={(e) => setLastname(e.target.value)}
+              value={lastname}
+            />
+            <input
+              type="text"
+              placeholder={userData.firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+              value={firstname}
+            />
           </div>
           <div className="profil-edit-inofs">
-            <input type="email" placeholder={userData.email} disabled="disabled"/>
-            <input type="password" placeholder="Mot de passe" />
+            <input
+              type="email"
+              placeholder={userData.email}
+              disabled
+            />
+            <input
+              type="password"
+              placeholder="Mot de passe"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
           </div>
           <button
             className="profil-edit-validation"
             type="submit"
-            onClick={() => setEditVisible(false)}
+            
           >
             Valider modification
           </button>

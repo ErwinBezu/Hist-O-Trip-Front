@@ -8,7 +8,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData} = useContext(Context);
+  const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
   
   
   const getUser = async (token) => {
@@ -23,9 +23,10 @@ function Login() {
   
       if (response.ok) {
         const usersData = await response.json();
-        setUserData(usersData);
+        const usersDataStr = JSON.stringify(usersData);
+        localStorage.setItem('userData', usersDataStr);
         // userData contient les données de l'utilisateur
-        console.log('Données de l\'utilisateur :', usersData);
+        console.log('Données de l\'utilisateur :', usersDataStr);
         return usersData;
       } else {
         console.error('Erreur lors de la récupération des données de l\'utilisateur');
@@ -36,6 +37,9 @@ function Login() {
       return null;
     }
   };
+
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +63,8 @@ function Login() {
         setIsLoggedIn(true);
         const user = await getUser(data.token);
         console.log('Données de l\'utilisateur après authentification :', user);
+        setToken(data.token);
+        console.log('token ici', token);
         // Rediriger ou effectuer d'autres actions en fonction de la réussite de l'authentification
       } else {
         setError('Identifiants invalides');
@@ -68,8 +74,7 @@ function Login() {
     }
   };
   
-  const token = Cookies.get('jwtToken');
-  console.log('le token :', token);
+  
   
   const parseJwt = (token) => {
     // terminate operation if token is invalid
@@ -94,7 +99,7 @@ function Login() {
 
 const user = parseJwt(token);
 
-  console.log('User :', user);
+console.log('User :', user);
   
   
 
