@@ -213,6 +213,37 @@
       }
     }
   }
+  .filter-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px 10px;
+
+    .filter-btn {
+      display: block;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      border-style: none;
+      border-radius: 30px;
+      color: $color-primary;
+      background-color: $color-secondary;
+      padding: 5px 20px;
+    }
+
+    nav {
+      width: 92%;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 20px;
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 1641px) {
@@ -234,14 +265,6 @@
 
     nav {
       width: 80%;
-
-      ul {
-        list-style-type: none;
-        padding: 0;
-        display: flex;
-        justify-content: space-evenly;
-        gap: 20px;
-      }
     }
   }
 }
