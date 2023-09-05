@@ -65,6 +65,15 @@ const Card: React.FC = () => {
   console.log(selectedTags);
   console.log(isFilterSubmitted);
 
+  const shuffleArray = (array: any) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   useEffect(() => {
     if (searchInput) {
       fetch(
@@ -72,7 +81,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -85,7 +95,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -98,7 +109,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -111,9 +123,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log('toto');
-          console.log(data);
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -126,7 +137,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
