@@ -28,7 +28,7 @@
         outline: none;
       }
     }
-    button {
+    .search-btn {
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
       border: 1px solid $color-tertiary;
@@ -98,7 +98,7 @@
 @keyframes fadeOut {
   from {
     opacity: 1;
-  } 
+  }
   to {
     opacity: 0;
     display: none;
@@ -248,4 +248,3 @@
 //     }
 //   }
 // }
-

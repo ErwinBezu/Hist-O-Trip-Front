@@ -4,12 +4,12 @@ import { CenturiesList } from '../../contexts';
 
 const Epoques = () => {
   const centuriesList = useContext(CenturiesList);
-  console.log(centuriesList);
+
   return (
     <div className="centuries">
       <ul>
-        {centuriesList.map((century, key) => (
-          <li key={key}>
+        {centuriesList.map((century) => (
+          <li key={century.id}>
             <label>
               <input type="checkbox" />
               {century.century}

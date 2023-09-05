@@ -22,6 +22,8 @@ type ContextType = {
   setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  userData: any;
+  setUserData: any;
 };
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
@@ -37,8 +39,10 @@ const App: React.FC = () => {
   const [centuriesList, setCenturiesList] = useState([]);
   const [tagsList, setTagsList] = useState([]);
 
+
   const [userData, setUserData] = useState();
   const [token, setToken] = useState();
+
 
   useEffect(() => {
     fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
@@ -68,8 +72,6 @@ const App: React.FC = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // const url = useLocation();
-
   return (
     <CenturiesList.Provider value={centuriesList}>
       <CategoriesList.Provider value={categoriesList}>
@@ -90,6 +92,7 @@ const App: React.FC = () => {
               setToken,
               userData, 
               setUserData
+
             }}
           >
             <Routes>

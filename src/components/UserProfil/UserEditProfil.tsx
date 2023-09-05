@@ -12,7 +12,6 @@ const UserEditProfil = () => {
   if (!context) {
     return <div></div>;
   }
- 
 
   const { setEditVisible } = context;
   const storedUserData = localStorage.getItem('userData');
@@ -103,6 +102,7 @@ const UserEditProfil = () => {
             />
           </div>
           <div className="profil-edit-inofs">
+
             <input
               type="email"
               placeholder={userData.email}
@@ -114,6 +114,7 @@ const UserEditProfil = () => {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
+
           </div>
           <button
             className="profil-edit-validation"

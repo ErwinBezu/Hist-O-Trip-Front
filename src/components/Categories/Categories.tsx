@@ -12,23 +12,23 @@ type Category = {
 };
 
 const Categories = () => {
-  // const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-  //   null
-  // );
   const categoriesList = useContext(CategoriesList);
 
   const { selectedCategory, setSelectedCategory } =
     useContext(SelectedCategory);
 
-  const categoryName = selectedCategory?.name;
-  const categoryId = selectedCategory?.id;
-  const categoryIcon = selectedCategory?.icon;
+  useEffect(() => {
+    if (!selectedCategory) {
+      const randomCategory =
+        categoriesList[Math.floor(Math.random() * categoriesList.length)];
+      setSelectedCategory(randomCategory);
+    }
+  }, [categoriesList, selectedCategory, setSelectedCategory]);
 
+  console.log(selectedCategory);
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
   };
-
-  console.log(categoryId);
 
   return (
     <nav>
@@ -39,9 +39,6 @@ const Categories = () => {
             <span>{category.name}</span>
           </li>
         ))}
-        {/* {categoriesData.map((category) => (
-          <li key={category.id}>{category.name}</li>
-        ))} */}
       </ul>
     </nav>
   );

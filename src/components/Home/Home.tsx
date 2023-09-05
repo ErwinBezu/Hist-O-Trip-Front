@@ -7,9 +7,14 @@ import Footer from '../Footer/Footer';
 import FilterFooter from '../FilterFooter/FilterFooter';
 
 import {
+  SearchInput,
   SelectedCategory,
   SelectedCentury,
   SelectedTag,
+  SelectedCenturies,
+  SelectedPeriod,
+  SelectedTags,
+  MainSearchFilter,
 } from '../contexts/index';
 
 type Category = {
@@ -30,6 +35,11 @@ type Tags = {
 };
 
 const Home = () => {
+  const [selectedCenturies, setSelectedCenturies] = useState<number[]>([]);
+  const [selectedTags, setSelectedTags] = useState<number[]>([]);
+
+  const [searchInput, setSearchInput] = useState('');
+
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
@@ -38,23 +48,46 @@ const Home = () => {
     null
   );
 
+  const [selectedPeriod, setSelectedPeriod] = useState<Centuries | null>(null);
+
   const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
+
+  const [isFilterSubmitted, setIsFilterSubmitted] = useState(false);
+
   return (
     <>
-      <SelectedCategory.Provider
-        value={{ selectedCategory, setSelectedCategory }}
+      <MainSearchFilter.Provider
+        value={{ isFilterSubmitted, setIsFilterSubmitted }}
       >
-        <SelectedCentury.Provider
-          value={{ selectedCentury, setSelectedCentury }}
-        >
-          <SelectedTag.Provider value={{ selectedTag, setSelectedTag }}>
-            <Header />
-            <Card />
-            <FilterFooter />
-            <Footer />
-          </SelectedTag.Provider>
-        </SelectedCentury.Provider>
-      </SelectedCategory.Provider>
+        <SelectedTags.Provider value={{ selectedTags, setSelectedTags }}>
+          <SelectedPeriod.Provider
+            value={{ selectedPeriod, setSelectedPeriod }}
+          >
+            <SelectedCenturies.Provider
+              value={{ selectedCenturies, setSelectedCenturies }}
+            >
+              <SearchInput.Provider value={{ searchInput, setSearchInput }}>
+                <SelectedCategory.Provider
+                  value={{ selectedCategory, setSelectedCategory }}
+                >
+                  <SelectedCentury.Provider
+                    value={{ selectedCentury, setSelectedCentury }}
+                  >
+                    <SelectedTag.Provider
+                      value={{ selectedTag, setSelectedTag }}
+                    >
+                      <Header />
+                      <Card />
+                      <FilterFooter />
+                      <Footer />
+                    </SelectedTag.Provider>
+                  </SelectedCentury.Provider>
+                </SelectedCategory.Provider>
+              </SearchInput.Provider>
+            </SelectedCenturies.Provider>
+          </SelectedPeriod.Provider>
+        </SelectedTags.Provider>
+      </MainSearchFilter.Provider>
     </>
   );
 };

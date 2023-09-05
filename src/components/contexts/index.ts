@@ -70,6 +70,14 @@ export const SelectedCentury = createContext<{
   setSelectedCentury: () => {},
 });
 
+export const SelectedPeriod = createContext<{
+  selectedPeriod: Centuries | null;
+  setSelectedPeriod: React.Dispatch<React.SetStateAction<Centuries | null>>;
+}>({
+  selectedPeriod: { id: 0, century: '', period: '' },
+  setSelectedPeriod: () => {},
+});
+
 export const SelectedTag = createContext<{
   selectedTag: Tags | null;
   setSelectedTag: React.Dispatch<React.SetStateAction<Tags | null>>;
@@ -82,4 +90,36 @@ export const SinglePlace = createContext<{
   singlePlaceData: PlaceData | undefined;
 }>({
   singlePlaceData: undefined,
+});
+
+export const SearchInput = createContext<{
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+}>({
+  searchInput: '',
+  setSearchInput: () => {},
+});
+
+export const SelectedCenturies = createContext<{
+  selectedCenturies: number[];
+  setSelectedCenturies: (centuries: number[]) => void;
+}>({
+  selectedCenturies: [],
+  setSelectedCenturies: () => {},
+});
+
+export const SelectedTags = createContext<{
+  selectedTags: number[];
+  setSelectedTags: (tags: number[]) => void;
+}>({
+  selectedTags: [],
+  setSelectedTags: () => {},
+});
+
+export const MainSearchFilter = createContext<{
+  isFilterSubmitted: boolean;
+  setIsFilterSubmitted: (value: boolean) => void;
+}>({
+  isFilterSubmitted: false,
+  setIsFilterSubmitted: () => {},
 });

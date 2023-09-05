@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -14,12 +13,27 @@ import Filter from '../Filter/Filter';
 import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
+import { SearchInput } from '../../contexts';
+
+type ContextType = {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  menueVisible: boolean;
+  setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  editVisible: boolean;
+  setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  signUpModal: boolean;
+  setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const NavBar = () => {
   const context = useContext(Context);
 
   if (!context) {
-    return;
+    // Gérer le cas où le contexte n'est pas défini
+    return null;
   }
 
   const {
@@ -52,6 +66,12 @@ const NavBar = () => {
     };
   }, []);
 
+  const { searchInput, setSearchInput } = useContext(SearchInput);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchInput(e.target.value);
+  };
+
   return (
     <>
       <div className="navbar-container">
@@ -59,22 +79,29 @@ const NavBar = () => {
           <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
         <div className="search-container">
-          <input type="text" placeholder="Rechercher un Lieu" />
-          <button type="button">
+          <input
+            type="text"
+            placeholder="Rechercher un Lieu"
+            name=""
+            id=""
+            value={searchInput}
+            onChange={handleChange}
+          />
+          <span className="search-btn">
             <AiOutlineSearch />
-          </button>
+          </span>
         </div>
 
         <div className="suggest-menu-container">
           {isLoggedIn ? (
             <>
-              <button type="button" className="suggest-btn">
-                Proposer un lieu
-              </button>
+              <Link to="/proposer" className="suggest-btn">
+                <button type="button">Proposer un lieu</button>
+              </Link>
               <button
                 type="button"
                 className="menu-btn"
-                onClick={() => setMenueVisible((prevstate) => !prevstate)}
+                onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
               >
                 <AiOutlineMenu />
                 <BsFillPersonFill />
@@ -84,12 +111,11 @@ const NavBar = () => {
             <button
               type="button"
               className="menu-btn"
-              onClick={() => setMenueVisible((prevstate) => !prevstate)}
+              onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
             >
               <BsFillPersonFill />
             </button>
           )}
-
           {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         </div>
       </div>
@@ -132,7 +158,7 @@ const NavBar = () => {
         <button
           type="button"
           className="menu-btn"
-          onClick={() => setMenueVisible((prevstate) => !prevstate)}
+          onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>

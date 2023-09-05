@@ -86,8 +86,6 @@ const MapPlaces = () => {
   let defaultMapCenter: [number, number] = [45.71301, 5.12916];
 
   let singlePlaceCenter: [number, number] | null = null;
-  console.log(singlePlaceData);
-  console.log(singlePlaceData?.coordinate);
 
   if (singlePlaceData) {
     const [latStr, lngStr] = singlePlaceData?.coordinate.split('/');
@@ -97,8 +95,6 @@ const MapPlaces = () => {
       singlePlaceCenter = [lat, lng];
     }
   }
-  console.log(singlePlaceCenter);
-  console.log(location.pathname.includes(`/${id}/${slug}`));
 
   return location.pathname.includes(`/${id}/${slug}`) ? (
     <MapContainer
@@ -153,7 +149,7 @@ const MapPlaces = () => {
   ) : (
     <MapContainer
       center={defaultMapCenter}
-      zoom={15}
+      zoom={6}
       style={{ width: '100%', height: '80vh' }}
     >
       <TileLayer
