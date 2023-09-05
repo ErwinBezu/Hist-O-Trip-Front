@@ -4,39 +4,41 @@ import SignUp from '../SignUp/SignUp';
 import './Login.scss'
 import { Context } from '../../App/App';
 
-function Login() {
+export const getUser = async (token) => {
+  try {
+    const response = await fetch('http://ludoviclebris-server.eddi.cloud/api/api/users/@me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (response.ok) {
+      const usersData = await response.json();
+      const usersDataStr = JSON.stringify(usersData);
+      localStorage.setItem('userData', usersDataStr);
+      // userData contient les données de l'utilisateur
+      console.log('Données de l\'utilisateur :', usersDataStr);
+      return usersData;
+    } else {
+      console.error('Erreur lors de la récupération des données de l\'utilisateur');
+      return null;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
+    return null;
+  }
+};
+
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
   
   
-  const getUser = async (token) => {
-    try {
-      const response = await fetch('http://ludoviclebris-server.eddi.cloud/api/api/users/@me', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
   
-      if (response.ok) {
-        const usersData = await response.json();
-        const usersDataStr = JSON.stringify(usersData);
-        localStorage.setItem('userData', usersDataStr);
-        // userData contient les données de l'utilisateur
-        console.log('Données de l\'utilisateur :', usersDataStr);
-        return usersData;
-      } else {
-        console.error('Erreur lors de la récupération des données de l\'utilisateur');
-        return null;
-      }
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
-      return null;
-    }
-  };
 
   
   

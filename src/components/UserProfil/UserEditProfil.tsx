@@ -3,6 +3,8 @@ import './UserEditProfil.scss';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Context } from '../App/App';
 import Cookies from 'js-cookie';
+import {getUser} from '../Auth/Login/Login';
+
 
 const UserEditProfil = () => {
   const context = useContext(Context);
@@ -44,6 +46,7 @@ const UserEditProfil = () => {
         }
       );
       if (response.ok) {
+        getUser(token);
         console.log('Les données ont bien été changées');
       }
     } catch (error) {
