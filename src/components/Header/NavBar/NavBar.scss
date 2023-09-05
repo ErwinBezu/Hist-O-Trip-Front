@@ -85,6 +85,9 @@
         }
         span {
           font-size: 0.8em;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
         &:hover {
           color: $color-secondary;
