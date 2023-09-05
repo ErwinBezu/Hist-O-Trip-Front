@@ -4,6 +4,33 @@ import SignUp from '../SignUp/SignUp';
 import './Login.scss';
 import { Context } from '../../App/App';
 
+export const getUser = async (token) => {
+  try {
+    const response = await fetch('http://ludoviclebris-server.eddi.cloud/api/api/users/@me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (response.ok) {
+      const usersData = await response.json();
+      const usersDataStr = JSON.stringify(usersData);
+      localStorage.setItem('userData', usersDataStr);
+      // userData contient les données de l'utilisateur
+      console.log('Données de l\'utilisateur :', usersDataStr);
+      return usersData;
+    } else {
+      console.error('Erreur lors de la récupération des données de l\'utilisateur');
+      return null;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
+    return null;
+  }
+};
+
 type ContextType = {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,52 +46,11 @@ type ContextType = {
   setUserData: any;
 };
 
-function Login() {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {
-    signUpModal,
-    setSignUpModal,
-    isLoggedIn,
-    setIsLoggedIn,
-    userData,
-    setUserData,
-  } = useContext<any>(Context);
-
-  const getUser = async (token: any) => {
-    try {
-      const response = await fetch(
-        'http://ludoviclebris-server.eddi.cloud/api/api/users/@me',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        const usersData = await response.json();
-        setUserData(usersData);
-        // userData contient les données de l'utilisateur
-        console.log("Données de l'utilisateur :", usersData);
-        return usersData;
-      } else {
-        console.error(
-          "Erreur lors de la récupération des données de l'utilisateur"
-        );
-        return null;
-      }
-    } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des données de l'utilisateur :",
-        error
-      );
-      return null;
-    }
-  };
+  const {signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -90,7 +76,10 @@ function Login() {
         setError('');
         setIsLoggedIn(true);
         const user = await getUser(data.token);
-        console.log("Données de l'utilisateur après authentification :", user);
+        console.log('Données de l\'utilisateur après authentification :', user);
+        setToken(data.token);
+        console.log('token ici', token);
+
         // Rediriger ou effectuer d'autres actions en fonction de la réussite de l'authentification
       } else {
         setError('Identifiants invalides');
@@ -100,10 +89,8 @@ function Login() {
     }
   };
 
-  const token = Cookies.get('jwtToken');
-  console.log('le token :', token);
+  const parseJwt = (token) => {
 
-  const parseJwt = (token: any) => {
     // terminate operation if token is invalid
     if (!token) {
       console.error('Token is invalid or missing');
@@ -126,7 +113,7 @@ function Login() {
 
   const user = parseJwt(token);
 
-  console.log('User :', user);
+console.log('User :', user);
 
   return (
     <div className="login-container">

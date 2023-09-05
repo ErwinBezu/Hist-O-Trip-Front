@@ -39,7 +39,10 @@ const App: React.FC = () => {
   const [centuriesList, setCenturiesList] = useState([]);
   const [tagsList, setTagsList] = useState([]);
 
-  const [userData, setUserData] = useState({});
+
+  const [userData, setUserData] = useState();
+  const [token, setToken] = useState();
+
 
   useEffect(() => {
     fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
@@ -85,8 +88,11 @@ const App: React.FC = () => {
               setMenueVisible,
               editVisible,
               setEditVisible,
-              userData,
-              setUserData,
+              token, 
+              setToken,
+              userData, 
+              setUserData
+
             }}
           >
             <Routes>
