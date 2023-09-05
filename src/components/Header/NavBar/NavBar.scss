@@ -159,6 +159,9 @@
   .navbar-container {
     display: flex;
     justify-content: space-between;
+    padding: 0 0 10px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(47, 47, 47, 0.2);
 
     .logo {
       width: 20%;
@@ -190,17 +193,63 @@
     }
     .suggest-menu-container {
       gap: 50px;
-      .suggest-btn {
-        display: block;
-        background-color: $color-secondary;
-        color: $color-primary;
-        padding: 5px 50px;
-        border-radius: 30px;
-        border-style: none;
+      .suggestLink-navbar {
+        text-decoration: none;
+        .suggest-btn {
+          display: block;
+          background-color: $color-secondary;
+          color: $color-primary;
+          padding: 5px 50px;
+          border-radius: 30px;
+          border-style: none;
+          font-size: 1.1em;
+        }
       }
       .menu-btn {
         display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 1641px) {
+  .navbar-container {
+    .logo {
+      width: 15%;
+    }
+  }
+  .filter-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px 10px;
+
+    .filter-btn {
+      display: block;
+    }
+
+    nav {
+      width: 80%;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1881px) {
+  .navbar-container {
+    .logo {
+      width: 10%;
     }
   }
 }

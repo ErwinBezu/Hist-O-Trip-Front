@@ -150,7 +150,8 @@ const MapPlaces = () => {
     <MapContainer
       center={defaultMapCenter}
       zoom={6}
-      style={{ width: '100%', height: '80vh' }}
+      className="map-container"
+      // style={{ width: '100%', height: '70vh' }}
     >
       <TileLayer
         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"

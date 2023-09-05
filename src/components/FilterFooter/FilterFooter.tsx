@@ -127,17 +127,18 @@ const FilterFooter = () => {
   return (
     <>
       <div className="filterFooter-container">
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className="oneFilter-title"
             onClick={() => setSelectedFilter('categories')}
           >
             Categories
           </h2>
           {selectedFilter === 'categories' && (
-            <ul>
+            <ul className="oneFilter-list">
               {randomCategories.map((category) => (
                 <li
+                  className="oneFilter-item"
                   key={category.id}
                   onClick={() => handleCategorySelect(category)}
                 >
@@ -148,17 +149,18 @@ const FilterFooter = () => {
           )}
         </div>
 
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className="oneFilter-title"
             onClick={() => setSelectedFilter('centuries')}
           >
             Siècles
           </h2>
           {selectedFilter === 'centuries' && (
-            <ul>
+            <ul className="oneFilter-list">
               {randomCenturies.map((century) => (
                 <li
+                  className="oneFilter-item"
                   key={century.id}
                   onClick={() => handleCenturySelect(century)}
                 >
@@ -169,17 +171,18 @@ const FilterFooter = () => {
           )}
         </div>
 
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className="oneFilter-title"
             onClick={() => setSelectedFilter('periods')}
           >
             Périodes
           </h2>
           {selectedFilter === 'periods' && (
-            <ul>
+            <ul className="oneFilter-list">
               {filteredPeriods.map((century) => (
                 <li
+                  className="oneFilter-item"
                   key={century.period}
                   onClick={() => handlePeriodSelect(century)}
                 >
@@ -190,17 +193,21 @@ const FilterFooter = () => {
           )}
         </div>
 
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className="oneFilter-title"
             onClick={() => setSelectedFilter('tags')}
           >
             Tags
           </h2>
           {selectedFilter === 'tags' && (
-            <ul>
+            <ul className="oneFilter-list">
               {randomTags.map((tag) => (
-                <li key={tag.id} onClick={() => handleTagSelect(tag)}>
+                <li
+                  className="oneFilter-item"
+                  key={tag.id}
+                  onClick={() => handleTagSelect(tag)}
+                >
                   {tag.name}
                 </li>
               ))}

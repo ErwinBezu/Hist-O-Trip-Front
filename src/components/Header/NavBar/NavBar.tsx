@@ -95,8 +95,10 @@ const NavBar = () => {
         <div className="suggest-menu-container">
           {isLoggedIn ? (
             <>
-              <Link to="/proposer" className="suggest-btn">
-                <button type="button">Proposer un lieu</button>
+              <Link to="/proposer" className="suggestLink-navbar">
+                <button className="suggest-btn" type="button">
+                  Proposer un lieu
+                </button>
               </Link>
               <button
                 type="button"

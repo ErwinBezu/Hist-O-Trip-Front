@@ -202,7 +202,7 @@ const Card: React.FC = () => {
           </>
         )}
       </div>
-      <div>
+      <div className="btn-container">
         {visibleCards < placesCardData.length && (
           <button className="btn-style-var" onClick={loadMoreCards}>
             Afficher plus
