@@ -22,6 +22,8 @@ type ContextType = {
   setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  userData: any;
+  setUserData: any;
 };
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
@@ -37,7 +39,7 @@ const App: React.FC = () => {
   const [centuriesList, setCenturiesList] = useState([]);
   const [tagsList, setTagsList] = useState([]);
 
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
@@ -82,7 +84,9 @@ const App: React.FC = () => {
               menueVisible,
               setMenueVisible,
               editVisible,
-              setEditVisible,userData, setUserData
+              setEditVisible,
+              userData,
+              setUserData,
             }}
           >
             <Routes>

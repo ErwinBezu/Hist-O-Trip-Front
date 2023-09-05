@@ -29,13 +29,7 @@ const Periodes = () => {
     useContext(SelectedCenturies);
 
   const handleCenturiesSelect = (centuryId: number) => {
-    setSelectedCenturies((prevSelectedCenturies: number[]) => {
-      if (prevSelectedCenturies.includes(centuryId)) {
-        return prevSelectedCenturies.filter((id) => id !== centuryId);
-      } else {
-        return [...prevSelectedCenturies, centuryId];
-      }
-    });
+    setSelectedCenturies([...selectedCenturies, centuryId]);
   };
 
   return (

@@ -9,7 +9,6 @@ const UserEditProfil = () => {
   if (!context) {
     return <div></div>;
   }
-  
 
   const { setEditVisible, userData } = context;
   return (
@@ -46,7 +45,7 @@ const UserEditProfil = () => {
             <input type="text" placeholder={userData.firstname} />
           </div>
           <div className="profil-edit-inofs">
-            <input type="email" placeholder={userData.email} disabled="disabled"/>
+            <input type="email" placeholder={userData.email} disabled />
             <input type="password" placeholder="Mot de passe" />
           </div>
           <button

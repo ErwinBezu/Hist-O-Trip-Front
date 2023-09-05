@@ -4,14 +4,28 @@ import Categories from '../../Categories/Categories';
 import Epoques from '../../Utiles/Epoques/Epoques';
 import Periodes from '../../Utiles/Periodes/Periodes';
 import Tags from '../../Utiles/Tags/Tags';
-import { MainSearchFilter } from '../../contexts';
+import {
+  MainSearchFilter,
+  SelectedTags,
+  SelectedCenturies,
+  SelectedCategory,
+} from '../../contexts';
 
 const Filter = ({ setIsVisible }) => {
   const { setIsFilterSubmitted } = useContext(MainSearchFilter);
+  const { setSelectedTags } = useContext(SelectedTags);
+  const { setSelectedCenturies } = useContext(SelectedCenturies);
+  const { setSelectedCategory } = useContext(SelectedCategory);
 
   const handleFilterSubmit = () => {
     setIsFilterSubmitted(true);
     setIsVisible(false);
+  };
+
+  const handleResetFilter = () => {
+    setSelectedCategory([]);
+    setSelectedCenturies([]);
+    selectedTags([]);
   };
   return (
     <>
@@ -49,6 +63,13 @@ const Filter = ({ setIsVisible }) => {
 
             <div className="filter-footer">
               <div className="footer-btn">
+                <button
+                  onClick={(e) => {
+                    handleResetFilter;
+                  }}
+                >
+                  Réinitialiser Tags
+                </button>
                 <button className="btn-style-var" type="submit">
                   Rechercher
                 </button>

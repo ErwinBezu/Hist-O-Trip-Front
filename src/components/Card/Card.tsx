@@ -12,6 +12,7 @@ import {
   SelectedCenturies,
   SelectedTags,
   MainSearchFilter,
+  SelectedPeriod,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
 
@@ -42,13 +43,17 @@ const Card: React.FC = () => {
     setMenueVisible: (value: boolean) => void;
     isVisible: boolean;
   };
-  const { selectedCategory } = useContext(SelectedCategory);
+  const { selectedCategory, setSelectedCategory } =
+    useContext(SelectedCategory);
   const { selectedCentury } = useContext(SelectedCentury);
+  const { selectedPeriod } = useContext(SelectedPeriod);
   const { selectedTag } = useContext(SelectedTag);
   const { searchInput } = useContext(SearchInput);
 
-  const { selectedCenturies } = useContext(SelectedCenturies);
-  const { selectedTags } = useContext(SelectedTags);
+  const { selectedCenturies, setSelectedCenturies } =
+    useContext(SelectedCenturies);
+
+  const { selectedTags, setSelectedTags } = useContext(SelectedTags);
 
   const [mapIsVisible, setMapIsVisible] = useState(false);
 
@@ -100,6 +105,21 @@ const Card: React.FC = () => {
   }, [selectedCentury]);
 
   useEffect(() => {
+    if (SelectedPeriod) {
+      fetch(
+        `http://ludoviclebris-server.eddi.cloud/api/api/places/centuries/${selectedPeriod?.period}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('toto');
+          console.log(data);
+          setPlacesCardData(data);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [selectedPeriod]);
+
+  useEffect(() => {
     if (selectedTag) {
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/tags/${selectedTag.id}`
@@ -130,6 +150,9 @@ const Card: React.FC = () => {
           console.log('coucou');
           console.log(data);
           setPlacesCardData(data);
+          setSelectedCategory(null);
+          setSelectedCenturies([]);
+          setSelectedTags([]);
         })
         .catch((err) => console.error(err));
     }

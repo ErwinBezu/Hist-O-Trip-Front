@@ -6,6 +6,7 @@ import {
   TagsList,
   SelectedCentury,
   SelectedTag,
+  SelectedPeriod,
 } from '../contexts';
 import './FilterFooter.scss';
 
@@ -35,11 +36,15 @@ const FilterFooter = () => {
   const [randomCenturies, setRandomCenturies] = useState<Centuries[]>([]);
   const [randomTags, setRandomTags] = useState<Tags[]>([]);
 
-  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(
+    'categories'
+  );
 
   const { selectedCategory, setSelectedCategory } =
     useContext(SelectedCategory);
   const { selectedCentury, setSelectedCentury } = useContext(SelectedCentury);
+
+  const { selectedPeriod, setSelectedPeriod } = useContext(SelectedPeriod);
 
   const { selectedTag, setSelectedTag } = useContext(SelectedTag);
 
@@ -83,6 +88,10 @@ const FilterFooter = () => {
 
   const handleCenturySelect = (century: Centuries) => {
     setSelectedCentury(century);
+  };
+
+  const handlePeriodSelect = (century: Centuries) => {
+    setSelectedPeriod(century);
   };
 
   const uniquePeriod = new Set();
@@ -172,7 +181,7 @@ const FilterFooter = () => {
               {filteredPeriods.map((century) => (
                 <li
                   key={century.period}
-                  onClick={() => handleCenturySelect(century)}
+                  onClick={() => handlePeriodSelect(century)}
                 >
                   {century.period}
                 </li>

@@ -17,10 +17,15 @@ const Categories = () => {
   const { selectedCategory, setSelectedCategory } =
     useContext(SelectedCategory);
 
-  const categoryName = selectedCategory?.name;
-  const categoryId = selectedCategory?.id;
-  const categoryIcon = selectedCategory?.icon;
+  useEffect(() => {
+    if (!selectedCategory) {
+      const randomCategory =
+        categoriesList[Math.floor(Math.random() * categoriesList.length)];
+      setSelectedCategory(randomCategory);
+    }
+  }, [categoriesList, selectedCategory, setSelectedCategory]);
 
+  console.log(selectedCategory);
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
   };
