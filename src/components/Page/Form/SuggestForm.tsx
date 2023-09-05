@@ -134,7 +134,6 @@ const SuggestForm = () => {
           id="adress"
           value={adress}
           onChange={(e) => setAdress(e.target.value)}
-          required
         />
       </div>
       <div className="item-container">

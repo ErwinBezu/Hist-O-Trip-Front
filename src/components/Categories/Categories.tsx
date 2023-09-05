@@ -25,10 +25,6 @@ const Categories = () => {
     }
   }, [categoriesList, selectedCategory, setSelectedCategory]);
 
-  const categoryName = selectedCategory?.name;
-  const categoryId = selectedCategory?.id;
-  const categoryIcon = selectedCategory?.icon;
-
   console.log(selectedCategory);
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
