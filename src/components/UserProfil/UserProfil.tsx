@@ -23,6 +23,7 @@ const UserProfil = () => {
     editVisible,
     setEditVisible,
     setMenueVisible,
+    menueVisible
   } = context;
   // ! Fin du code à verifier
 
@@ -39,6 +40,7 @@ const UserProfil = () => {
   }, [editVisible]);
 
   return (
+    <div className='profil-modal' >
     <div className="Profil-container">
       <div className="profil-header">
         <label
@@ -56,7 +58,6 @@ const UserProfil = () => {
         >
           Mon profil
         </button>
-        {editVisible && <UserEditProfil />}
         <button className="profil-fav-btn">Favoris</button>
         <button className="profil-proposition-btn">Mes propositions</button>
 
@@ -68,6 +69,7 @@ const UserProfil = () => {
           Se déconnecter
         </button>
       </div>
+    </div>
     </div>
   );
 };

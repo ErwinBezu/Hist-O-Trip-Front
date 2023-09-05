@@ -116,7 +116,6 @@ const NavBar = () => {
               <BsFillPersonFill />
             </button>
           )}
-          {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         </div>
       </div>
 
@@ -135,11 +134,15 @@ const NavBar = () => {
         >
           <AiOutlineControl /> Filtre
         </button>
-        {isVisible && <Filter setIsVisible={setIsVisible} />}
-      </div>
+        </div>
 
+      
+      
+      
+      
+      
+      
       <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
-        {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         <Link to="/">
           <button className="home-mobile-btn">
             <AiOutlineHome /> Home
@@ -153,8 +156,6 @@ const NavBar = () => {
           <AiOutlineControl /> Filter
         </button>
 
-        {isVisible && <Filter setIsVisible={setIsVisible} />}
-
         <button
           type="button"
           className="menu-btn"
@@ -162,6 +163,7 @@ const NavBar = () => {
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
+        
       </div>
     </>
   );

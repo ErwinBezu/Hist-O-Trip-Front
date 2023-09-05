@@ -1,4 +1,6 @@
 /* Container styles */
+@use '../../styles/variables' as *;
+
 .Profil-container {
   font-family: 'Akshar', sans-serif;
   font-weight: bold;
@@ -6,18 +8,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 92vh;
   width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  bottom: 0;
+  background-color: $color-primary;
+  position: fixed;
+  top: 0;
   
-}
+  }
 
 .profil-quit-btn{
-  background-color: #fff;
+  background-color: $color-primary;
   border: none;
   position: fixed;
   padding: 5px;
@@ -93,9 +93,11 @@
   .Profil-container {
   height: 250px;
   max-width: 200px;
-  position: absolute;
+  position: fixed;
   top: 40px;
   right: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   
 }
 .profil-header{
