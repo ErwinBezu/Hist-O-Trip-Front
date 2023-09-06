@@ -15,7 +15,7 @@ const UserProfil = () => {
   const context = useContext(Context);
 
   if (!context) {
-    return <div>Loading...</div>;
+    return null;
   }
   const {
     isLoggedIn,

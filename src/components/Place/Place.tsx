@@ -66,23 +66,7 @@ const Place: React.FC = () => {
   const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   const foundPlaceData = placesData.find(
-  //     (PlaceItem) => PlaceItem.id === parseInt(id) && PlaceItem.slug === slug
-  //   );
-
-  //   if (foundPlaceData) {
-  //     console.log(foundPlaceData);
-  //     setSinglePlaceData(foundPlaceData || defaultPlaceData);
-  //   } else {
-
-  //     setSinglePlaceData(defaultPlaceData);
-  //   }
-  // }, [id, slug, location]);
-
-  // if (!singlePlaceData || singlePlaceData === defaultPlaceData) {
-  //   return <Error404 />;
-  // }
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id && slug) {
@@ -91,16 +75,21 @@ const Place: React.FC = () => {
         .then((data) => {
           if (data.id === parseInt(id) && data.slug === slug) {
             setSinglePlaceData(data);
+            setLoading(false);
           } else {
-            return <Error404 />;
+            setLoading(false);
           }
         })
         .catch((error) => {
           console.error('Pas bon', error);
-          return <Error404 />;
+          setLoading(false);
         });
     }
   }, [id, slug, location]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!singlePlaceData) {
     return <Error404 />;
@@ -167,8 +156,6 @@ const Place: React.FC = () => {
             <MapPlaces />
           </SinglePlace.Provider>
         </div>
-        {/* <div className="place-review"><h3>Commentaires</h3>
-      </div> */}
       </div>
       <div className="place-footer">
         <Footer />

@@ -24,6 +24,8 @@ type ContextType = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   userData: any;
   setUserData: any;
+  token?: string | null; // Add token property
+  setToken?: any;
 };
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
@@ -40,10 +42,8 @@ const App: React.FC = () => {
   const [centuriesList, setCenturiesList] = useState([]);
   const [tagsList, setTagsList] = useState([]);
 
-
   const [userData, setUserData] = useState();
   const [token, setToken] = useState();
-
 
   useEffect(() => {
     fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
@@ -89,10 +89,13 @@ const App: React.FC = () => {
               setMenueVisible,
               editVisible,
               setEditVisible,
-              token, 
+              token,
               setToken,
+
               userData, 
               setUserData,loginModal, setLoginModal
+
+
 
             }}
           >

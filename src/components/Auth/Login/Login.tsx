@@ -5,29 +5,37 @@ import './Login.scss';
 import { Context } from '../../App/App';
 import { AiOutlineClose } from 'react-icons/ai';
 
-export const getUser = async (token) => {
+export const getUser = async (token: any) => {
   try {
-    const response = await fetch('http://ludoviclebris-server.eddi.cloud/api/api/users/@me', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+    const response = await fetch(
+      'http://ludoviclebris-server.eddi.cloud/api/api/users/@me',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       }
-    });
+    );
 
     if (response.ok) {
       const usersData = await response.json();
       const usersDataStr = JSON.stringify(usersData);
       localStorage.setItem('userData', usersDataStr);
       // userData contient les données de l'utilisateur
-      console.log('Données de l\'utilisateur :', usersDataStr);
+      console.log("Données de l'utilisateur :", usersDataStr);
       return usersData;
     } else {
-      console.error('Erreur lors de la récupération des données de l\'utilisateur');
+      console.error(
+        "Erreur lors de la récupération des données de l'utilisateur"
+      );
       return null;
     }
   } catch (error) {
-    console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
+    console.error(
+      "Erreur lors de la récupération des données de l'utilisateur :",
+      error
+    );
     return null;
   }
 };
@@ -45,13 +53,17 @@ type ContextType = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   userData: any;
   setUserData: any;
+  token?: string | null; // Add token property
+  setToken?: React.Dispatch<React.SetStateAction<string | null>>; // Add setToken property
 };
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
   const {setLoginModal, menueVisible, setMenueVisible, signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -78,7 +90,7 @@ const Login = () => {
         setIsLoggedIn(true);
         setLoginModal(false);
         const user = await getUser(data.token);
-        console.log('Données de l\'utilisateur après authentification :', user);
+        console.log("Données de l'utilisateur après authentification :", user);
         setToken(data.token);
         console.log('token ici', token);
 
@@ -91,8 +103,7 @@ const Login = () => {
     }
   };
 
-  const parseJwt = (token) => {
-
+  const parseJwt = (token: any) => {
     // terminate operation if token is invalid
     if (!token) {
       console.error('Token is invalid or missing');
@@ -114,7 +125,6 @@ const Login = () => {
   };
 
   const user = parseJwt(token);
-
 
 
 
@@ -183,6 +193,6 @@ const Login = () => {
     </div>
     </>
   );
-}
+};
 
 export default Login;

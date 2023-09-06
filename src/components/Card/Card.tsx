@@ -78,6 +78,15 @@ const Card: React.FC = () => {
   console.log(selectedTags);
   console.log(isFilterSubmitted);
 
+  const shuffleArray = (array: any) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   useEffect(() => {
     if (searchInput) {
       fetch(
@@ -85,7 +94,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -93,12 +103,14 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedCategory && !isVisible) {
+      resetVisibleCards();
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -111,7 +123,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -124,9 +137,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log('toto');
-          console.log(data);
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -139,7 +151,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -175,6 +188,9 @@ const Card: React.FC = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
+  const resetVisibleCards = () => {
+    setVisibleCards(12);
+  };
   const toggleMapOn = () => {
     setMapIsVisible(true);
   };
@@ -235,10 +251,10 @@ const Card: React.FC = () => {
           </>
         )}
       </div>
-      <div>
-        {visibleCards < placesCardData.length && (
-          <button className="btn-style-var" onClick={loadMoreCards}>
-            Afficher plus
+      <div className="btn-container">
+        {!mapIsVisible && visibleCards < placesCardData.length && (
+          <button className="btn-style-var " onClick={loadMoreCards}>
+            <span> Afficher plus</span>
           </button>
         )}
         <button

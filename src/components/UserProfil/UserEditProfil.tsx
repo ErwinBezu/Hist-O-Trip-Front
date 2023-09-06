@@ -3,34 +3,29 @@ import './UserEditProfil.scss';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Context } from '../App/App';
 import Cookies from 'js-cookie';
-import {getUser} from '../Auth/Login/Login';
-
+import { getUser } from '../Auth/Login/Login';
 
 const UserEditProfil = () => {
   const context = useContext(Context);
 
   if (!context) {
-    return <div></div>;
+    return null;
   }
 
   const { setEditVisible } = context;
-  const storedUserData = localStorage.getItem('userData');
+  const storedUserData: any = localStorage.getItem('userData');
   const userData = JSON.parse(storedUserData);
 
-  
   console.log('userdata ici', userData);
   const token = Cookies.get('jwtToken');
   console.log('ici token', token);
-  
 
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
   const [password, setPassword] = useState('');
 
-  
-
-  const handleEdit = async (e, token) => {
+  const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
     try {
       const response = await fetch(
@@ -39,7 +34,7 @@ const UserEditProfil = () => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ firstname, lastname, pseudonym, password }),
         }
@@ -59,7 +54,10 @@ const UserEditProfil = () => {
         className="edit-profil-bg"
         onClick={() => setEditVisible(false)}
       ></div>
-      <form className="profil-edit-container" onSubmit={(e) => handleEdit(e, token)}>
+      <form
+        className="profil-edit-container"
+        onSubmit={(e) => handleEdit(e, token)}
+      >
         <div className="profil-edit-header">
           <label
             className="profil-edit-back-btn"
@@ -94,6 +92,7 @@ const UserEditProfil = () => {
           </div>
           <div className="profil-edit-inofs">
 
+
             <input
               type="email"
               placeholder={userData.email}
@@ -101,12 +100,9 @@ const UserEditProfil = () => {
             />
             
 
+
           </div>
-          <button
-            className="profil-edit-validation"
-            type="submit"
-            
-          >
+          <button className="profil-edit-validation" type="submit">
             Valider modification
           </button>
         </div>
