@@ -96,6 +96,10 @@ const MapPlaces = () => {
     }
   }
 
+  const customMarkerIcon = new L.Icon({
+    iconUrl: '../../../public/images/marker-icon.png',
+  });
+
   return location.pathname.includes(`/${id}/${slug}`) ? (
     <MapContainer
       center={singlePlaceCenter || defaultMapCenter}
@@ -125,7 +129,11 @@ const MapPlaces = () => {
             const lng = parseFloat(lngStr);
             if (!isNaN(lat) && !isNaN(lng)) {
               return (
-                <Marker key={index} position={[lat, lng]}>
+                <Marker
+                  key={index}
+                  position={[lat, lng]}
+                  icon={customMarkerIcon}
+                >
                   <Popup className="pop-up">
                     <Link to={`/${id}/${slug}`} key={id}>
                       <p>{name}</p>
@@ -168,7 +176,11 @@ const MapPlaces = () => {
             const lng = parseFloat(lngStr);
             if (!isNaN(lat) && !isNaN(lng)) {
               return (
-                <Marker key={index} position={[lat, lng]}>
+                <Marker
+                  key={index}
+                  position={[lat, lng]}
+                  icon={customMarkerIcon}
+                >
                   <Popup className="pop-up">
                     <Link to={`/${id}/${slug}`} key={id}>
                       <p>{name}</p>
