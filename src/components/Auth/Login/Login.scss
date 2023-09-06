@@ -11,7 +11,7 @@
   background-color: $color-primary;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 800;
 
   .login-modal-header{
     text-align: center;
@@ -146,6 +146,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     overflow-x: hidden;
+    z-index: 800;
     
   }
   .login-container{
@@ -167,7 +168,7 @@
   .login-modal-header{
     text-align: center;
     h2{
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       width: 600px;
       padding: 5px 0px 20px 0px;
       font-size: larger;
@@ -189,9 +190,7 @@
         background-color: rgba(128, 128, 128, 0.2);
       }
   }
-}
 
-@media screen and (min-width: 768px){
   .login-container{
     display: flex;
     flex-direction: column;
@@ -207,15 +206,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    .login-modal-header{
-      h2{
-        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-        width: 100vw;
-        padding: 10px;
-        font-size: larger;
-      }
-    }
-
+    
     .login-modal-submit{
       display: block;
     width: 100%;

@@ -5,6 +5,7 @@
 }
 .edit-profil-bg{
   display: none;
+  z-index: 800;
 }
 .profil-edit-container {
   font-family: 'Akshar', sans-serif;
@@ -15,7 +16,7 @@
   width: 100%;
   padding: 20px;
   background-color: $color-primary;
-  
+  z-index: 801;
   border-radius: 10px;
 }
 

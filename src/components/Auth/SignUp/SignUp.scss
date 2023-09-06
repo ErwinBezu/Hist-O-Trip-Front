@@ -11,8 +11,8 @@
   background-color: $color-primary;
   position: fixed;
   top: 0;
-  
-  z-index: 2;
+  z-index: 900;
+
 .signUp-names{
   display: flex;
   flex-direction: column;
@@ -161,6 +161,7 @@ a, a:visited {
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
+    z-index: 800;
 }
 
 .signUp-container{
@@ -178,7 +179,7 @@ a, a:visited {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 801;
   
   input[type="text"],
   input[type="password"],

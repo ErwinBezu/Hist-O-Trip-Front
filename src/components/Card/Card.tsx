@@ -47,7 +47,6 @@ const Card: React.FC = () => {
   const { editVisible,
     isLoggedIn,
     signUpModal,
-    setIsLoggedIn,
     isVisible,
     setIsVisible,
     menueVisible,
