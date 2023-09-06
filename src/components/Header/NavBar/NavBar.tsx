@@ -43,6 +43,7 @@ const NavBar = () => {
     setIsVisible,
     menueVisible,
     setMenueVisible,
+    setLoginModal
   } = context;
 
   const [isBottom, setIsBottom] = useState(false);
@@ -74,7 +75,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="navbar-container">
+      <div className="navbar-container" onClick={() => menueVisible ? setMenueVisible(false) : ''}>
         <Link to="/" className="logo">
           <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
@@ -113,16 +114,15 @@ const NavBar = () => {
             <button
               type="button"
               className="menu-btn"
-              onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
+              onClick={() => setLoginModal(true)}
             >
               <BsFillPersonFill />
             </button>
           )}
-          {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         </div>
       </div>
 
-      <div className="filter-container">
+      <div className="filter-container" onClick={() => menueVisible ? setMenueVisible(false) : ''}>
         <button type="button" className="previous-btn">
           &lt;
         </button>
@@ -137,11 +137,15 @@ const NavBar = () => {
         >
           <AiOutlineControl /> Filtre
         </button>
-        {isVisible && <Filter setIsVisible={setIsVisible} />}
-      </div>
+        </div>
 
+      
+      
+      
+      
+      
+      
       <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
-        {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         <Link to="/">
           <button className="home-mobile-btn">
             <AiOutlineHome /> Home
@@ -158,15 +162,14 @@ const NavBar = () => {
           <span>Filter</span>
         </button>
 
-        {isVisible && <Filter setIsVisible={setIsVisible} />}
-
         <button
           type="button"
           className="menu-btn"
-          onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
+          onClick={() => isLoggedIn ? setMenueVisible((prevstate: any) => !prevstate) : setLoginModal(true)}
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
+        
       </div>
     </>
   );

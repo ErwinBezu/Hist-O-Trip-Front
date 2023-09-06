@@ -15,6 +15,11 @@ import {
   SelectedPeriod,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
+import UserProfil from '../UserProfil/UserProfil';
+import Filter from '../Header/Filter/Filter';
+import UserEditProfil from '../UserProfil/UserEditProfil';
+import Login from '../Auth/Login/Login';
+import SignUp from '../Auth/SignUp/SignUp';
 
 type Picture = {
   url: string;
@@ -39,7 +44,15 @@ type Place = {
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const { setMenueVisible, isVisible } = useContext(Context) as {
+  const { editVisible,
+    isLoggedIn,
+    signUpModal,
+    setIsLoggedIn,
+    isVisible,
+    setIsVisible,
+    menueVisible,
+    setMenueVisible,
+    loginModal } = useContext(Context) as {
     setMenueVisible: (value: boolean) => void;
     isVisible: boolean;
   };
@@ -184,9 +197,29 @@ const Card: React.FC = () => {
   const toggleMapOff = () => {
     setMapIsVisible(false);
   };
+  const handleScrollStyle = () => {
+    if (isVisible || editVisible || signUpModal || loginModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  };
 
+  // Appelez cette fonction à chaque changement d'état des modales
+  useEffect(() => {
+    handleScrollStyle();
+  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal]);
   return (
+    
     <>
+      {signUpModal && <SignUp />}
+      {loginModal && <Login/>}
+      {menueVisible && <UserProfil /> }
+      {isVisible && <Filter setIsVisible={setIsVisible} />}
+      {editVisible && <UserEditProfil />}
+      
+
+
       <div className="cards-container" onClick={() => setMenueVisible(false)}>
         {mapIsVisible ? (
           <MapPlaces />

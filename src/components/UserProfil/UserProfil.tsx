@@ -23,22 +23,14 @@ const UserProfil = () => {
     editVisible,
     setEditVisible,
     setMenueVisible,
+    menueVisible
   } = context;
   // ! Fin du code à verifier
 
-  useEffect(() => {
-    if (editVisible) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto'; // Remettre le scroll normal lorsque le composant est démonté
-    };
-  }, [editVisible]);
+  
 
   return (
+    <div className='profil-modal' >
     <div className="Profil-container">
       <div className="profil-header">
         <label
@@ -56,10 +48,6 @@ const UserProfil = () => {
         >
           Mon profil
         </button>
-        {editVisible && <UserEditProfil />}
-        <button className="profil-fav-btn">Favoris</button>
-        <button className="profil-proposition-btn">Mes propositions</button>
-
         <button
           type="submit"
           className="profil-deco-btn"
@@ -68,6 +56,7 @@ const UserProfil = () => {
           Se déconnecter
         </button>
       </div>
+    </div>
     </div>
   );
 };
