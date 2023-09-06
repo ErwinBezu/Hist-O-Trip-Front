@@ -44,17 +44,17 @@ type Place = {
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const { editVisible,
+  const {
+    editVisible,
     isLoggedIn,
     signUpModal,
     isVisible,
     setIsVisible,
     menueVisible,
     setMenueVisible,
-    loginModal } = useContext(Context) as {
-    setMenueVisible: (value: boolean) => void;
-    isVisible: boolean;
-  };
+    loginModal,
+  } = useContext<any>(Context);
+
   const { selectedCategory, setSelectedCategory } =
     useContext(SelectedCategory);
   const { selectedCentury } = useContext(SelectedCentury);
@@ -198,9 +198,9 @@ const Card: React.FC = () => {
   };
   const handleScrollStyle = () => {
     if (isVisible || editVisible || signUpModal || loginModal) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     }
   };
 
@@ -209,15 +209,12 @@ const Card: React.FC = () => {
     handleScrollStyle();
   }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal]);
   return (
-    
     <>
       {signUpModal && <SignUp />}
-      {loginModal && <Login/>}
-      {menueVisible && <UserProfil /> }
+      {loginModal && <Login />}
+      {menueVisible && <UserProfil />}
       {isVisible && <Filter setIsVisible={setIsVisible} />}
       {editVisible && <UserEditProfil />}
-      
-
 
       <div className="cards-container" onClick={() => setMenueVisible(false)}>
         {mapIsVisible ? (
