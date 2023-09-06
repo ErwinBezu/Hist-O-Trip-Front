@@ -219,7 +219,7 @@ const Card: React.FC = () => {
         )}
       </div>
       <div className="btn-container">
-        {visibleCards < placesCardData.length && (
+        {!mapIsVisible && visibleCards < placesCardData.length && (
           <button className="btn-style-var " onClick={loadMoreCards}>
             <span> Afficher plus</span>
           </button>
