@@ -41,7 +41,7 @@ const UserEditProfil = () => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify({ firstname, lastname, pseudonym }),
+          body: JSON.stringify({ firstname, lastname, pseudonym, password }),
         }
       );
       if (response.ok) {
@@ -70,15 +70,6 @@ const UserEditProfil = () => {
           <h2>Mon profil</h2>
         </div>
         <div className="profil-edit-content">
-          <label className="profil-edit-avatar" htmlFor="edit-profile-image">
-            Télécharger une image
-          </label>
-          <input
-            type="file"
-            id="edit-profile-image"
-            name="profileImage"
-            accept="image/*"
-          />
           <div className="profil-edit-pseudo">
             <input
               type="text"
@@ -108,12 +99,7 @@ const UserEditProfil = () => {
               placeholder={userData.email}
               disabled
             />
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
+            
 
           </div>
           <button

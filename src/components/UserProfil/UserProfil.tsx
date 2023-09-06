@@ -27,17 +27,7 @@ const UserProfil = () => {
   } = context;
   // ! Fin du code à verifier
 
-  useEffect(() => {
-    if (editVisible) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto'; // Remettre le scroll normal lorsque le composant est démonté
-    };
-  }, [editVisible]);
+  
 
   return (
     <div className='profil-modal' >
@@ -58,9 +48,6 @@ const UserProfil = () => {
         >
           Mon profil
         </button>
-        <button className="profil-fav-btn">Favoris</button>
-        <button className="profil-proposition-btn">Mes propositions</button>
-
         <button
           type="submit"
           className="profil-deco-btn"

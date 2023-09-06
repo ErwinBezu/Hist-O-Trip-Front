@@ -43,6 +43,7 @@ const NavBar = () => {
     setIsVisible,
     menueVisible,
     setMenueVisible,
+    setLoginModal
   } = context;
 
   const [isBottom, setIsBottom] = useState(false);
@@ -74,7 +75,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="navbar-container">
+      <div className="navbar-container" onClick={() => menueVisible ? setMenueVisible(false) : ''}>
         <Link to="/" className="logo">
           <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
@@ -111,7 +112,7 @@ const NavBar = () => {
             <button
               type="button"
               className="menu-btn"
-              onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
+              onClick={() => setLoginModal(true)}
             >
               <BsFillPersonFill />
             </button>
@@ -119,7 +120,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      <div className="filter-container">
+      <div className="filter-container" onClick={() => menueVisible ? setMenueVisible(false) : ''}>
         <button type="button" className="previous-btn">
           &lt;
         </button>
@@ -159,7 +160,7 @@ const NavBar = () => {
         <button
           type="button"
           className="menu-btn"
-          onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
+          onClick={() => isLoggedIn ? setMenueVisible((prevstate: any) => !prevstate) : setLoginModal(true)}
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>

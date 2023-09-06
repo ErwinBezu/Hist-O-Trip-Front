@@ -51,7 +51,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {setMenueVisible, signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
+  const {setLoginModal, menueVisible, setMenueVisible, signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -76,6 +76,7 @@ const Login = () => {
         console.log("c'est bon ");
         setError('');
         setIsLoggedIn(true);
+        setLoginModal(false);
         const user = await getUser(data.token);
         console.log('Données de l\'utilisateur après authentification :', user);
         setToken(data.token);
@@ -114,16 +115,17 @@ const Login = () => {
 
   const user = parseJwt(token);
 
-console.log('User :', user);
+
+
 
   return (
     <>
-    <div className='login-modal'onClick={() => setMenueVisible(false)} ></div>
+    <div className='login-modal'onClick={() => setLoginModal(false)} ></div>
     <div className="login-container">
       <div className="login-modal-header">
       <label
           className="login-quit-btn"
-          onClick={() => setMenueVisible(false)}
+          onClick={() => setLoginModal(false)}
         >
           <AiOutlineClose />
         </label>
@@ -164,7 +166,13 @@ console.log('User :', user);
         {error && <p>{error}</p>}
 
 
-        <button className="signup-btn" onClick={() => setSignUpModal((prevstate: any) => !prevstate)}>
+        <button
+      className="signup-btn"
+      onClick={() => {
+      setLoginModal(false);
+      setSignUpModal((prevState: any) => !prevState);
+      }}
+        >
           Inscription
         </button>
         

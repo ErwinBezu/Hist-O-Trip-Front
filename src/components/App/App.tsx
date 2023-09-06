@@ -34,6 +34,7 @@ const App: React.FC = () => {
   const [editVisible, setEditVisible] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
+  const [loginModal, setLoginModal] = useState(false);
 
   const [categoriesList, setCategoriesList] = useState([]);
   const [centuriesList, setCenturiesList] = useState([]);
@@ -91,7 +92,7 @@ const App: React.FC = () => {
               token, 
               setToken,
               userData, 
-              setUserData
+              setUserData,loginModal, setLoginModal
 
             }}
           >

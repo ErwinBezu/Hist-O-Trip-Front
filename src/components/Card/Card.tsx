@@ -51,7 +51,8 @@ const Card: React.FC = () => {
     isVisible,
     setIsVisible,
     menueVisible,
-    setMenueVisible, } = useContext(Context) as {
+    setMenueVisible,
+    loginModal } = useContext(Context) as {
     setMenueVisible: (value: boolean) => void;
     isVisible: boolean;
   };
@@ -180,12 +181,24 @@ const Card: React.FC = () => {
   const toggleMapOff = () => {
     setMapIsVisible(false);
   };
+  const handleScrollStyle = () => {
+    if (isVisible || editVisible || signUpModal || loginModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  };
 
+  // Appelez cette fonction à chaque changement d'état des modales
+  useEffect(() => {
+    handleScrollStyle();
+  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal]);
   return (
     
     <>
       {signUpModal && <SignUp />}
-      {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
+      {loginModal && <Login/>}
+      {menueVisible && <UserProfil /> }
       {isVisible && <Filter setIsVisible={setIsVisible} />}
       {editVisible && <UserEditProfil />}
       
