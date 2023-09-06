@@ -26,6 +26,8 @@ type ContextType = {
   setUserData: any;
   token?: string | null; // Add token property
   setToken?: any;
+  loginModal: any;
+  setLoginModal: any;
 };
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
@@ -91,12 +93,10 @@ const App: React.FC = () => {
               setEditVisible,
               token,
               setToken,
-
-              userData, 
-              setUserData,loginModal, setLoginModal
-
-
-
+              userData,
+              setUserData,
+              loginModal,
+              setLoginModal,
             }}
           >
             <Routes>
