@@ -23,7 +23,6 @@ const UserEditProfil = () => {
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
-  const [password, setPassword] = useState('');
 
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
@@ -36,7 +35,7 @@ const UserEditProfil = () => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ firstname, lastname, pseudonym, password }),
+          body: JSON.stringify({ firstname, lastname, pseudonym }),
         }
       );
       if (response.ok) {
@@ -91,16 +90,7 @@ const UserEditProfil = () => {
             />
           </div>
           <div className="profil-edit-inofs">
-
-
-            <input
-              type="email"
-              placeholder={userData.email}
-              disabled
-            />
-            
-
-
+            <input type="email" placeholder={userData.email} disabled />
           </div>
           <button className="profil-edit-validation" type="submit">
             Valider modification
