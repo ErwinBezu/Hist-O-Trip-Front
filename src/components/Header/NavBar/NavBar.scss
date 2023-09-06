@@ -219,6 +219,12 @@
           border-radius: 30px;
           border-style: none;
           font-size: 1.1em;
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+          transition: background-color 0.3s ease-in-out;
+        }
+        .suggest-btn:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
       }
       .menu-btn {

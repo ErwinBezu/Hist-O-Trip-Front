@@ -97,7 +97,8 @@ const MapPlaces = () => {
   }
 
   const customMarkerIcon = new L.Icon({
-    iconUrl: '../../../public/images/marker-icon.png',
+    iconUrl:
+      'https://ik.imagekit.io/v4u5l9d7p/marker-icon.png?updatedAt=1694013187611',
   });
 
   return location.pathname.includes(`/${id}/${slug}`) ? (
