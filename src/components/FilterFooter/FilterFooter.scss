@@ -19,6 +19,7 @@
 
     .oneFilter-title {
       padding: 5px 0;
+      cursor: pointer;
       &:hover {
         border-bottom: 1px solid $color-primary;
       }
@@ -35,8 +36,7 @@
       .oneFilter-item {
         list-style: none;
         font-size: 1.2em;
-      }
-      .selected {
+        cursor: pointer;
       }
     }
   }

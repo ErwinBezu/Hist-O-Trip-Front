@@ -22,11 +22,6 @@ const Filter = ({ setIsVisible }) => {
     setIsVisible(false);
   };
 
-  const handleResetFilter = () => {
-    setSelectedCategory([]);
-    setSelectedCenturies([]);
-    selectedTags([]);
-  };
   return (
     <>
       <div className="modal-bg" onClick={() => setIsVisible(false)} />
@@ -63,13 +58,6 @@ const Filter = ({ setIsVisible }) => {
 
             <div className="filter-footer">
               <div className="footer-btn">
-                <button
-                  onClick={(e) => {
-                    handleResetFilter;
-                  }}
-                >
-                  Réinitialiser Tags
-                </button>
                 <button className="btn-style-var" type="submit">
                   Rechercher
                 </button>
