@@ -152,7 +152,10 @@ const NavBar = () => {
           onClick={() => setIsVisible(true)}
           className="filter-btn"
         >
-          <AiOutlineControl /> Filter
+          <span className="logo-filter">
+            <AiOutlineControl />
+          </span>
+          <span>Filter</span>
         </button>
 
         {isVisible && <Filter setIsVisible={setIsVisible} />}

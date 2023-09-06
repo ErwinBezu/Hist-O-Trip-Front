@@ -12,7 +12,7 @@
     margin-bottom: 10px;
     text-decoration: none;
     color: $color-tertiary;
-    height: 70vh;
+    min-height: 70vh;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
     border-radius: 20px;
@@ -39,15 +39,15 @@
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
       padding: 15px 0 10px 10px;
-      height: 20vh;
+      min-height: 20vh;
 
       .placename-card {
-        font-size: 1.7em;
+        font-size: 1.6em;
       }
       .placecity-card {
-        font-size: 1.4em;
+        font-size: 1.3em;
         .zipcode {
-          font-size: 1.4rem;
+          font-size: 1.2rem;
           font-weight: 500;
         }
       }
@@ -60,7 +60,18 @@
 .btn-container {
   display: flex;
   justify-content: center;
-  padding: 10px 0;
+  gap: 30px;
+  padding: 20px 0 10px 0;
+
+  .btn-style-var {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .btn-style-var:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
 }
 
 @media screen and (min-width: 551px) {
@@ -99,6 +110,24 @@
   .cards-container {
     .article-card {
       width: calc((100% / 6) - 20px);
+      min-height: 65vh;
+
+      .content {
+        min-height: 15vh;
+        .placename-card {
+          font-size: 1.7em;
+        }
+        .placecity-card {
+          font-size: 1.4em;
+          .zipcode {
+            font-size: 1.4rem;
+            font-weight: 500;
+          }
+        }
+        span {
+          font-size: 1.6em;
+        }
+      }
     }
   }
 }

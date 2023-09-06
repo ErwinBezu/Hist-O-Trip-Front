@@ -31,12 +31,20 @@ const Categories = () => {
   };
 
   return (
-    <nav>
-      <ul>
+    <nav className="categories-container">
+      <ul className="categories-list">
         {categoriesList.map((category: Category) => (
-          <li key={category.id} onClick={() => handleCategorySelect(category)}>
+          <li
+            className={
+              category === selectedCategory
+                ? 'category-item category-item--active'
+                : 'category-item'
+            }
+            key={category.id}
+            onClick={() => handleCategorySelect(category)}
+          >
             <Icon name={category.icon} />
-            <span>{category.name}</span>
+            <span className="category-name">{category.name}</span>
           </li>
         ))}
       </ul>

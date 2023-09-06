@@ -19,13 +19,24 @@
 
     .oneFilter-title {
       padding: 5px 0;
+      &:hover {
+        border-bottom: 1px solid $color-primary;
+      }
     }
+    .active {
+      font-weight: bold;
+      border-bottom: 1px solid $color-primary;
+    }
+
     .oneFilter-list {
       padding: 0;
+      padding-top: 10px;
       align-items: center;
       .oneFilter-item {
         list-style: none;
         font-size: 1.2em;
+      }
+      .selected {
       }
     }
   }
@@ -71,5 +82,18 @@
 
 @media screen and (min-width: 1881px) {
   .filterFooter-container {
+    .oneFilter-container {
+      .oneFilter-title {
+        font-size: 1.8em;
+      }
+      .oneFilter-list {
+        padding: 0;
+        align-items: center;
+        .oneFilter-item {
+          list-style: none;
+          font-size: 1.5em;
+        }
+      }
+    }
   }
 }

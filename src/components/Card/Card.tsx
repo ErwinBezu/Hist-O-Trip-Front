@@ -90,6 +90,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedCategory && !isVisible) {
+      resetVisibleCards();
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
       )
@@ -174,6 +175,9 @@ const Card: React.FC = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
+  const resetVisibleCards = () => {
+    setVisibleCards(12);
+  };
   const toggleMapOn = () => {
     setMapIsVisible(true);
   };
@@ -216,8 +220,8 @@ const Card: React.FC = () => {
       </div>
       <div className="btn-container">
         {visibleCards < placesCardData.length && (
-          <button className="btn-style-var" onClick={loadMoreCards}>
-            Afficher plus
+          <button className="btn-style-var " onClick={loadMoreCards}>
+            <span> Afficher plus</span>
           </button>
         )}
         <button
