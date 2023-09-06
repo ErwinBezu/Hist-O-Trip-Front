@@ -135,7 +135,11 @@ const MapPlaces = () => {
                   icon={customMarkerIcon}
                 >
                   <Popup className="pop-up">
-                    <Link to={`/${id}/${slug}`} key={id}>
+                    <Link
+                      to={`/${id}/${slug}`}
+                      key={id}
+                      className="pop-up-title"
+                    >
                       <p>{name}</p>
                     </Link>
                     {pictures.map((picture: Picture, picIndex: number) => (
@@ -143,7 +147,7 @@ const MapPlaces = () => {
                         key={picIndex}
                         src={picture.url}
                         alt={picture.name}
-                        className="img-map"
+                        className="pop-up-img"
                       />
                     ))}
                   </Popup>
