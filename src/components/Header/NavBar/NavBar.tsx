@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -59,6 +59,9 @@ const NavBar = () => {
       setIsBottom(false);
     }
   };
+
+  const location = useLocation();
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -126,7 +129,11 @@ const NavBar = () => {
       </div>
 
       <div
-        className="filter-container"
+        className={`${
+          location.pathname === '/'
+            ? 'filter-container'
+            : 'filter-container-none'
+        }`}
         onClick={() => (menueVisible ? setMenueVisible(false) : '')}
       >
         <button type="button" className="previous-btn">

@@ -19,4 +19,18 @@
 }
 
 .pop-up {
+  .pop-up-link {
+    text-decoration: none;
+    .pop-up-title {
+      font-family: $text-alternate;
+      text-align: center;
+      font-size: 1.4em;
+      color: $color-tertiary;
+
+      p {
+        margin: 0;
+        padding: 5px 0;
+      }
+    }
+  }
 }

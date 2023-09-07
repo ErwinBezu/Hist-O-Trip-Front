@@ -57,20 +57,19 @@
 
 @media screen and (min-width: 951px) {
   .contactForm-mainContainer {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    min-height: 50vh;
 
     .contactForm-container {
       background-color: $color-card;
       width: 50vh;
-      max-height: 55vh;
+      min-height: 55vh;
       border-radius: 20px;
+
       border: 1px solid $color-tertiary;
 
       .item-container {
         .input-item {
-          width: 400px;
+          max-width: 45vh;
         }
       }
     }
