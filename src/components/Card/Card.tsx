@@ -163,7 +163,7 @@ const Card: React.FC = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            categoriesId: categoryArray,
+            categoriesId: categoryArray || [],
             centuriesId: selectedCenturies,
             tagsId: selectedTags,
           }),

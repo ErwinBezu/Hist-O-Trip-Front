@@ -27,7 +27,7 @@ const Filter = ({ setIsVisible }) => {
     e.preventDefault();
     setSelectedTags([]);
     setSelectedCenturies([]);
-    setSelectedCategory(null);
+    setSelectedCategory([]);
   };
   return (
     <>

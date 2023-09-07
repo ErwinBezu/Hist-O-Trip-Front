@@ -62,7 +62,6 @@ const Place: React.FC = () => {
   const [singlePlaceData, setSinglePlaceData] = useState<PlaceData | undefined>(
     undefined
   );
-  console.log(singlePlaceData);
   const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
