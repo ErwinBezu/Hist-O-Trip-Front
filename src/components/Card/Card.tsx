@@ -72,9 +72,13 @@ const Card: React.FC = () => {
   const { isFilterSubmitted } = useContext(MainSearchFilter);
 
   const categoryArray = [selectedCategory?.id];
+  console.log('ici');
   console.log(categoryArray);
+  console.log('ici');
   console.log(selectedCenturies);
+  console.log('ici');
   console.log(selectedTags);
+  console.log('ici');
   console.log(isFilterSubmitted);
 
   const shuffleArray = (array: any) => {
@@ -207,7 +211,14 @@ const Card: React.FC = () => {
   // Appelez cette fonction à chaque changement d'état des modales
   useEffect(() => {
     handleScrollStyle();
-  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal, isVisible]);
+  }, [
+    isLoggedIn,
+    menueVisible,
+    editVisible,
+    signUpModal,
+    loginModal,
+    isVisible,
+  ]);
   return (
     <>
       {signUpModal && <SignUp />}
