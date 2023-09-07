@@ -16,14 +16,11 @@ const UserEditProfil = () => {
   const storedUserData: any = localStorage.getItem('userData');
   const userData = JSON.parse(storedUserData);
 
-  console.log('userdata ici', userData);
   const token = Cookies.get('jwtToken');
-  console.log('ici token', token);
 
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
-
 
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();

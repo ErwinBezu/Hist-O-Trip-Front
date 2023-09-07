@@ -25,7 +25,6 @@ const Categories = () => {
     }
   }, [categoriesList, selectedCategory, setSelectedCategory]);
 
-  console.log(selectedCategory);
   const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
   };

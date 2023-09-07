@@ -69,17 +69,10 @@ const Card: React.FC = () => {
 
   const [mapIsVisible, setMapIsVisible] = useState(false);
 
-  const { isFilterSubmitted } = useContext(MainSearchFilter);
+  const { isFilterSubmitted, setIsFilterSubmitted } =
+    useContext(MainSearchFilter);
 
   const categoryArray = [selectedCategory?.id];
-  console.log('ici');
-  console.log(categoryArray);
-  console.log('ici');
-  console.log(selectedCenturies);
-  console.log('ici');
-  console.log(selectedTags);
-  console.log('ici');
-  console.log(isFilterSubmitted);
 
   const shuffleArray = (array: any) => {
     const newArray = [...array];
@@ -184,10 +177,9 @@ const Card: React.FC = () => {
           .then((data) => {
             console.log('coucou');
             console.log(data);
-            setPlacesCardData(data);
-            setSelectedCategory(null);
-            setSelectedCenturies([]);
-            setSelectedTags([]);
+            const shuffledData = shuffleArray(data);
+            setPlacesCardData(shuffledData);
+            setIsFilterSubmitted(false);
           })
           .catch((err) => console.error(err));
       } catch (error) {
@@ -195,6 +187,7 @@ const Card: React.FC = () => {
       }
     }
   }, [isFilterSubmitted]);
+
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };

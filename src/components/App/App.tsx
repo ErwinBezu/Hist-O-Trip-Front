@@ -70,7 +70,6 @@ const App: React.FC = () => {
       .then((response) => response.json())
       .then((data) => {
         setCenturiesList(data);
-        console.log(data);
       })
       .catch((err) => console.error(err));
   }, []);
