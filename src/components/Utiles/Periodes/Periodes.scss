@@ -1,0 +1,17 @@
+.periodes {
+  font-size: 0.9em;
+  cursor: pointer;
+  h2{
+    display: flex;
+    align-items: center;
+    &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    
+  }
+  .rotate-icon {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
+  }
+  
+  }
+}

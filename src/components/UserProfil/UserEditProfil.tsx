@@ -23,7 +23,7 @@ const UserEditProfil = () => {
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
-  const [password, setPassword] = useState('');
+ 
 
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const UserEditProfil = () => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ firstname, lastname, pseudonym, password }),
+          body: JSON.stringify({ firstname, lastname, pseudonym }),
         }
       );
       if (response.ok) {
