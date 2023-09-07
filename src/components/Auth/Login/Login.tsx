@@ -62,8 +62,19 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const {setLoginModal, menueVisible, setMenueVisible, signUpModal, setSignUpModal, isLoggedIn, setIsLoggedIn, userData, setUserData, token, setToken} = useContext(Context);
-
+  const {
+    setLoginModal,
+    menueVisible,
+    setMenueVisible,
+    signUpModal,
+    setSignUpModal,
+    isLoggedIn,
+    setIsLoggedIn,
+    userData,
+    setUserData,
+    token,
+    setToken,
+  } = useContext<any>(Context);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -126,71 +137,59 @@ const Login = () => {
 
   const user = parseJwt(token);
 
-
-
   return (
     <>
-    <div className='login-modal'onClick={() => setLoginModal(false)} ></div>
-    <div className="login-container">
-      <div className="login-modal-header">
-      <label
-          className="login-quit-btn"
-          onClick={() => setLoginModal(false)}
-        >
-          <AiOutlineClose />
-        </label>
+      <div className="login-modal" onClick={() => setLoginModal(false)}></div>
+      <div className="login-container">
+        <div className="login-modal-header">
+          <label
+            className="login-quit-btn"
+            onClick={() => setLoginModal(false)}
+          >
+            <AiOutlineClose />
+          </label>
           <h2>Connexion ou inscription</h2>
+        </div>
+        <div className="login-body">
+          <p className="login-title">Bienvenue sur Hist’O’Trip</p>
+          <form onSubmit={handleSubmit}>
+            <input
+              className="login-modal-user"
+              type="text"
+              placeholder="Nom d'utilisateur"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              className="login-modal-pw"
+              type="password"
+              placeholder="Mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button className="login-modal-submit" type="submit">
+              Se connecter
+            </button>
+          </form>
+
+          <div className="ou">
+            <div className="login-ou">ou</div>
           </div>
-      <div className="login-body">
-        <p className='login-title'>Bienvenue sur Hist’O’Trip</p>
-        <form onSubmit={handleSubmit}>
 
-          <input
-          className='login-modal-user'
-            type="text"
-            placeholder="Nom d'utilisateur"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-          className='login-modal-pw'
-            type="password"
-            placeholder="Mot de passe"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          
-          
-          
-            <button className='login-modal-submit' type="submit">Se connecter</button>
-          
-          
-        </form>
+          {error && <p>{error}</p>}
 
-        <div className='ou'>
-          <div className='login-ou'>
-            ou
-            </div>
-          </div>
-        
-        {error && <p>{error}</p>}
-
-
-        <button
-      className="signup-btn"
-      onClick={() => {
-      setLoginModal(false);
-      setSignUpModal((prevState: any) => !prevState);
-      }}
-        >
-          Inscription
-        </button>
-        
-        
-        
-      
-    </div>
-    </div>
+          <button
+            className="signup-btn"
+            onClick={() => {
+              setLoginModal(false);
+              setSignUpModal((prevState: any) => !prevState);
+            }}
+          >
+            Inscription
+          </button>
+        </div>
+      </div>
     </>
   );
 };

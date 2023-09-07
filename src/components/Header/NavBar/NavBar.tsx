@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -43,7 +43,7 @@ const NavBar = () => {
     setIsVisible,
     menueVisible,
     setMenueVisible,
-    setLoginModal
+    setLoginModal,
   } = context;
 
   const [isBottom, setIsBottom] = useState(false);
@@ -60,6 +60,9 @@ const NavBar = () => {
     }
   };
 
+  const location = useLocation();
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -75,7 +78,10 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="navbar-container" onClick={() => menueVisible ? setMenueVisible(false) : ''}>
+      <div
+        className="navbar-container"
+        onClick={() => (menueVisible ? setMenueVisible(false) : '')}
+      >
         <Link to="/" className="logo">
           <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
@@ -122,7 +128,14 @@ const NavBar = () => {
         </div>
       </div>
 
-      <div className="filter-container" onClick={() => menueVisible ? setMenueVisible(false) : ''}>
+      <div
+        className={`${
+          location.pathname === '/'
+            ? 'filter-container'
+            : 'filter-container-none'
+        }`}
+        onClick={() => (menueVisible ? setMenueVisible(false) : '')}
+      >
         <button type="button" className="previous-btn">
           &lt;
         </button>
@@ -137,14 +150,8 @@ const NavBar = () => {
         >
           <AiOutlineControl /> Filtre
         </button>
-        </div>
+      </div>
 
-      
-      
-      
-      
-      
-      
       <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
         <Link to="/">
           <button className="home-mobile-btn">
@@ -165,11 +172,14 @@ const NavBar = () => {
         <button
           type="button"
           className="menu-btn"
-          onClick={() => isLoggedIn ? setMenueVisible((prevstate: any) => !prevstate) : setLoginModal(true)}
+          onClick={() =>
+            isLoggedIn
+              ? setMenueVisible((prevstate: any) => !prevstate)
+              : setLoginModal(true)
+          }
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
-        
       </div>
     </>
   );

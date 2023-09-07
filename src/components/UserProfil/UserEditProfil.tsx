@@ -23,7 +23,7 @@ const UserEditProfil = () => {
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
- 
+
 
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
@@ -91,16 +91,7 @@ const UserEditProfil = () => {
             />
           </div>
           <div className="profil-edit-inofs">
-
-
-            <input
-              type="email"
-              placeholder={userData.email}
-              disabled
-            />
-            
-
-
+            <input type="email" placeholder={userData.email} disabled />
           </div>
           <button className="profil-edit-validation" type="submit">
             Valider modification
