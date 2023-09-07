@@ -109,31 +109,47 @@ const Place: React.FC = () => {
           </Link>
           <img src={singlePlaceData?.pictures[0].url} alt="picture" />
           <div className="place-tags">
-            <p>Période</p>
-            {singlePlaceData.centuries.map((cent) => (
-              <>
-                <span key={cent.id}>{cent.period}</span>{' '}
-              </>
-            ))}
-            <p>Epoque</p>
-            {singlePlaceData.centuries.map((cent) => (
-              <>
-                <span key={cent.id}>{cent.century}</span>{' '}
-              </>
-            ))}
-            <p>Catégorie</p>
-            {singlePlaceData.categories.map((cat) => (
-              <>
-                <span key={cat.id}>{cat.name}</span>
-                <Icon name={cat.icon} />
-              </>
-            ))}
-            <p>Tags</p>
-            {singlePlaceData.tags.map((item) => (
-              <>
-                <span key={item.id}>{item.name}</span>{' '}
-              </>
-            ))}
+            <div className="item-container">
+              <p className="tags-item">Période</p>
+              {singlePlaceData.centuries.map((cent) => (
+                <>
+                  <div className="item">
+                    <span key={cent.id}>{cent.period}</span>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="item-container">
+              <p className="tags-item">Epoque</p>
+              {singlePlaceData.centuries.map((cent) => (
+                <>
+                  <div className="item">
+                    <span key={cent.id}>{cent.century}</span>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="item-container">
+              <p className="tags-item">Catégorie</p>
+              {singlePlaceData.categories.map((cat) => (
+                <>
+                  <div className="item">
+                    <span key={cat.id}>{cat.name}</span>
+                    <Icon name={cat.icon} />
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="item-container">
+              <p className="tags-item">Tags</p>
+              {singlePlaceData.tags.map((item) => (
+                <>
+                  <div className="item">
+                    <span key={item.id}>{item.name}</span>{' '}
+                  </div>
+                </>
+              ))}
+            </div>
           </div>
         </div>
         <div className="place-name">
@@ -148,7 +164,7 @@ const Place: React.FC = () => {
           <p>Tarifs: {singlePlaceData?.price}</p>
           <p>
             Site Web:
-            <a href={singlePlaceData?.website}>{singlePlaceData?.website}</a>
+            <a href={singlePlaceData?.website}> {singlePlaceData?.website}</a>
           </p>
         </div>
         <div className="place-map">
