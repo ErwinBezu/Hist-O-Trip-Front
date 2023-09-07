@@ -24,6 +24,7 @@ const UserEditProfil = () => {
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
 
+
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
     try {

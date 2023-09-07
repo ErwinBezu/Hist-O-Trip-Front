@@ -207,7 +207,7 @@ const Card: React.FC = () => {
   // Appelez cette fonction à chaque changement d'état des modales
   useEffect(() => {
     handleScrollStyle();
-  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal]);
+  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal, isVisible]);
   return (
     <>
       {signUpModal && <SignUp />}

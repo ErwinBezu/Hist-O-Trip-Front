@@ -10,6 +10,7 @@ import {
   SelectedCenturies,
   SelectedCategory,
 } from '../../contexts';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const Filter = ({ setIsVisible }) => {
   const { setIsFilterSubmitted } = useContext(MainSearchFilter);
@@ -32,10 +33,10 @@ const Filter = ({ setIsVisible }) => {
           </div>
 
           <button className="close-btn" onClick={() => setIsVisible(false)}>
-            X
+          <AiOutlineClose />
           </button>
 
-          <form
+          <form className='filter-form'
             onSubmit={(e) => {
               e.preventDefault();
               handleFilterSubmit();
