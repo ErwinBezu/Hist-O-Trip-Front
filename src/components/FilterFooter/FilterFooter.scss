@@ -32,7 +32,10 @@
     .oneFilter-list {
       padding: 0;
       padding-top: 10px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       .oneFilter-item {
         list-style: none;
         font-size: 1.2em;

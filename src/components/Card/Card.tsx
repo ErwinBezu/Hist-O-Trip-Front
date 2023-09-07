@@ -163,30 +163,38 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (isFilterSubmitted) {
-      fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
-        method: 'POST', // Changez la méthode en POST
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          categoriesId: categoryArray,
-          centuriesId: selectedCenturies,
-          tagsId: selectedTags,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('coucou');
-          console.log(data);
-          setPlacesCardData(data);
-          setSelectedCategory(null);
-          setSelectedCenturies([]);
-          setSelectedTags([]);
+      try {
+        fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            categoriesId: categoryArray,
+            centuriesId: selectedCenturies,
+            tagsId: selectedTags,
+          }),
         })
-        .catch((err) => console.error(err));
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log('coucou');
+            console.log(data);
+            setPlacesCardData(data);
+            setSelectedCategory(null);
+            setSelectedCenturies([]);
+            setSelectedTags([]);
+          })
+          .catch((err) => console.error(err));
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
     }
   }, [isFilterSubmitted]);
-
   const loadMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
