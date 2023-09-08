@@ -12,19 +12,20 @@
 
   .search-container {
     display: flex;
-    padding-left: 30px;
-
+    
     input {
       border-top-left-radius: 30px;
       border-bottom-left-radius: 30px;
       border: 1px solid $color-tertiary;
-      border-right: none;
+      border-right: 30px;
       width: 80%;
       padding: 5px 20px;
       background-color: $color-primary;
+      
 
       &:focus {
         outline: none;
+        
       }
     }
     .search-btn {
@@ -32,8 +33,9 @@
       border-bottom-right-radius: 30px;
       border: 1px solid $color-tertiary;
       border-left: none;
-      padding: 5px 20px;
+      padding: 10px 20px;
       background-color: $color-primary;
+      
     }
   }
   .suggest-menu-container {
@@ -194,9 +196,16 @@
         border-style: none;
         border-radius: 30px;
         padding: 5px 10px;
+        cursor: pointer;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+        &:hover{
+          box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        }
       }
     }
-  }
+  
   .mobilebar-container {
     display: none;
   }

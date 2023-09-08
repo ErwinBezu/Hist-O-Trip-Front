@@ -203,18 +203,6 @@ const Card: React.FC = () => {
 
 
 
-  // Appelez cette fonction à chaque changement d'état des modales
-  useEffect(() => {
-    handleScrollStyle();
-  }, [
-    isLoggedIn,
-    menueVisible,
-    editVisible,
-    signUpModal,
-    loginModal,
-    isVisible,
-  ]);
-
   return (
     <>
       <div className="cards-container" onClick={() => setMenueVisible(false)}>
