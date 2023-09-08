@@ -14,6 +14,8 @@ import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
 import { SearchInput } from '../../contexts';
+import SignUp from '../../Auth/SignUp/SignUp';
+import UserEditProfil from '../../UserProfil/UserEditProfil';
 
 type ContextType = {
   isVisible: boolean;
@@ -44,6 +46,11 @@ const NavBar = () => {
     menueVisible,
     setMenueVisible,
     setLoginModal,
+    signUpModal,
+    loginModal,
+    editVisible,
+    
+
   } = context;
 
   const [isBottom, setIsBottom] = useState(false);
@@ -74,9 +81,27 @@ const NavBar = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(e.target.value);
   };
+  const handleScrollStyle = () => {
+    if (isVisible || editVisible || signUpModal || loginModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  };
+
+  // Appelez cette fonction à chaque changement d'état des modales
+  useEffect(() => {
+    handleScrollStyle();
+  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal, isVisible]);
 
   return (
+    
     <>
+    {signUpModal && <SignUp />}
+      {loginModal && <Login />}
+      {menueVisible && <UserProfil />}
+      {isVisible && <Filter setIsVisible={setIsVisible} />}
+      {editVisible && <UserEditProfil />}
       <div
         className="navbar-container"
         onClick={() => (menueVisible ? setMenueVisible(false) : '')}

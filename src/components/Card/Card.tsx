@@ -202,32 +202,8 @@ const Card: React.FC = () => {
     setMapIsVisible(false);
   };
 
-  const handleScrollStyle = () => {
-    if (isVisible || editVisible || signUpModal || loginModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  };
-
-  useEffect(() => {
-    handleScrollStyle();
-  }, [
-    isLoggedIn,
-    menueVisible,
-    editVisible,
-    signUpModal,
-    loginModal,
-    isVisible,
-  ]);
   return (
     <>
-      {signUpModal && <SignUp />}
-      {loginModal && <Login />}
-      {menueVisible && <UserProfil />}
-      {isVisible && <Filter setIsVisible={setIsVisible} />}
-      {editVisible && <UserEditProfil />}
-
       <div className="cards-container" onClick={() => setMenueVisible(false)}>
         {mapIsVisible ? (
           <MapPlaces />
