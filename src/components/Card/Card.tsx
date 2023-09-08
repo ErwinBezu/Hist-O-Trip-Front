@@ -15,6 +15,11 @@ import {
   SelectedPeriod,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
+import UserProfil from '../UserProfil/UserProfil';
+import Filter from '../Header/Filter/Filter';
+import UserEditProfil from '../UserProfil/UserEditProfil';
+import Login from '../Auth/Login/Login';
+import SignUp from '../Auth/SignUp/SignUp';
 
 type Picture = {
   url: string;
@@ -39,10 +44,17 @@ type Place = {
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
-  const { setMenueVisible, isVisible } = useContext(Context) as {
-    setMenueVisible: (value: boolean) => void;
-    isVisible: boolean;
-  };
+  const {
+    editVisible,
+    isLoggedIn,
+    signUpModal,
+    isVisible,
+    setIsVisible,
+    menueVisible,
+    setMenueVisible,
+    loginModal,
+  } = useContext<any>(Context);
+
   const { selectedCategory, setSelectedCategory } =
     useContext(SelectedCategory);
   const { selectedCentury } = useContext(SelectedCentury);
@@ -57,13 +69,19 @@ const Card: React.FC = () => {
 
   const [mapIsVisible, setMapIsVisible] = useState(false);
 
-  const { isFilterSubmitted } = useContext(MainSearchFilter);
+  const { isFilterSubmitted, setIsFilterSubmitted } =
+    useContext(MainSearchFilter);
 
   const categoryArray = [selectedCategory?.id];
-  console.log(categoryArray);
-  console.log(selectedCenturies);
-  console.log(selectedTags);
-  console.log(isFilterSubmitted);
+
+  const shuffleArray = (array: any) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
 
   useEffect(() => {
     if (searchInput) {
@@ -72,7 +90,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -80,12 +99,14 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedCategory && !isVisible) {
+      resetVisibleCards();
       fetch(
         `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -98,7 +119,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -111,9 +133,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log('toto');
-          console.log(data);
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -126,7 +147,8 @@ const Card: React.FC = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setPlacesCardData(data);
+          const shuffledData = shuffleArray(data);
+          setPlacesCardData(shuffledData);
         })
         .catch((err) => console.error(err));
     }
@@ -134,27 +156,35 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (isFilterSubmitted) {
-      fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
-        method: 'POST', // Changez la méthode en POST
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          categoriesId: categoryArray,
-          centuriesId: selectedCenturies,
-          tagsId: selectedTags,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('coucou');
-          console.log(data);
-          setPlacesCardData(data);
-          setSelectedCategory(null);
-          setSelectedCenturies([]);
-          setSelectedTags([]);
+      try {
+        fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            categoriesId: categoryArray || [],
+            centuriesId: selectedCenturies,
+            tagsId: selectedTags,
+          }),
         })
-        .catch((err) => console.error(err));
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log('coucou');
+            console.log(data);
+            const shuffledData = shuffleArray(data);
+            setPlacesCardData(shuffledData);
+            setIsFilterSubmitted(false);
+          })
+          .catch((err) => console.error(err));
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
     }
   }, [isFilterSubmitted]);
 
@@ -162,6 +192,9 @@ const Card: React.FC = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 12);
   };
 
+  const resetVisibleCards = () => {
+    setVisibleCards(12);
+  };
   const toggleMapOn = () => {
     setMapIsVisible(true);
   };
@@ -194,7 +227,6 @@ const Card: React.FC = () => {
                       <span className="zipcode">{place.postcode}</span> -{' '}
                       {place.city}
                     </h3>
-                    {/* <span> {place.rating}</span> */}
                   </div>
                 </article>
               </Link>
@@ -202,14 +234,14 @@ const Card: React.FC = () => {
           </>
         )}
       </div>
-      <div>
-        {visibleCards < placesCardData.length && (
-          <button className="btn-style-var" onClick={loadMoreCards}>
-            Afficher plus
+      <div className="btn-container">
+        {!mapIsVisible && visibleCards < placesCardData.length && (
+          <button className="btn-style-var " onClick={loadMoreCards}>
+            <span> Afficher plus</span>
           </button>
         )}
         <button
-          className="btn-style-var"
+          className="btn-style-var btn-card"
           onClick={mapIsVisible ? toggleMapOff : toggleMapOn}
         >
           {mapIsVisible ? 'Afficher la liste' : 'Afficher la carte'}

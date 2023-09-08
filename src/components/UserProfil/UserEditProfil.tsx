@@ -16,14 +16,11 @@ const UserEditProfil = () => {
   const storedUserData: any = localStorage.getItem('userData');
   const userData = JSON.parse(storedUserData);
 
-  console.log('userdata ici', userData);
   const token = Cookies.get('jwtToken');
-  console.log('ici token', token);
 
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
-  const [password, setPassword] = useState('');
 
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
@@ -68,15 +65,6 @@ const UserEditProfil = () => {
           <h2>Mon profil</h2>
         </div>
         <div className="profil-edit-content">
-          <label className="profil-edit-avatar" htmlFor="edit-profile-image">
-            Télécharger une image
-          </label>
-          <input
-            type="file"
-            id="edit-profile-image"
-            name="profileImage"
-            accept="image/*"
-          />
           <div className="profil-edit-pseudo">
             <input
               type="text"
@@ -101,12 +89,6 @@ const UserEditProfil = () => {
           </div>
           <div className="profil-edit-inofs">
             <input type="email" placeholder={userData.email} disabled />
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
           </div>
           <button className="profil-edit-validation" type="submit">
             Valider modification

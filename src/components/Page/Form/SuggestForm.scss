@@ -1,32 +1,86 @@
 @use '../../../styles/variables' as *;
 
-.contactForm-container {
+.suggestForm-mainContainer {
+  min-height: 79vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25px 0;
+  justify-content: center;
+  padding: 20px;
 
-  .asterisk {
-    color: red;
-  }
-
-  .contactForm-title {
-    font-size: 2.5em;
-  }
-  .item-container {
+  .suggestForm-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 5px 0 5px 0;
+    align-items: center;
+    padding: 25px 0;
 
-    .label-item {
-      font-size: 1.2em;
+    .asterisk {
+      color: red;
     }
-    .input-item {
-      width: 80vw;
+
+    .suggestForm-title {
+      font-size: 2.5em;
     }
-    .input-textarea {
-      height: 100px;
+    .item-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5px 0 5px 0;
+
+      .input-item {
+        width: 80vw;
+        border-radius: 20px;
+        border: 1px solid $color-tertiary;
+        padding: 5px 10px;
+        opacity: 0.5;
+        &:focus {
+          outline: none;
+          opacity: 1;
+        }
+      }
+      .input-item {
+        width: 80vw;
+      }
+      .input-textarea {
+        height: 100px;
+      }
+    }
+
+    .btn-style-var {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-style-var:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+@media screen and (min-width: 951px) {
+  .suggestForm-mainContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    .container-container {
+      display: flex;
+      padding-bottom: 20px;
+      .first-container {
+        padding-right: 10px;
+      }
+    }
+
+    .suggestForm-container {
+      background-color: $color-card;
+      width: 900px;
+      max-height: 100vh;
+      border-radius: 20px;
+      border: 1px solid $color-tertiary;
+
+      .item-container {
+        .input-item {
+          width: 400px;
+        }
+      }
     }
   }
 }

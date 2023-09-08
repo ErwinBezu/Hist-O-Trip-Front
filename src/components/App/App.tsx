@@ -26,6 +26,8 @@ type ContextType = {
   setUserData: any;
   token?: string | null; // Add token property
   setToken?: any;
+  loginModal: any;
+  setLoginModal: any;
 };
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
@@ -36,6 +38,7 @@ const App: React.FC = () => {
   const [editVisible, setEditVisible] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
+  const [loginModal, setLoginModal] = useState(false);
 
   const [categoriesList, setCategoriesList] = useState([]);
   const [centuriesList, setCenturiesList] = useState([]);
@@ -67,7 +70,6 @@ const App: React.FC = () => {
       .then((response) => response.json())
       .then((data) => {
         setCenturiesList(data);
-        console.log(data);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -92,6 +94,8 @@ const App: React.FC = () => {
               setToken,
               userData,
               setUserData,
+              loginModal,
+              setLoginModal,
             }}
           >
             <Routes>

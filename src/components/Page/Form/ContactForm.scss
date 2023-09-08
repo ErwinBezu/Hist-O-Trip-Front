@@ -1,32 +1,77 @@
 @use '../../../styles/variables' as *;
 
-.contactForm-container {
+.contactForm-mainContainer {
+  min-height: 79vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25px 0;
+  justify-content: center;
+  padding: 20px;
 
-  .asterisk {
-    color: red;
-  }
-
-  .contactForm-title {
-    font-size: 2.5em;
-  }
-  .item-container {
+  .contactForm-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 5px 0 5px 0;
+    align-items: center;
+    padding: 25px 0;
 
-    .label-item {
-      font-size: 1.2em;
+    .asterisk {
+      color: red;
     }
-    .input-item {
-      width: 80vw;
+
+    .contactForm-title {
+      font-size: 2.5em;
     }
-    .input-textarea {
-      height: 100px;
+    .item-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5px 0 5px 0;
+
+      .label-item {
+        font-size: 1.2em;
+      }
+      .input-item {
+        width: 80vw;
+        border-radius: 20px;
+        border: 1px solid $color-tertiary;
+        padding: 5px 10px;
+        opacity: 0.5;
+        &:focus {
+          outline: none;
+          opacity: 1;
+        }
+      }
+      .input-textarea {
+        height: 100px;
+      }
+    }
+    .btn-style-var {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-style-var:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+@media screen and (min-width: 951px) {
+  .contactForm-mainContainer {
+    min-height: 50vh;
+
+    .contactForm-container {
+      background-color: $color-card;
+      width: 50vh;
+      min-height: 55vh;
+      border-radius: 20px;
+
+      border: 1px solid $color-tertiary;
+
+      .item-container {
+        .input-item {
+          max-width: 45vh;
+        }
+      }
     }
   }
 }

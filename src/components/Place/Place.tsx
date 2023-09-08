@@ -62,27 +62,10 @@ const Place: React.FC = () => {
   const [singlePlaceData, setSinglePlaceData] = useState<PlaceData | undefined>(
     undefined
   );
-  console.log(singlePlaceData);
   const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   const foundPlaceData = placesData.find(
-  //     (PlaceItem) => PlaceItem.id === parseInt(id) && PlaceItem.slug === slug
-  //   );
-
-  //   if (foundPlaceData) {
-  //     console.log(foundPlaceData);
-  //     setSinglePlaceData(foundPlaceData || defaultPlaceData);
-  //   } else {
-
-  //     setSinglePlaceData(defaultPlaceData);
-  //   }
-  // }, [id, slug, location]);
-
-  // if (!singlePlaceData || singlePlaceData === defaultPlaceData) {
-  //   return <Error404 />;
-  // }
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id && slug) {
@@ -91,16 +74,21 @@ const Place: React.FC = () => {
         .then((data) => {
           if (data.id === parseInt(id) && data.slug === slug) {
             setSinglePlaceData(data);
+            setLoading(false);
           } else {
-            return <Error404 />;
+            setLoading(false);
           }
         })
         .catch((error) => {
           console.error('Pas bon', error);
-          return <Error404 />;
+          setLoading(false);
         });
     }
   }, [id, slug, location]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!singlePlaceData) {
     return <Error404 />;
@@ -118,33 +106,52 @@ const Place: React.FC = () => {
               <IoIosArrowBack />
             </button>
           </Link>
-          <img src={singlePlaceData?.pictures[0].url} alt="picture" />
+          <div>
+            <img src={singlePlaceData?.pictures[0].url} alt="picture" />
+            <p>Source: {singlePlaceData?.pictures[0].picture_legend}</p>
+          </div>
           <div className="place-tags">
-            <p>Période</p>
-            {singlePlaceData.centuries.map((cent) => (
-              <>
-                <span key={cent.id}>{cent.period}</span>{' '}
-              </>
-            ))}
-            <p>Epoque</p>
-            {singlePlaceData.centuries.map((cent) => (
-              <>
-                <span key={cent.id}>{cent.century}</span>{' '}
-              </>
-            ))}
-            <p>Catégorie</p>
-            {singlePlaceData.categories.map((cat) => (
-              <>
-                <span key={cat.id}>{cat.name}</span>
-                <Icon name={cat.icon} />
-              </>
-            ))}
-            <p>Tags</p>
-            {singlePlaceData.tags.map((item) => (
-              <>
-                <span key={item.id}>{item.name}</span>{' '}
-              </>
-            ))}
+            <div className="item-container">
+              <p className="tags-item">Période</p>
+              {singlePlaceData.centuries.map((cent) => (
+                <>
+                  <div className="item">
+                    <span key={cent.id}>{cent.period}</span>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="item-container">
+              <p className="tags-item">Epoque</p>
+              {singlePlaceData.centuries.map((cent) => (
+                <>
+                  <div className="item">
+                    <span key={cent.id}>{cent.century}</span>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="item-container">
+              <p className="tags-item">Catégorie</p>
+              {singlePlaceData.categories.map((cat) => (
+                <>
+                  <div className="item">
+                    <span key={cat.id}>{cat.name}</span>
+                    <Icon name={cat.icon} />
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="item-container">
+              <p className="tags-item">Tags</p>
+              {singlePlaceData.tags.map((item) => (
+                <>
+                  <div className="item">
+                    <span key={item.id}>{item.name}</span>{' '}
+                  </div>
+                </>
+              ))}
+            </div>
           </div>
         </div>
         <div className="place-name">
@@ -159,7 +166,9 @@ const Place: React.FC = () => {
           <p>Tarifs: {singlePlaceData?.price}</p>
           <p>
             Site Web:
-            <a href={singlePlaceData?.website}>{singlePlaceData?.website}</a>
+            <a target="_blank" href={singlePlaceData?.website}>
+              {singlePlaceData?.website}
+            </a>
           </p>
         </div>
         <div className="place-map">
@@ -167,8 +176,6 @@ const Place: React.FC = () => {
             <MapPlaces />
           </SinglePlace.Provider>
         </div>
-        {/* <div className="place-review"><h3>Commentaires</h3>
-      </div> */}
       </div>
       <div className="place-footer">
         <Footer />

@@ -11,8 +11,11 @@ const Tags = () => {
   const { selectedTags, setSelectedTags } = useContext(SelectedTags);
 
   const handleTagsSelect = (tagId: number) => {
-    const newSelectedTags = [...selectedTags, tagId];
-    setSelectedTags(newSelectedTags);
+    if (selectedTags.includes(tagId)) {
+      setSelectedTags(selectedTags.filter((id) => id !== tagId));
+    } else {
+      setSelectedTags([...selectedTags, tagId]);
+    }
   };
   return (
     <div className="centuries">

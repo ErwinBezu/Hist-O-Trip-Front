@@ -14,8 +14,10 @@ import {
   GiAnvilImpact,
   GiBunker,
   GiGuards,
+  GiFamilyHouse,
 } from 'react-icons/gi';
 import { FaFortAwesome, FaMonument } from 'react-icons/fa';
+import { FaLandmarkDome } from 'react-icons/fa6';
 import { LiaCrossSolid } from 'react-icons/lia';
 
 interface IconProps {
@@ -42,6 +44,8 @@ const Icon: React.FC<IconProps> = ({ name }) => {
       {name === 'GiAnvilImpact' && <GiAnvilImpact />}
       {name === 'GiCastleRuins' && <GiCastleRuins />}
       {name === 'GiMonaLisa' && <GiMonaLisa />}
+      {name === 'GiFamilyHouse' && <GiFamilyHouse />}
+      {name === 'FaLandmarkDome' && <FaLandmarkDome />}
     </div>
   );
 };

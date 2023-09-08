@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import {
   AiOutlineSearch,
   AiOutlineMenu,
@@ -14,6 +14,8 @@ import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
 import { SearchInput } from '../../contexts';
+import SignUp from '../../Auth/SignUp/SignUp';
+import UserEditProfil from '../../UserProfil/UserEditProfil';
 
 type ContextType = {
   isVisible: boolean;
@@ -43,6 +45,12 @@ const NavBar = () => {
     setIsVisible,
     menueVisible,
     setMenueVisible,
+    setLoginModal,
+    signUpModal,
+    loginModal,
+    editVisible,
+    
+
   } = context;
 
   const [isBottom, setIsBottom] = useState(false);
@@ -66,15 +74,38 @@ const NavBar = () => {
     };
   }, []);
 
+  const location = useLocation();
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
   const { searchInput, setSearchInput } = useContext(SearchInput);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(e.target.value);
   };
+  const handleScrollStyle = () => {
+    if (isVisible || editVisible || signUpModal || loginModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  };
+
+  // Appelez cette fonction à chaque changement d'état des modales
+  useEffect(() => {
+    handleScrollStyle();
+  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal, isVisible]);
 
   return (
+    
     <>
-      <div className="navbar-container">
+    {signUpModal && <SignUp />}
+      {loginModal && <Login />}
+      {menueVisible && <UserProfil />}
+      {isVisible && <Filter setIsVisible={setIsVisible} />}
+      {editVisible && <UserEditProfil />}
+      <div
+        className="navbar-container"
+        onClick={() => (menueVisible ? setMenueVisible(false) : '')}
+      >
         <Link to="/" className="logo">
           <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
         </Link>
@@ -95,8 +126,10 @@ const NavBar = () => {
         <div className="suggest-menu-container">
           {isLoggedIn ? (
             <>
-              <Link to="/proposer" className="suggest-btn">
-                <button type="button">Proposer un lieu</button>
+              <Link to="/proposer" className="suggestLink-navbar">
+                <button className="suggest-btn" type="button">
+                  Proposer un lieu
+                </button>
               </Link>
               <button
                 type="button"
@@ -111,16 +144,22 @@ const NavBar = () => {
             <button
               type="button"
               className="menu-btn"
-              onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
+              onClick={() => setLoginModal(true)}
             >
               <BsFillPersonFill />
             </button>
           )}
-          {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
         </div>
       </div>
 
-      <div className="filter-container">
+      <div
+        className={`${
+          location.pathname === '/'
+            ? 'filter-container'
+            : 'filter-container-none'
+        }`}
+        onClick={() => (menueVisible ? setMenueVisible(false) : '')}
+      >
         <button type="button" className="previous-btn">
           &lt;
         </button>
@@ -135,11 +174,13 @@ const NavBar = () => {
         >
           <AiOutlineControl /> Filtre
         </button>
-        {isVisible && <Filter setIsVisible={setIsVisible} />}
       </div>
 
-      <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
-        {menueVisible && (isLoggedIn ? <UserProfil /> : <Login />)}
+      <div
+        className={`mobilebar-container ${
+          (isBottom as boolean) ? 'hidden' : ''
+        }`}
+      >
         <Link to="/">
           <button className="home-mobile-btn">
             <AiOutlineHome /> Home
@@ -150,15 +191,20 @@ const NavBar = () => {
           onClick={() => setIsVisible(true)}
           className="filter-btn"
         >
-          <AiOutlineControl /> Filter
+          <span className="logo-filter">
+            <AiOutlineControl />
+          </span>
+          <span>Filter</span>
         </button>
-
-        {isVisible && <Filter setIsVisible={setIsVisible} />}
 
         <button
           type="button"
           className="menu-btn"
-          onClick={() => setMenueVisible((prevstate: any) => !prevstate)}
+          onClick={() =>
+            isLoggedIn
+              ? setMenueVisible((prevstate: any) => !prevstate)
+              : setLoginModal(true)
+          }
         >
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>

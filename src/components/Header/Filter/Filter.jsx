@@ -10,6 +10,7 @@ import {
   SelectedCenturies,
   SelectedCategory,
 } from '../../contexts';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const Filter = ({ setIsVisible }) => {
   const { setIsFilterSubmitted } = useContext(MainSearchFilter);
@@ -22,10 +23,12 @@ const Filter = ({ setIsVisible }) => {
     setIsVisible(false);
   };
 
-  const handleResetFilter = () => {
-    setSelectedCategory([]);
+  const handleResetFilter = (e) => {
+    e.preventDefault();
+    setSelectedTags([]);
     setSelectedCenturies([]);
-    selectedTags([]);
+    setSelectedCategory([]);
+    setIsFilterSubmitted(false);
   };
   return (
     <>
@@ -37,10 +40,11 @@ const Filter = ({ setIsVisible }) => {
           </div>
 
           <button className="close-btn" onClick={() => setIsVisible(false)}>
-            X
+            <AiOutlineClose />
           </button>
 
           <form
+            className="filter-form"
             onSubmit={(e) => {
               e.preventDefault();
               handleFilterSubmit();
@@ -64,11 +68,11 @@ const Filter = ({ setIsVisible }) => {
             <div className="filter-footer">
               <div className="footer-btn">
                 <button
-                  onClick={(e) => {
-                    handleResetFilter;
-                  }}
+                  className="btn-style-var"
+                  type="button"
+                  onClick={handleResetFilter}
                 >
-                  Réinitialiser Tags
+                  Réinitialiser
                 </button>
                 <button className="btn-style-var" type="submit">
                   Rechercher

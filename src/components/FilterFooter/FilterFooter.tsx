@@ -35,6 +35,7 @@ const FilterFooter = () => {
   const [randomCategories, setRandomCategories] = useState<Category[]>([]);
   const [randomCenturies, setRandomCenturies] = useState<Centuries[]>([]);
   const [randomTags, setRandomTags] = useState<Tags[]>([]);
+  const [randomPeriods, setRandomPeriods] = useState<Centuries[]>([]);
 
   const [selectedFilter, setSelectedFilter] = useState<string | null>(
     'categories'
@@ -127,17 +128,26 @@ const FilterFooter = () => {
   return (
     <>
       <div className="filterFooter-container">
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className={`${
+              selectedFilter === 'categories'
+                ? ' oneFilter-title active'
+                : 'oneFilter-title'
+            }`}
             onClick={() => setSelectedFilter('categories')}
           >
             Categories
           </h2>
           {selectedFilter === 'categories' && (
-            <ul>
+            <ul className="oneFilter-list">
               {randomCategories.map((category) => (
                 <li
+                  className={`${
+                    selectedCategory === category
+                      ? 'oneFilter-item selected'
+                      : 'oneFilter-item'
+                  }`}
                   key={category.id}
                   onClick={() => handleCategorySelect(category)}
                 >
@@ -148,17 +158,26 @@ const FilterFooter = () => {
           )}
         </div>
 
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className={`oneFilter-title ${
+              selectedFilter === 'centuries'
+                ? ' oneFilter-title active'
+                : 'oneFilter-title'
+            }`}
             onClick={() => setSelectedFilter('centuries')}
           >
             Siècles
           </h2>
           {selectedFilter === 'centuries' && (
-            <ul>
+            <ul className="oneFilter-list">
               {randomCenturies.map((century) => (
                 <li
+                  className={`${
+                    selectedCentury === century
+                      ? 'oneFilter-item selected'
+                      : 'oneFilter-item'
+                  }`}
                   key={century.id}
                   onClick={() => handleCenturySelect(century)}
                 >
@@ -169,17 +188,26 @@ const FilterFooter = () => {
           )}
         </div>
 
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className={`oneFilter-title ${
+              selectedFilter === 'periods'
+                ? ' oneFilter-title active'
+                : ' oneFilter-title'
+            }`}
             onClick={() => setSelectedFilter('periods')}
           >
             Périodes
           </h2>
           {selectedFilter === 'periods' && (
-            <ul>
+            <ul className="oneFilter-list">
               {filteredPeriods.map((century) => (
                 <li
+                  className={`${
+                    selectedPeriod === century
+                      ? 'oneFilter-item selected'
+                      : 'oneFilter-item'
+                  }`}
                   key={century.period}
                   onClick={() => handlePeriodSelect(century)}
                 >
@@ -190,17 +218,29 @@ const FilterFooter = () => {
           )}
         </div>
 
-        <div>
+        <div className="oneFilter-container">
           <h2
-            className="filterFooter-title"
+            className={`oneFilter-title ${
+              selectedFilter === 'tags'
+                ? ' oneFilter-title active'
+                : ' oneFilter-title'
+            }`}
             onClick={() => setSelectedFilter('tags')}
           >
             Tags
           </h2>
           {selectedFilter === 'tags' && (
-            <ul>
+            <ul className="oneFilter-list">
               {randomTags.map((tag) => (
-                <li key={tag.id} onClick={() => handleTagSelect(tag)}>
+                <li
+                  className={`${
+                    selectedTag === tag
+                      ? 'oneFilter-item selected'
+                      : 'oneFilter-item'
+                  }`}
+                  key={tag.id}
+                  onClick={() => handleTagSelect(tag)}
+                >
                   {tag.name}
                 </li>
               ))}

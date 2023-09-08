@@ -5,24 +5,42 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  padding: 10px 10px 0 10px;
+
+  padding: 25px 10px 0 10px;
 
   .article-card {
     width: calc((100% / 1) - 20px);
     margin-bottom: 10px;
     text-decoration: none;
     color: $color-tertiary;
+    max-height: 70vh;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 20px;
 
-    img {
-      width: 100%;
+    &:hover {
+      transform: scale(1.05); /* Agrandir la carte au survol */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px; /* Ajouter une ombre au survol */
+    }
+
+    img {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 50vh;
+      width: 100%;
+      transition: filter 0.3s;
+      object-fit: cover;
     }
     .content {
       background-color: $color-card;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
-      padding: 10px 0 10px 15px;
+      padding: 15px 0 10px 10px;
+      min-height: 20vh;
 
       .placename-card {
         font-size: 1.6em;
@@ -38,6 +56,22 @@
         font-size: 1.6em;
       }
     }
+  }
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px 0 10px 0;
+
+  .btn-style-var {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .btn-style-var:hover {
+    transform: scale(1.1) translateX(0); /* Ajoutez translateX(0) pour annuler le déplacement horizontal */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -61,6 +95,9 @@
   .cards-container {
     .article-card {
       width: calc((100% / 4) - 20px);
+      .content {
+        min-height: 20vh;
+      }
     }
   }
 }
@@ -77,6 +114,24 @@
   .cards-container {
     .article-card {
       width: calc((100% / 6) - 20px);
+      min-height: 65vh;
+
+      .content {
+        min-height: 20vh;
+        .placename-card {
+          font-size: 1.7em;
+        }
+        .placecity-card {
+          font-size: 1.4em;
+          .zipcode {
+            font-size: 1.4rem;
+            font-weight: 500;
+          }
+        }
+        span {
+          font-size: 1.6em;
+        }
+      }
     }
   }
 }

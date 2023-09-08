@@ -10,8 +10,96 @@
   flex-direction: column;
   align-items: center;
   padding: 15px 0;
+  height: 45vh;
 
-  .filterFooter-title {
-    padding: 5px 0;
+  .oneFilter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .oneFilter-title {
+      padding: 5px 0;
+      cursor: pointer;
+      &:hover {
+        border-bottom: 1px solid $color-primary;
+      }
+    }
+    .active {
+      font-weight: bold;
+      border-bottom: 1px solid $color-primary;
+    }
+
+    .oneFilter-list {
+      padding: 0;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .oneFilter-item {
+        list-style: none;
+        font-size: 1.2em;
+        cursor: pointer;
+      }
+      .selected {
+        font-style: italic;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 551px) {
+  .filterFooter-container {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 30px;
+    height: 25vh;
+    .oneFilter-container {
+      width: 25vw;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (min-height: 632px) {
+  .filterFooter-container {
+    gap: 50px;
+    height: 21vh;
+  }
+}
+
+@media screen and (min-width: 1129px) {
+  .filterFooter-container {
+    .oneFilter-container {
+      width: 20vw;
+      height: 16vh;
+    }
+  }
+}
+
+@media screen and (min-width: 1641px) {
+  .filterFooter-container {
+    height: 25vh;
+    .oneFilter-container {
+      width: 15vw;
+    }
+  }
+}
+
+@media screen and (min-width: 1881px) {
+  .filterFooter-container {
+    .oneFilter-container {
+      .oneFilter-title {
+        font-size: 1.8em;
+      }
+      .oneFilter-list {
+        padding: 0;
+        align-items: center;
+        .oneFilter-item {
+          list-style: none;
+          font-size: 1.5em;
+        }
+      }
+    }
   }
 }

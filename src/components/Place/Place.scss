@@ -1,9 +1,14 @@
+@use '../../styles/variables' as *;
+
+.filter-container-none {
+  display: none;
+}
 .place-header-container,
 .place-footer {
   display: none;
 }
 .place-container {
-  background: #f2f0f0;
+  background: $color-primary;
 }
 .place-picture {
   padding: 1rem;
@@ -73,12 +78,13 @@
   }
 
   .place-back-btn {
-    display: none;
+    position: absolute;
+    top: 80px;
+    left: 60px;
   }
 
   .place-header-container {
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
   }
 
@@ -137,6 +143,45 @@
     display: flex;
     flex-direction: column;
     padding: 0rem 2rem;
+    .place-picture {
+      justify-content: center;
+      img {
+        width: auto;
+        height: 600px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1210px) {
+  .place-container {
+    .place-tags {
+      padding: 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: $color-card;
+      .item-container {
+        .tags-item {
+          padding: 5px;
+          border: 1px solid #2f2f2f69;
+          border-radius: 20px;
+          text-align: center;
+          background-color: $color-secondary;
+          color: $color-primary;
+          font-family: $text-alternate;
+        }
+      }
+      .item {
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
 }
 
@@ -150,18 +195,25 @@
     display: flex;
     flex-direction: column;
     padding: 0rem 15rem;
+    .place-picture {
+      justify-content: center;
+      img {
+        width: auto;
+        height: 900px;
+        object-fit: cover;
+      }
+    }
+    .place-back-btn {
+      left: 180px;
+    }
   }
-  .place-tags {
-    padding: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    p {
-      padding: 5px;
-      border: 1px solid #2f2f2f69;
-      border-radius: 15px;
+}
+@media screen and (min-width: 2800px) {
+  .place-container {
+    .place-picture {
+      img {
+        height: 1200px;
+      }
     }
   }
 }

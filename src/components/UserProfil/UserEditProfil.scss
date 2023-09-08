@@ -1,24 +1,27 @@
+@use '../../styles/variables' as *;
+
 #edit-profile-image{
   display: none;
 }
 .edit-profil-bg{
   display: none;
+  z-index: 800;
 }
 .profil-edit-container {
   font-family: 'Akshar', sans-serif;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 92vh;
   width: 100%;
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: $color-primary;
+  z-index: 801;
   border-radius: 10px;
 }
 
 .profil-edit-back-btn{
-  background-color: #fff;
+  background-color: $color-primary;
   border: none;
   position: fixed;
   padding: 5px;
@@ -47,19 +50,7 @@
   border-top: 1px solid #eee;
 }
 
- .profil-edit-avatar {
-  display: flex;
-  justify-content: center;
-  padding: 5px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #1f0505;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background: #ddd;
-}
-
-
+ 
 .profil-edit-pseudo,
 .profil-edit-name,
 .profil-edit-inofs {
@@ -114,7 +105,7 @@
     height: auto;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: $color-primary;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     position: fixed;
@@ -139,7 +130,7 @@
 
   .profil-edit-content {
     padding: 80px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
   }
   .profil-edit-back-btn{
   display: none;}

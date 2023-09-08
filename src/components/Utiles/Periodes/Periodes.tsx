@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CenturiesList, SelectedCenturies } from '../../contexts';
+import './Periodes.scss';
+import { MdArrowDropDown } from 'react-icons/md';
 
 type Centuries = {
   id: number;
@@ -29,14 +31,26 @@ const Periodes = () => {
     useContext(SelectedCenturies);
 
   const handleCenturiesSelect = (centuryId: number) => {
-    setSelectedCenturies([...selectedCenturies, centuryId]);
+    if (selectedCenturies.includes(centuryId)) {
+      setSelectedCenturies(selectedCenturies.filter((id) => id !== centuryId));
+    } else {
+      setSelectedCenturies([...selectedCenturies, centuryId]);
+    }
   };
+  console.log(selectedCenturies);
 
   return (
     <div className="periodes">
       {Object.keys(centuriesByPeriod).map((period, key) => (
         <div key={key}>
-          <h2 onClick={() => handlePeriodClick(period)}>{period}</h2>
+          <h2 onClick={() => handlePeriodClick(period)}>
+            {period}{' '}
+            <MdArrowDropDown
+              className={`periode-icon ${
+                selectedPeriod === period ? 'rotate-icon' : ''
+              }`}
+            />
+          </h2>
           {selectedPeriod === period && (
             <ul>
               {centuriesByPeriod[period].map((century) => (

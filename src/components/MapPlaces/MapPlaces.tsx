@@ -96,6 +96,11 @@ const MapPlaces = () => {
     }
   }
 
+  const customMarkerIcon = new L.Icon({
+    iconUrl:
+      'https://ik.imagekit.io/v4u5l9d7p/marker-icon.png?updatedAt=1694013187611',
+  });
+
   return location.pathname.includes(`/${id}/${slug}`) ? (
     <MapContainer
       center={singlePlaceCenter || defaultMapCenter}
@@ -125,9 +130,17 @@ const MapPlaces = () => {
             const lng = parseFloat(lngStr);
             if (!isNaN(lat) && !isNaN(lng)) {
               return (
-                <Marker key={index} position={[lat, lng]}>
+                <Marker
+                  key={index}
+                  position={[lat, lng]}
+                  icon={customMarkerIcon}
+                >
                   <Popup className="pop-up">
-                    <Link to={`/${id}/${slug}`} key={id}>
+                    <Link
+                      to={`/${id}/${slug}`}
+                      key={id}
+                      className="pop-up-title"
+                    >
                       <p>{name}</p>
                     </Link>
                     {pictures.map((picture: Picture, picIndex: number) => (
@@ -135,7 +148,7 @@ const MapPlaces = () => {
                         key={picIndex}
                         src={picture.url}
                         alt={picture.name}
-                        className="img-map"
+                        className="pop-up-img"
                       />
                     ))}
                   </Popup>
@@ -150,7 +163,8 @@ const MapPlaces = () => {
     <MapContainer
       center={defaultMapCenter}
       zoom={6}
-      style={{ width: '100%', height: '80vh' }}
+      className="map-container"
+      // style={{ width: '100%', height: '70vh' }}
     >
       <TileLayer
         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -167,19 +181,28 @@ const MapPlaces = () => {
             const lng = parseFloat(lngStr);
             if (!isNaN(lat) && !isNaN(lng)) {
               return (
-                <Marker key={index} position={[lat, lng]}>
+                <Marker
+                  key={index}
+                  position={[lat, lng]}
+                  icon={customMarkerIcon}
+                >
                   <Popup className="pop-up">
-                    <Link to={`/${id}/${slug}`} key={id}>
-                      <p>{name}</p>
+                    <Link
+                      to={`/${id}/${slug}`}
+                      key={id}
+                      className="pop-up-link"
+                    >
+                      <p className="pop-up-title">{name}</p>
+
+                      {pictures.map((picture: Picture, picIndex: number) => (
+                        <img
+                          key={picIndex}
+                          src={picture.url}
+                          alt={picture.name}
+                          className="pop-up-img"
+                        />
+                      ))}
                     </Link>
-                    {pictures.map((picture: Picture, picIndex: number) => (
-                      <img
-                        key={picIndex}
-                        src={picture.url}
-                        alt={picture.name}
-                        className="img-map"
-                      />
-                    ))}
                   </Popup>
                 </Marker>
               );
