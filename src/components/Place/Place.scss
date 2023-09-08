@@ -78,10 +78,9 @@
   }
 
   .place-back-btn {
-    // display: none;
-    position: fixed;
+    position: absolute;
     top: 80px;
-    left: 80px;
+    left: 60px;
   }
 
   .place-header-container {
@@ -148,8 +147,8 @@
       justify-content: center;
       img {
         width: auto;
-        height: 50vh;
-        object-fit: contain;
+        height: 600px;
+        object-fit: cover;
       }
     }
   }
@@ -196,5 +195,25 @@
     display: flex;
     flex-direction: column;
     padding: 0rem 15rem;
+    .place-picture {
+      justify-content: center;
+      img {
+        width: auto;
+        height: 900px;
+        object-fit: cover;
+      }
+    }
+    .place-back-btn {
+      left: 180px;
+    }
+  }
+}
+@media screen and (min-width: 2800px) {
+  .place-container {
+    .place-picture {
+      img {
+        height: 1200px;
+      }
+    }
   }
 }

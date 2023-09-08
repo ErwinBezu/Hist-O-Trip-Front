@@ -60,9 +60,6 @@ const NavBar = () => {
     }
   };
 
-  const location = useLocation();
-  const { id, slug } = useParams<{ id?: string; slug?: string }>();
-
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -70,6 +67,8 @@ const NavBar = () => {
     };
   }, []);
 
+  const location = useLocation();
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
   const { searchInput, setSearchInput } = useContext(SearchInput);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -152,7 +151,11 @@ const NavBar = () => {
         </button>
       </div>
 
-      <div className={`mobilebar-container ${isBottom ? 'hidden' : ''}`}>
+      <div
+        className={`mobilebar-container ${
+          (isBottom as boolean) ? 'hidden' : ''
+        }`}
+      >
         <Link to="/">
           <button className="home-mobile-btn">
             <AiOutlineHome /> Home

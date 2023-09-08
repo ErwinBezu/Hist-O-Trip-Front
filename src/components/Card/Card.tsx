@@ -201,6 +201,7 @@ const Card: React.FC = () => {
   const toggleMapOff = () => {
     setMapIsVisible(false);
   };
+
   const handleScrollStyle = () => {
     if (isVisible || editVisible || signUpModal || loginModal) {
       document.body.style.overflow = 'hidden';
@@ -209,7 +210,6 @@ const Card: React.FC = () => {
     }
   };
 
-  // Appelez cette fonction à chaque changement d'état des modales
   useEffect(() => {
     handleScrollStyle();
   }, [
@@ -251,7 +251,6 @@ const Card: React.FC = () => {
                       <span className="zipcode">{place.postcode}</span> -{' '}
                       {place.city}
                     </h3>
-                    {/* <span> {place.rating}</span> */}
                   </div>
                 </article>
               </Link>
@@ -266,7 +265,7 @@ const Card: React.FC = () => {
           </button>
         )}
         <button
-          className="btn-style-var"
+          className="btn-style-var btn-card"
           onClick={mapIsVisible ? toggleMapOff : toggleMapOn}
         >
           {mapIsVisible ? 'Afficher la liste' : 'Afficher la carte'}

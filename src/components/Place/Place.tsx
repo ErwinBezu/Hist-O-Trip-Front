@@ -106,7 +106,10 @@ const Place: React.FC = () => {
               <IoIosArrowBack />
             </button>
           </Link>
-          <img src={singlePlaceData?.pictures[0].url} alt="picture" />
+          <div>
+            <img src={singlePlaceData?.pictures[0].url} alt="picture" />
+            <p>Source: {singlePlaceData?.pictures[0].picture_legend}</p>
+          </div>
           <div className="place-tags">
             <div className="item-container">
               <p className="tags-item">Période</p>
@@ -163,7 +166,9 @@ const Place: React.FC = () => {
           <p>Tarifs: {singlePlaceData?.price}</p>
           <p>
             Site Web:
-            <a href={singlePlaceData?.website}> {singlePlaceData?.website}</a>
+            <a target="_blank" href={singlePlaceData?.website}>
+              {singlePlaceData?.website}
+            </a>
           </p>
         </div>
         <div className="place-map">

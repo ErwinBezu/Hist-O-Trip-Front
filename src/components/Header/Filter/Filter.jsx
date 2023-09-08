@@ -28,6 +28,7 @@ const Filter = ({ setIsVisible }) => {
     setSelectedTags([]);
     setSelectedCenturies([]);
     setSelectedCategory([]);
+    setIsFilterSubmitted(false);
   };
   return (
     <>
