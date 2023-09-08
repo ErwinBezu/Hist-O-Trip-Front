@@ -10,7 +10,7 @@ const Tags = () => {
   const tagsList = useContext(TagsList);
   const { selectedTags, setSelectedTags } = useContext(SelectedTags);
 
-  const handleTagsSelect = (tagId) => {
+  const handleTagsSelect = (tagId: number) => {
     if (selectedTags.includes(tagId)) {
       setSelectedTags(selectedTags.filter((id) => id !== tagId));
     } else {

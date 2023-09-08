@@ -22,8 +22,6 @@ export const getUser = async (token: any) => {
       const usersData = await response.json();
       const usersDataStr = JSON.stringify(usersData);
       localStorage.setItem('userData', usersDataStr);
-      // userData contient les données de l'utilisateur
-      console.log("Données de l'utilisateur :", usersDataStr);
       return usersData;
     } else {
       console.error(
@@ -96,7 +94,6 @@ const Login = () => {
         const data = await response.json();
         // Stocker le JWT dans le stockage local
         Cookies.set('jwtToken', data.token);
-        console.log("c'est bon ");
         setError('');
         setIsLoggedIn(true);
         setLoginModal(false);

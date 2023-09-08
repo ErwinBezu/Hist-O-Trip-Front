@@ -84,14 +84,12 @@ const SuggestForm = () => {
           }),
         }
       );
-      console.log(response);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
       const result = await response.json();
-      console.log(result);
 
       resetForm();
     } catch (error) {
@@ -101,9 +99,7 @@ const SuggestForm = () => {
       console.error(error);
     }
   };
-  console.log(categoriesId);
-  console.log(centuriesId);
-  console.log(tagsId);
+
   return (
     <div className="suggestForm-mainContainer">
       <form className="suggestForm-container" onSubmit={handleSubmit}>

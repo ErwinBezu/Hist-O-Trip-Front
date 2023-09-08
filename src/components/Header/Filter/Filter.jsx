@@ -23,6 +23,13 @@ const Filter = ({ setIsVisible }) => {
     setIsVisible(false);
   };
 
+  const handleResetFilter = (e) => {
+    e.preventDefault();
+    setSelectedTags([]);
+    setSelectedCenturies([]);
+    setSelectedCategory([]);
+    setIsFilterSubmitted(false);
+  };
   return (
     <>
       <div className="modal-bg" onClick={() => setIsVisible(false)} />
@@ -33,10 +40,11 @@ const Filter = ({ setIsVisible }) => {
           </div>
 
           <button className="close-btn" onClick={() => setIsVisible(false)}>
-          <AiOutlineClose />
+            <AiOutlineClose />
           </button>
 
-          <form className='filter-form'
+          <form
+            className="filter-form"
             onSubmit={(e) => {
               e.preventDefault();
               handleFilterSubmit();
@@ -59,6 +67,13 @@ const Filter = ({ setIsVisible }) => {
 
             <div className="filter-footer">
               <div className="footer-btn">
+                <button
+                  className="btn-style-var"
+                  type="button"
+                  onClick={handleResetFilter}
+                >
+                  Réinitialiser
+                </button>
                 <button className="btn-style-var" type="submit">
                   Rechercher
                 </button>

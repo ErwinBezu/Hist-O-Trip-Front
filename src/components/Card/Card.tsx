@@ -69,17 +69,10 @@ const Card: React.FC = () => {
 
   const [mapIsVisible, setMapIsVisible] = useState(false);
 
-  const { isFilterSubmitted } = useContext(MainSearchFilter);
+  const { isFilterSubmitted, setIsFilterSubmitted } =
+    useContext(MainSearchFilter);
 
   const categoryArray = [selectedCategory?.id];
-  console.log('ici');
-  console.log(categoryArray);
-  console.log('ici');
-  console.log(selectedCenturies);
-  console.log('ici');
-  console.log(selectedTags);
-  console.log('ici');
-  console.log(isFilterSubmitted);
 
   const shuffleArray = (array: any) => {
     const newArray = [...array];
@@ -163,27 +156,35 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (isFilterSubmitted) {
-      fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
-        method: 'POST', // Changez la méthode en POST
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          categoriesId: categoryArray,
-          centuriesId: selectedCenturies,
-          tagsId: selectedTags,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('coucou');
-          console.log(data);
-          setPlacesCardData(data);
-          setSelectedCategory(null);
-          setSelectedCenturies([]);
-          setSelectedTags([]);
+      try {
+        fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            categoriesId: categoryArray || [],
+            centuriesId: selectedCenturies,
+            tagsId: selectedTags,
+          }),
         })
-        .catch((err) => console.error(err));
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log('coucou');
+            console.log(data);
+            const shuffledData = shuffleArray(data);
+            setPlacesCardData(shuffledData);
+            setIsFilterSubmitted(false);
+          })
+          .catch((err) => console.error(err));
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
     }
   }, [isFilterSubmitted]);
 
@@ -200,8 +201,6 @@ const Card: React.FC = () => {
   const toggleMapOff = () => {
     setMapIsVisible(false);
   };
-
-
 
   return (
     <>
@@ -228,7 +227,6 @@ const Card: React.FC = () => {
                       <span className="zipcode">{place.postcode}</span> -{' '}
                       {place.city}
                     </h3>
-                    {/* <span> {place.rating}</span> */}
                   </div>
                 </article>
               </Link>
@@ -243,7 +241,7 @@ const Card: React.FC = () => {
           </button>
         )}
         <button
-          className="btn-style-var"
+          className="btn-style-var btn-card"
           onClick={mapIsVisible ? toggleMapOff : toggleMapOn}
         >
           {mapIsVisible ? 'Afficher la liste' : 'Afficher la carte'}

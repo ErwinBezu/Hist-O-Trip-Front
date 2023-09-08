@@ -31,19 +31,26 @@ const Periodes = () => {
     useContext(SelectedCenturies);
 
   const handleCenturiesSelect = (centuryId: number) => {
-    setSelectedCenturies([...selectedCenturies, centuryId]);
+    if (selectedCenturies.includes(centuryId)) {
+      setSelectedCenturies(selectedCenturies.filter((id) => id !== centuryId));
+    } else {
+      setSelectedCenturies([...selectedCenturies, centuryId]);
+    }
   };
+  console.log(selectedCenturies);
 
   return (
     <div className="periodes">
       {Object.keys(centuriesByPeriod).map((period, key) => (
         <div key={key}>
           <h2 onClick={() => handlePeriodClick(period)}>
-        {period}{' '}
-        <MdArrowDropDown
-          className={`periode-icon ${selectedPeriod === period ? 'rotate-icon' : ''}`}
-        />
-      </h2>
+            {period}{' '}
+            <MdArrowDropDown
+              className={`periode-icon ${
+                selectedPeriod === period ? 'rotate-icon' : ''
+              }`}
+            />
+          </h2>
           {selectedPeriod === period && (
             <ul>
               {centuriesByPeriod[period].map((century) => (

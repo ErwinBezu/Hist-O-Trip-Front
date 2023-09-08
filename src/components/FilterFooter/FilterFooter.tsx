@@ -35,6 +35,7 @@ const FilterFooter = () => {
   const [randomCategories, setRandomCategories] = useState<Category[]>([]);
   const [randomCenturies, setRandomCenturies] = useState<Centuries[]>([]);
   const [randomTags, setRandomTags] = useState<Tags[]>([]);
+  const [randomPeriods, setRandomPeriods] = useState<Centuries[]>([]);
 
   const [selectedFilter, setSelectedFilter] = useState<string | null>(
     'categories'
