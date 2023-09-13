@@ -48,7 +48,7 @@ const App: React.FC = () => {
   const [token, setToken] = useState();
 
   useEffect(() => {
-    fetch('http://ludoviclebris-server.eddi.cloud/api/api/categories')
+    fetch('http://localhost:8080/api/categories')
       .then((response) => response.json())
       .then((data) => {
         setCategoriesList(data);
@@ -57,7 +57,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://ludoviclebris-server.eddi.cloud/api/api/tags')
+    fetch('http://localhost:8080/api/tags')
       .then((response) => response.json())
       .then((data) => {
         setTagsList(data);
@@ -66,7 +66,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://ludoviclebris-server.eddi.cloud/api/api/centuries')
+    fetch('http://localhost:8080/api/centuries')
       .then((response) => response.json())
       .then((data) => {
         setCenturiesList(data);

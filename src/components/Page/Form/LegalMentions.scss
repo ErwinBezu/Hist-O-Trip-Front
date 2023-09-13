@@ -1,0 +1,17 @@
+.main-sub-title {
+  font-size: 1.2em;
+}
+
+@media screen and (min-width: 1024px) {
+  .main-legal {
+    width: 80vw;
+    .main-title {
+      text-align: center;
+    }
+    .main-section {
+      .main-sub-title {
+        font-size: 1.2em;
+      }
+    }
+  }
+}

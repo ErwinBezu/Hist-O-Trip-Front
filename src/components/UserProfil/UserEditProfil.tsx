@@ -26,7 +26,7 @@ const UserEditProfil = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/users/${userData.id}`,
+        `http://localhost:8080/api/users/${userData.id}`,
         {
           method: 'PATCH',
           headers: {

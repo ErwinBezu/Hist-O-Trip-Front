@@ -61,6 +61,7 @@ const Card: React.FC = () => {
   const { selectedPeriod } = useContext(SelectedPeriod);
   const { selectedTag } = useContext(SelectedTag);
   const { searchInput } = useContext(SearchInput);
+  const url = 'http://localhost:8080/';
 
   const { selectedCenturies, setSelectedCenturies } =
     useContext(SelectedCenturies);
@@ -85,9 +86,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (searchInput) {
-      fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/places?search=${searchInput}`
-      )
+      fetch(`${url}api/places?search=${searchInput}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -100,9 +99,7 @@ const Card: React.FC = () => {
   useEffect(() => {
     if (selectedCategory && !isVisible) {
       resetVisibleCards();
-      fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
-      )
+      fetch(`${url}api/places/categories/${selectedCategory.id}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -114,9 +111,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedCentury) {
-      fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/places/centuries/${selectedCentury.id}`
-      )
+      fetch(`${url}api/places/centuries/${selectedCentury.id}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -128,9 +123,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (SelectedPeriod) {
-      fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/places/centuries/${selectedPeriod?.period}`
-      )
+      fetch(`${url}api/places/centuries/${selectedPeriod?.period}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -142,9 +135,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedTag) {
-      fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/places/tags/${selectedTag.id}`
-      )
+      fetch(`${url}api/places/tags/${selectedTag.id}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -157,7 +148,7 @@ const Card: React.FC = () => {
   useEffect(() => {
     if (isFilterSubmitted) {
       try {
-        fetch('http://ludoviclebris-server.eddi.cloud/api/api/places/filter', {
+        fetch(`${url}api/places/filter`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
