@@ -7,16 +7,13 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 export const getUser = async (token: any) => {
   try {
-    const response = await fetch(
-      'http://ludoviclebris-server.eddi.cloud/api/api/users/@me',
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch('http://localhost:8080/api/users/@me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (response.ok) {
       const usersData = await response.json();
@@ -79,16 +76,13 @@ const Login = () => {
 
     // Envoyer les informations d'identification au backend pour vérification
     try {
-      const response = await fetch(
-        'http://ludoviclebris-server.eddi.cloud/api/api/login_check',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      );
+      const response = await fetch('http://localhost:8080/api/login_check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
       if (response.ok) {
         const data = await response.json();

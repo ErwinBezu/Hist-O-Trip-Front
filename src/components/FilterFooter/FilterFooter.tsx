@@ -9,33 +9,17 @@ import {
   SelectedPeriod,
 } from '../contexts';
 import './FilterFooter.scss';
-
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
-type Tags = {
-  id: number;
-  name: string;
-};
-
-type Centuries = {
-  id: number;
-  period: string;
-  century: string;
-};
+import { ICategories, ICenturies, ITags } from '../../types/index';
 
 const FilterFooter = () => {
   const categoriesList = useContext(CategoriesList);
   const centuriesList = useContext(CenturiesList);
   const tagsList = useContext(TagsList);
 
-  const [randomCategories, setRandomCategories] = useState<Category[]>([]);
-  const [randomCenturies, setRandomCenturies] = useState<Centuries[]>([]);
-  const [randomTags, setRandomTags] = useState<Tags[]>([]);
-  const [randomPeriods, setRandomPeriods] = useState<Centuries[]>([]);
+  const [randomCategories, setRandomCategories] = useState<ICategories[]>([]);
+  const [randomCenturies, setRandomCenturies] = useState<ICenturies[]>([]);
+  const [randomTags, setRandomTags] = useState<ITags[]>([]);
+  const [randomPeriods, setRandomPeriods] = useState<ICenturies[]>([]);
 
   const [selectedFilter, setSelectedFilter] = useState<string | null>(
     'categories'
@@ -66,7 +50,7 @@ const FilterFooter = () => {
     }
   }, [categoriesList]);
 
-  const handleCategorySelect = (category: Category) => {
+  const handleCategorySelect = (category: ICategories) => {
     setSelectedCategory(category);
   };
 
@@ -87,11 +71,11 @@ const FilterFooter = () => {
     }
   }, [centuriesList]);
 
-  const handleCenturySelect = (century: Centuries) => {
+  const handleCenturySelect = (century: ICenturies) => {
     setSelectedCentury(century);
   };
 
-  const handlePeriodSelect = (century: Centuries) => {
+  const handlePeriodSelect = (century: ICenturies) => {
     setSelectedPeriod(century);
   };
 
@@ -121,7 +105,7 @@ const FilterFooter = () => {
     }
   }, [tagsList]);
 
-  const handleTagSelect = (tag: Tags) => {
+  const handleTagSelect = (tag: ITags) => {
     setSelectedTag(tag);
   };
 

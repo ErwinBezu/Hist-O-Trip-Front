@@ -15,35 +15,16 @@ import {
   SelectedPeriod,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
+import { IPlaceData } from '../../types/index';
 import UserProfil from '../UserProfil/UserProfil';
 import Filter from '../Header/Filter/Filter';
 import UserEditProfil from '../UserProfil/UserEditProfil';
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
 
-type Picture = {
-  url: string;
-};
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
-type Place = {
-  id: number;
-  slug: string;
-  name: string;
-  pictures: Picture[];
-  postcode: string;
-  city: string;
-  rating: number;
-  category: Category[];
-};
-
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
-  const [placesCardData, setPlacesCardData] = useState<Place[]>([]);
+  const [placesCardData, setPlacesCardData] = useState<IPlaceData[]>([]);
   const {
     editVisible,
     isLoggedIn,

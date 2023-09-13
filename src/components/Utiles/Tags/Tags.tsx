@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
-import tags from '../../../data/tags.json';
 import { TagsList, SelectedTags } from '../../contexts';
-type Tags = {
-  id: number;
-  name: string;
-};
 
 const Tags = () => {
   const tagsList = useContext(TagsList);
@@ -27,7 +22,7 @@ const Tags = () => {
                 type="checkbox"
                 checked={selectedTags.includes(tag.id)}
                 onChange={() => handleTagsSelect(tag.id)}
-              />{' '}
+              />
               {tag.name}
             </label>
           </li>

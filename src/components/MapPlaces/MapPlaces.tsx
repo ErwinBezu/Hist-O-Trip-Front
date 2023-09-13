@@ -5,60 +5,20 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import './MapPlaces.scss';
 import { SelectedCategory, SinglePlace } from '../contexts';
 import L from 'leaflet';
-
-interface Picture {
-  url: string;
-  name: string;
-  picture_legend: string;
-}
-
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
-type Tags = {
-  id: number;
-  name: string;
-};
-
-type PlaceData = {
-  id: number;
-  name: string;
-  subtitle: string;
-  coordinate: string;
-  adress: string;
-  placecode: string;
-  city: string;
-  country: string;
-  website: string;
-  phone: string;
-  description: string;
-  user_id: string;
-  price: string;
-  opening_hours: string;
-  rating: string;
-  accessibility: string;
-  guided_tour: string;
-  slug: string;
-  pictures: Picture[];
-  categories: Category[];
-  tags: Tags[];
-};
+import { IPictures, IPlaceData } from '../../types/index';
 
 const MapPlaces = () => {
   const { singlePlaceData } = useContext(SinglePlace);
-  const [placesData, setPlacesData] = useState<PlaceData | undefined>(
+  const [placesData, setPlacesData] = useState<IPlaceData | undefined>(
     undefined
   );
-  const [placesCardData, setPlacesCardData] = useState<PlaceData[]>([]);
+  const [placesCardData, setPlacesCardData] = useState<IPlaceData[]>([]);
 
   const location = useLocation();
   const { id, slug } = useParams<{ id?: string; slug?: string }>();
 
   useEffect(() => {
-    fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places`)
+    fetch(`http://localhost:8080/api/places`)
       .then((response) => response.json())
       .then((data) => {
         setPlacesData(data);
@@ -73,7 +33,7 @@ const MapPlaces = () => {
   useEffect(() => {
     if (selectedCategory) {
       fetch(
-        `http://ludoviclebris-server.eddi.cloud/api/api/places/categories/${selectedCategory.id}`
+        `http://localhost:8080/api/places/categories/${selectedCategory.id}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -143,7 +103,7 @@ const MapPlaces = () => {
                     >
                       <p>{name}</p>
                     </Link>
-                    {pictures.map((picture: Picture, picIndex: number) => (
+                    {pictures.map((picture: IPictures, picIndex: number) => (
                       <img
                         key={picIndex}
                         src={picture.url}
@@ -194,7 +154,7 @@ const MapPlaces = () => {
                     >
                       <p className="pop-up-title">{name}</p>
 
-                      {pictures.map((picture: Picture, picIndex: number) => (
+                      {pictures.map((picture: IPictures, picIndex: number) => (
                         <img
                           key={picIndex}
                           src={picture.url}

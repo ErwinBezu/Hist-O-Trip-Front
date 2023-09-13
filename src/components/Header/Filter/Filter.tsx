@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 import './Filter.scss';
 import Categories from '../../Categories/Categories';
-import Epoques from '../../Utiles/Epoques/Epoques';
-import Periodes from '../../Utiles/Periodes/Periodes';
+import Periods from '../../Utiles/Periodes/Periodes';
 import Tags from '../../Utiles/Tags/Tags';
 import {
   MainSearchFilter,
@@ -23,7 +22,7 @@ const Filter = ({ setIsVisible }) => {
     setIsVisible(false);
   };
 
-  const handleResetFilter = (e) => {
+  const handleResetFilter = (e: any) => {
     e.preventDefault();
     setSelectedTags([]);
     setSelectedCenturies([]);
@@ -57,7 +56,7 @@ const Filter = ({ setIsVisible }) => {
               </div>
               <div className="filter-periodes">
                 <h4>Périodes</h4>
-                <Periodes />
+                <Periods />
               </div>
               <div className="filter-tags">
                 <h4>Tags</h4>

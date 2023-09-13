@@ -62,23 +62,20 @@ const SignUp = () => {
       return;
     }
     try {
-      const response = await fetch(
-        'http://ludoviclebris-server.eddi.cloud/api/api/users/signup',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            lastname: lastname,
-            firstname: firstname,
-            password: password,
-            email: email,
-            pseudonym: pseudonym,
-            is_active: 1,
-          }),
-        }
-      );
+      const response = await fetch('http://localhost:8080/api/users/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          lastname: lastname,
+          firstname: firstname,
+          password: password,
+          email: email,
+          pseudonym: pseudonym,
+          is_active: 1,
+        }),
+      });
       if (response.ok) {
         setSuccess(true);
         setPseudonym('');

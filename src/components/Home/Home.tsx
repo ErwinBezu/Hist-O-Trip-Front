@@ -17,22 +17,7 @@ import {
   MainSearchFilter,
 } from '../contexts/index';
 
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
-type Centuries = {
-  id: number;
-  period: string;
-  century: string;
-};
-
-type Tags = {
-  id: number;
-  name: string;
-};
+import { ICategories, ICenturies, ITags } from '../../types';
 
 const Home = () => {
   const [selectedCenturies, setSelectedCenturies] = useState<number[]>([]);
@@ -40,17 +25,17 @@ const Home = () => {
 
   const [searchInput, setSearchInput] = useState('');
 
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+  const [selectedCategory, setSelectedCategory] = useState<ICategories | null>(
     null
   );
 
-  const [selectedCentury, setSelectedCentury] = useState<Centuries | null>(
+  const [selectedCentury, setSelectedCentury] = useState<ICenturies | null>(
     null
   );
 
-  const [selectedPeriod, setSelectedPeriod] = useState<Centuries | null>(null);
+  const [selectedPeriod, setSelectedPeriod] = useState<ICenturies | null>(null);
 
-  const [selectedTag, setSelectedTag] = useState<Tags | null>(null);
+  const [selectedTag, setSelectedTag] = useState<ITags | null>(null);
 
   const [isFilterSubmitted, setIsFilterSubmitted] = useState(false);
 

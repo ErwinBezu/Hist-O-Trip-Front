@@ -4,12 +4,7 @@ import Icon from './Icon';
 import { CategoriesList, SelectedCategory } from '../contexts/index';
 
 import './Categories.scss';
-
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
+import { ICategories } from '../../types';
 
 const Categories = () => {
   const categoriesList = useContext(CategoriesList);
@@ -25,14 +20,14 @@ const Categories = () => {
     }
   }, [categoriesList, selectedCategory, setSelectedCategory]);
 
-  const handleCategorySelect = (category: Category) => {
+  const handleCategorySelect = (category: ICategories) => {
     setSelectedCategory(category);
   };
 
   return (
     <nav className="categories-container">
       <ul className="categories-list">
-        {categoriesList.map((category: Category) => (
+        {categoriesList.map((category: ICategories) => (
           <li
             className={
               category === selectedCategory

@@ -2,23 +2,7 @@ import React, { useContext, useState } from 'react';
 import { CategoriesList, CenturiesList, TagsList } from '../../contexts';
 import Cookies from 'js-cookie';
 import './SuggestForm.scss';
-
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
-type Tags = {
-  id: number;
-  name: string;
-};
-
-type Centuries = {
-  id: number;
-  period: string;
-  century: string;
-};
+import { ICategories, ICenturies, ITags } from '../../../types/index';
 
 const SuggestForm = () => {
   const [name, setName] = useState<string>('');
@@ -59,31 +43,28 @@ const SuggestForm = () => {
       return;
     }
     try {
-      const response = await fetch(
-        'http://ludoviclebris-server.eddi.cloud/api/api/places/add',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            name: name,
-            coordinate: '45.71301/5.12916',
-            adress: adress,
-            postcode: postcode,
-            city: city,
-            country: country,
-            pictures: [],
-            slug: name,
-            description: description,
-            is_valid: 0,
-            categoriesId: categoriesId,
-            centuriesId: centuriesId,
-            tagsId: tagsId,
-          }),
-        }
-      );
+      const response = await fetch('http://localhost:8080/api/places/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          coordinate: '45.71301/5.12916',
+          adress: adress,
+          postcode: postcode,
+          city: city,
+          country: country,
+          pictures: [],
+          slug: name,
+          description: description,
+          is_valid: 0,
+          categoriesId: categoriesId,
+          centuriesId: centuriesId,
+          tagsId: tagsId,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -209,7 +190,7 @@ const SuggestForm = () => {
                 }
                 required
               >
-                {categoriesList.map((category: Category) => (
+                {categoriesList.map((category: ICategories) => (
                   <option value={category.id}>{category.name}</option>
                 ))}
               </select>
@@ -234,7 +215,7 @@ const SuggestForm = () => {
                 }
                 required
               >
-                {tagsList.map((tag: Tags) => (
+                {tagsList.map((tag: ITags) => (
                   <option value={tag.id}>{tag.name}</option>
                 ))}
               </select>
@@ -259,7 +240,7 @@ const SuggestForm = () => {
                 }
                 required
               >
-                {centuriesList.map((century: Centuries) => (
+                {centuriesList.map((century: ICenturies) => (
                   <option value={century.id}>{century.century}</option>
                 ))}
               </select>

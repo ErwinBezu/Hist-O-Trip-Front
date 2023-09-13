@@ -2,66 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import './Place.scss';
-import placesData from '../../data/places.json';
 import Footer from '../Footer/Footer';
 import { IoIosArrowBack } from 'react-icons/io';
 import Error404 from '../Error/Error404';
 import MapPlaces from '../MapPlaces/MapPlaces';
 import { SinglePlace } from '../contexts';
 import Icon from '../Categories/Icon';
-
-type Picture = {
-  id: number;
-  name: string;
-  picture_legend: string;
-  place_id: string;
-  url: string;
-};
-type Category = {
-  id: number;
-  name: string;
-  icon: string;
-};
-type Tags = {
-  id: number;
-  name: string;
-};
-
-type Centuries = {
-  id: number;
-  period: string;
-  century: string;
-};
-
-type PlaceData = {
-  id: number;
-  name: string;
-  subtitle: string;
-  coordinate: string;
-  adress: string;
-  placecode: string;
-  city: string;
-  country: string;
-  website: string;
-  phone: string;
-  description: string;
-  user_id: string;
-  price: string;
-  opening_hours: string;
-  rating: string;
-  accessibility: string;
-  guided_tour: string;
-  slug: string;
-  pictures: Picture[];
-  categories: Category[];
-  tags: Tags[];
-  centuries: Centuries[];
-};
+import { IPlaceData } from '../../types/index';
 
 const Place: React.FC = () => {
-  const [singlePlaceData, setSinglePlaceData] = useState<PlaceData | undefined>(
-    undefined
-  );
+  const [singlePlaceData, setSinglePlaceData] = useState<
+    IPlaceData | undefined
+  >(undefined);
   const { id, slug } = useParams<{ id: string; slug: string }>();
   const location = useLocation();
 
@@ -69,7 +21,7 @@ const Place: React.FC = () => {
 
   useEffect(() => {
     if (id && slug) {
-      fetch(`http://ludoviclebris-server.eddi.cloud/api/api/places/${id}`)
+      fetch(`http://localhost:8080/api/places/${id}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.id === parseInt(id) && data.slug === slug) {

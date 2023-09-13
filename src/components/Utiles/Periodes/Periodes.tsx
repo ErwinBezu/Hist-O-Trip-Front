@@ -2,17 +2,12 @@ import React, { useContext, useState } from 'react';
 import { CenturiesList, SelectedCenturies } from '../../contexts';
 import './Periodes.scss';
 import { MdArrowDropDown } from 'react-icons/md';
+import { ICenturies } from '../../../types/index';
 
-type Centuries = {
-  id: number;
-  period: string;
-  century: string;
-};
-
-const Periodes = () => {
+const Periods = () => {
   const centuriesList = useContext(CenturiesList);
 
-  const centuriesByPeriod: { [key: string]: Centuries[] } = {};
+  const centuriesByPeriod: { [key: string]: ICenturies[] } = {};
 
   centuriesList.forEach((century) => {
     const { period } = century;
@@ -73,4 +68,4 @@ const Periodes = () => {
   );
 };
 
-export default Periodes;
+export default Periods;
