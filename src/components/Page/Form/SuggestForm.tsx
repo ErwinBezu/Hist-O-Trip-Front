@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { CategoriesList, CenturiesList, TagsList } from '../../contexts';
 import Cookies from 'js-cookie';
 import './SuggestForm.scss';
-import { ICategories, ICenturies, ITags } from '../../../types/index';
+import { ICategories, ICenturies, ITags } from '../../../@types/index';
+import FieldInput from './Field/FieldInput';
+import FieldTextarea from './Field/FieldTextarea';
 
 const SuggestForm = () => {
   const [name, setName] = useState<string>('');
-  const [adress, setAdress] = useState<string>();
-  const [postcode, setPostcode] = useState<string>();
+  const [adress, setAdress] = useState<string>('');
+  const [postcode, setPostcode] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -81,6 +83,33 @@ const SuggestForm = () => {
     }
   };
 
+  const changeField = (
+    value: string,
+    name: 'name' | 'adress' | 'postcode' | 'city' | 'country' | 'description'
+  ) => {
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'adress') {
+      setAdress(value);
+    } else if (name === 'postcode') {
+      setPostcode(value);
+    } else if (name === 'city') {
+      setCity(value);
+    } else if (name === 'country') {
+      setCountry(value);
+    } else if (name === 'description') {
+      setDescription(value);
+    }
+  };
+
+  const handleChangeField =
+    (
+      name: 'name' | 'adress' | 'postcode' | 'city' | 'country' | 'description'
+    ) =>
+    (value: string) => {
+      changeField(value, name);
+    };
+
   return (
     <div className="suggestForm-mainContainer">
       <form className="suggestForm-container" onSubmit={handleSubmit}>
@@ -90,85 +119,52 @@ const SuggestForm = () => {
         </p>
         <div className="container-container">
           <div className="first-container">
-            <div className="item-container">
-              <label className="label-item" htmlFor="name">
-                Nom du lieu<span className="asterisk">*</span>:
-              </label>
-              <input
-                className="input-item"
-                type="text"
-                aria-label="name"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div className="item-container">
-              <label className="label-item" htmlFor="adress">
-                Adresse:
-              </label>
-              <input
-                className="input-item"
-                type="string"
-                aria-label="adress"
-                id="adress"
-                value={adress}
-                onChange={(e) => setAdress(e.target.value)}
-              />
-            </div>
-            <div className="item-container">
-              <label className="label-item" htmlFor="postcode">
-                Code Postal<span className="asterisk">*</span>:
-              </label>
-              <input
-                className="input-item"
-                type="string"
-                aria-label="postcode"
-                id="postcode"
-                value={postcode}
-                onChange={(e) => setPostcode(e.target.value)}
-                required
-              />
-            </div>
-            <div className="item-container">
-              <label className="label-item" htmlFor="city">
-                Ville<span className="asterisk">*</span>:
-              </label>
-              <input
-                className="input-item"
-                type="text"
-                aria-label="city"
-                id="city"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-              />
-            </div>
-            <div className="item-container">
-              <label className="label-item" htmlFor="country">
-                Pays<span className="asterisk">*</span>:
-              </label>
-              <input
-                className="input-item"
-                type="country"
-                id="country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                required
-              />
-            </div>
-            <div className="item-container">
-              <label className="label-item" htmlFor="description">
-                Description<span className="asterisk">*</span>:
-              </label>
-              <textarea
-                className="input-item"
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
-            </div>
+            <FieldInput
+              type="text"
+              placeholder="Nom du lieu"
+              value={name}
+              onChange={handleChangeField('name')}
+              id="name"
+              required
+            />
+            <FieldInput
+              type="text"
+              placeholder="Adresse"
+              value={adress}
+              onChange={handleChangeField('adress')}
+              id="adress"
+            />
+            <FieldInput
+              type="text"
+              placeholder="Code Postal"
+              value={postcode}
+              onChange={handleChangeField('postcode')}
+              id="postcode"
+              required
+            />
+            <FieldInput
+              type="text"
+              placeholder="Ville"
+              value={city}
+              onChange={handleChangeField('city')}
+              id="city"
+              required
+            />
+            <FieldInput
+              type="text"
+              placeholder="Pays"
+              value={country}
+              onChange={handleChangeField('country')}
+              id="country"
+              required
+            />
+            <FieldTextarea
+              placeholder="Description"
+              value={description}
+              onChange={handleChangeField('description')}
+              id="description"
+              required
+            />
           </div>
           <div className="second-container">
             <div className="item-container">
@@ -191,7 +187,9 @@ const SuggestForm = () => {
                 required
               >
                 {categoriesList.map((category: ICategories) => (
-                  <option value={category.id}>{category.name}</option>
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -216,7 +214,9 @@ const SuggestForm = () => {
                 required
               >
                 {tagsList.map((tag: ITags) => (
-                  <option value={tag.id}>{tag.name}</option>
+                  <option key={tag.id} value={tag.id}>
+                    {tag.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -241,7 +241,9 @@ const SuggestForm = () => {
                 required
               >
                 {centuriesList.map((century: ICenturies) => (
-                  <option value={century.id}>{century.century}</option>
+                  <option key={century.id} value={century.id}>
+                    {century.century}
+                  </option>
                 ))}
               </select>
             </div>
@@ -257,3 +259,85 @@ const SuggestForm = () => {
 };
 
 export default SuggestForm;
+
+/*  <div className="item-container">
+              <label className="label-item" htmlFor="name">
+                Nom du lieu<span className="asterisk">*</span>:
+              </label>
+              <input
+                className="input-item"
+                type="text"
+                aria-label="name"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="item-container">
+              <label className="label-item" htmlFor="adress">
+                Adresse:
+              </label>
+              <input
+                className="input-item"
+                type="text"
+                aria-label="adress"
+                id="adress"
+                value={adress}
+                onChange={(e) => setAdress(e.target.value)}
+              />
+            </div>
+            <div className="item-container">
+              <label className="label-item" htmlFor="postcode">
+                Code Postal<span className="asterisk">*</span>:
+              </label>
+              <input
+                className="input-item"
+                type="text"
+                aria-label="postcode"
+                id="postcode"
+                value={postcode}
+                onChange={(e) => setPostcode(e.target.value)}
+                required
+              />
+            </div>
+            <div className="item-container">
+              <label className="label-item" htmlFor="city">
+                Ville<span className="asterisk">*</span>:
+              </label>
+              <input
+                className="input-item"
+                type="text"
+                aria-label="city"
+                id="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+              />
+            </div>
+             <div className="item-container">
+              <label className="label-item" htmlFor="country">
+                Pays<span className="asterisk">*</span>:
+              </label>
+              <input
+                className="input-item"
+                type="country"
+                id="country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+              />
+            </div>
+
+             <div className="item-container">
+              <label className="label-item" htmlFor="description">
+                Description<span className="asterisk">*</span>:
+              </label>
+              <textarea
+                className="input-item"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </div>
+            */

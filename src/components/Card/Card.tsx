@@ -15,7 +15,7 @@ import {
   SelectedPeriod,
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
-import { IPlaceData } from '../../types/index';
+import { IPlaceData } from '../../@types/index';
 import UserProfil from '../UserProfil/UserProfil';
 import Filter from '../Header/Filter/Filter';
 import UserEditProfil from '../UserProfil/UserEditProfil';

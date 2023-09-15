@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import './Filter.scss';
 import Categories from '../../Categories/Categories';
-import Periods from '../../Utiles/Periodes/Periodes';
-import Tags from '../../Utiles/Tags/Tags';
+import Periods from '../../Utils/Periodes/Periodes';
+import Tags from '../../Utils/Tags/Tags';
 import {
   MainSearchFilter,
   SelectedTags,

@@ -17,7 +17,7 @@ import {
   MainSearchFilter,
 } from '../contexts/index';
 
-import { ICategories, ICenturies, ITags } from '../../types';
+import { ICategories, ICenturies, ITags } from '../../@types';
 
 const Home = () => {
   const [selectedCenturies, setSelectedCenturies] = useState<number[]>([]);

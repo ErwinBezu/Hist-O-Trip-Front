@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { ICategories, ICenturies, ITags, IPlaceData } from '../../types/index';
+import { ICategories, ICenturies, ITags, IPlaceData } from '../../@types/index';
 
 export const CategoriesList = createContext<ICategories[]>([]);
 export const CenturiesList = createContext<ICenturies[]>([]);

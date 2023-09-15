@@ -8,7 +8,7 @@ import Error404 from '../Error/Error404';
 import MapPlaces from '../MapPlaces/MapPlaces';
 import { SinglePlace } from '../contexts';
 import Icon from '../Categories/Icon';
-import { IPlaceData } from '../../types/index';
+import { IPlaceData } from '../../@types/index';
 
 const Place: React.FC = () => {
   const [singlePlaceData, setSinglePlaceData] = useState<
@@ -66,42 +66,34 @@ const Place: React.FC = () => {
             <div className="item-container">
               <p className="tags-item">Période</p>
               {singlePlaceData.centuries.map((cent) => (
-                <>
-                  <div className="item">
-                    <span key={cent.id}>{cent.period}</span>
-                  </div>
-                </>
+                <div className="item" key={cent.id}>
+                  <span>{cent.period}</span>
+                </div>
               ))}
             </div>
             <div className="item-container">
               <p className="tags-item">Epoque</p>
               {singlePlaceData.centuries.map((cent) => (
-                <>
-                  <div className="item">
-                    <span key={cent.id}>{cent.century}</span>
-                  </div>
-                </>
+                <div className="item" key={cent.id}>
+                  <span>{cent.century}</span>
+                </div>
               ))}
             </div>
             <div className="item-container">
               <p className="tags-item">Catégorie</p>
               {singlePlaceData.categories.map((cat) => (
-                <>
-                  <div className="item">
-                    <span key={cat.id}>{cat.name}</span>
-                    <Icon name={cat.icon} />
-                  </div>
-                </>
+                <div className="item" key={cat.id}>
+                  <span>{cat.name}</span>
+                  <Icon name={cat.icon} />
+                </div>
               ))}
             </div>
             <div className="item-container">
               <p className="tags-item">Tags</p>
               {singlePlaceData.tags.map((item) => (
-                <>
-                  <div className="item">
-                    <span key={item.id}>{item.name}</span>{' '}
-                  </div>
-                </>
+                <div className="item" key={item.id}>
+                  <span>{item.name}</span>{' '}
+                </div>
               ))}
             </div>
           </div>

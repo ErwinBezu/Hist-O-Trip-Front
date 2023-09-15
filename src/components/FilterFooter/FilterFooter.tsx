@@ -9,7 +9,7 @@ import {
   SelectedPeriod,
 } from '../contexts';
 import './FilterFooter.scss';
-import { ICategories, ICenturies, ITags } from '../../types/index';
+import { ICategories, ICenturies, ITags } from '../../@types/index';
 
 const FilterFooter = () => {
   const categoriesList = useContext(CategoriesList);

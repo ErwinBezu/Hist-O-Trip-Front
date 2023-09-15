@@ -5,7 +5,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import './MapPlaces.scss';
 import { SelectedCategory, SinglePlace } from '../contexts';
 import L from 'leaflet';
-import { IPictures, IPlaceData } from '../../types/index';
+import { IPictures, IPlaceData } from '../../@types/index';
 
 const MapPlaces = () => {
   const { singlePlaceData } = useContext(SinglePlace);

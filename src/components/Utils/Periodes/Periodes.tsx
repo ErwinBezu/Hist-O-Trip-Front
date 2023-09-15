@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { CenturiesList, SelectedCenturies } from '../../contexts';
 import './Periodes.scss';
 import { MdArrowDropDown } from 'react-icons/md';
-import { ICenturies } from '../../../types/index';
+import { ICenturies } from '../../../@types/index';
 
 const Periods = () => {
   const centuriesList = useContext(CenturiesList);
