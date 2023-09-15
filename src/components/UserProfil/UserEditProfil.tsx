@@ -4,6 +4,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { Context } from '../App/App';
 import Cookies from 'js-cookie';
 import { getUser } from '../Auth/Login/Login';
+import Field from '../Page/Form/Field/FieldInput';
 
 const UserEditProfil = () => {
   const context = useContext(Context);
@@ -21,6 +22,7 @@ const UserEditProfil = () => {
   const [firstname, setFirstname] = useState(userData.firstname || '');
   const [lastname, setLastname] = useState(userData.lastname || '');
   const [pseudonym, setPseudonym] = useState(userData.pseudonym || '');
+  const [email, setEmail] = useState(userData.email || '');
 
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
@@ -45,6 +47,27 @@ const UserEditProfil = () => {
     }
   };
 
+  const changeField = (
+    value: string,
+    name: 'pseudonym' | 'lastname' | 'firstname' | 'email'
+  ) => {
+    if (name === 'pseudonym') {
+      setPseudonym(value);
+    } else if (name === 'lastname') {
+      setLastname(value);
+    } else if (name === 'firstname') {
+      setFirstname(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    }
+  };
+
+  const handleChangeField =
+    (name: 'pseudonym' | 'lastname' | 'firstname' | 'email') =>
+    (value: string) => {
+      changeField(value, name);
+    };
+
   return (
     <>
       <div
@@ -66,29 +89,43 @@ const UserEditProfil = () => {
         </div>
         <div className="profil-edit-content">
           <div className="profil-edit-pseudo">
-            <input
+            <Field
               type="text"
-              placeholder={userData.pseudonym}
-              onChange={(e) => setPseudonym(e.target.value)}
+              labelName="Pseudonyme"
+              placeholder={userData.pseudonym ? '' : 'Entrez votre pseudonyme'}
               value={pseudonym}
+              onChange={handleChangeField('pseudonym')}
+              id="pseudonym"
             />
           </div>
           <div className="profil-edit-name">
-            <input
+            <Field
               type="text"
-              placeholder={userData.lastname}
-              onChange={(e) => setLastname(e.target.value)}
+              labelName="Nom"
+              placeholder={userData.lastname ? '' : 'Entrez votre nom'}
               value={lastname}
+              onChange={handleChangeField('lastname')}
+              id="lastname"
             />
-            <input
+            <Field
               type="text"
-              placeholder={userData.firstname}
-              onChange={(e) => setFirstname(e.target.value)}
+              labelName="Prénom"
+              placeholder={userData.lastname ? '' : 'Entrez votre prénom'}
               value={firstname}
+              onChange={handleChangeField('firstname')}
+              id="firstname"
             />
           </div>
           <div className="profil-edit-inofs">
-            <input type="email" placeholder={userData.email} disabled />
+            <Field
+              type="email"
+              labelName="Adresse email"
+              placeholder={userData.email ? '' : 'Entrez votre prénom'}
+              value={email}
+              onChange={handleChangeField('email')}
+              id="email"
+              disabled
+            />
           </div>
           <button className="profil-edit-validation" type="submit">
             Valider modification

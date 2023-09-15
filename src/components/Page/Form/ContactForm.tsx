@@ -126,6 +126,7 @@ const ContactForm = () => {
           id="message"
           required
         />
+
         <button className="btn-style-var" type="submit" disabled={isSubmitting}>
           Envoyer
         </button>

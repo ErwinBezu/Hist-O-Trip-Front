@@ -7,6 +7,8 @@ interface FieldProps {
   type?: string;
   onChange: (value: string) => void;
   required?: boolean;
+  labelName?: string;
+  disabled?: boolean;
 }
 
 const FieldInput = ({
@@ -16,6 +18,8 @@ const FieldInput = ({
   id,
   onChange,
   required,
+  labelName,
+  disabled,
 }: FieldProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     onChange(event.target.value);
@@ -24,7 +28,8 @@ const FieldInput = ({
   return (
     <div className="item-container">
       <label className="label-item" htmlFor={id}>
-        {placeholder}
+        {labelName}
+        {labelName && !placeholder ? null : placeholder}
         {required ? <span className="asterisk">*</span> : null}:
       </label>
       <input
@@ -36,6 +41,7 @@ const FieldInput = ({
         value={value}
         onChange={handleChange}
         required={required}
+        disabled={disabled}
       />
     </div>
   );
