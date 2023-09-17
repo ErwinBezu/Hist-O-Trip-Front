@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
-import Field from './Field/FieldInput';
-import FieldTextarea from './Field/FieldTextarea';
+import Field from '../../Utils/Field/FieldInput';
+import FieldTextarea from '../../Utils/Field/FieldTextarea';
 import './ContactForm.scss';
 
 const ContactForm = () => {

@@ -83,7 +83,7 @@ const MapPlaces = () => {
       </Marker>
       {Array.isArray(placesData) &&
         placesData.map((data, index: number) => {
-          const { id, slug, coordinate, name, pictures, category } = data;
+          const { id, slug, coordinate, name, pictures } = data;
           if (coordinate) {
             const [latStr, lngStr] = coordinate.split('/');
             const lat = parseFloat(latStr);
@@ -134,7 +134,7 @@ const MapPlaces = () => {
       />
       {Array.isArray(placesCardData) &&
         placesCardData.map((data, index: number) => {
-          const { id, slug, coordinate, name, pictures, categories } = data;
+          const { id, slug, coordinate, name, pictures } = data;
           if (coordinate) {
             const [latStr, lngStr] = coordinate.split('/');
             const lat = parseFloat(latStr);

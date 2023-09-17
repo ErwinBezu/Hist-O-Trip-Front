@@ -4,7 +4,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { Context } from '../App/App';
 import Cookies from 'js-cookie';
 import { getUser } from '../Auth/Login/Login';
-import Field from '../Page/Form/Field/FieldInput';
+import Field from '../Utils/Field/FieldInput';
 
 const UserEditProfil = () => {
   const context = useContext(Context);
@@ -120,7 +120,7 @@ const UserEditProfil = () => {
             <Field
               type="email"
               labelName="Adresse email"
-              placeholder={userData.email ? '' : 'Entrez votre prénom'}
+              placeholder={userData.email ? '' : 'Entrez votre adresse email'}
               value={email}
               onChange={handleChangeField('email')}
               id="email"

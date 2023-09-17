@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import {
-  AiOutlineSearch,
-  AiOutlineMenu,
-  AiOutlineControl,
-  AiOutlineHome,
-} from 'react-icons/ai';
+
+import { AiOutlineMenu } from 'react-icons/ai';
 import { BsFillPersonFill } from 'react-icons/bs';
-import Categories from '../../Categories/Categories';
 import Login from '../../Auth/Login/Login';
 import Filter from '../Filter/Filter';
 import './NavBar.scss';
 import UserProfil from '../../UserProfil/UserProfil';
 import { Context } from '../../App/App';
-import { SearchInput } from '../../contexts';
+
 import SignUp from '../../Auth/SignUp/SignUp';
 import UserEditProfil from '../../UserProfil/UserEditProfil';
+import Logo from './Logo';
+import Search from './Search';
+import Suggest from './Suggest';
 
 type ContextType = {
   isVisible: boolean;
@@ -49,38 +46,8 @@ const NavBar = () => {
     signUpModal,
     loginModal,
     editVisible,
-    
-
   } = context;
 
-  const [isBottom, setIsBottom] = useState(false);
-
-  const handleScroll = () => {
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.scrollY;
-
-    if (scrollTop + windowHeight >= documentHeight) {
-      setIsBottom(true);
-    } else {
-      setIsBottom(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const location = useLocation();
-  const { id, slug } = useParams<{ id?: string; slug?: string }>();
-  const { searchInput, setSearchInput } = useContext(SearchInput);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchInput(e.target.value);
-  };
   const handleScrollStyle = () => {
     if (isVisible || editVisible || signUpModal || loginModal) {
       document.body.style.overflow = 'hidden';
@@ -92,12 +59,18 @@ const NavBar = () => {
   // Appelez cette fonction à chaque changement d'état des modales
   useEffect(() => {
     handleScrollStyle();
-  }, [isLoggedIn, menueVisible, editVisible, signUpModal, loginModal, isVisible]);
+  }, [
+    isLoggedIn,
+    menueVisible,
+    editVisible,
+    signUpModal,
+    loginModal,
+    isVisible,
+  ]);
 
   return (
-    
     <>
-    {signUpModal && <SignUp />}
+      {signUpModal && <SignUp />}
       {loginModal && <Login />}
       {menueVisible && <UserProfil />}
       {isVisible && <Filter setIsVisible={setIsVisible} />}
@@ -106,31 +79,14 @@ const NavBar = () => {
         className="navbar-container"
         onClick={() => (menueVisible ? setMenueVisible(false) : '')}
       >
-        <Link to="/" className="logo">
-          <img src="../src/assets/images/logo.png" alt="logo Hist'O'Trip" />
-        </Link>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Rechercher un Lieu"
-            name=""
-            id=""
-            value={searchInput}
-            onChange={handleChange}
-          />
-          <span className="search-btn">
-            <AiOutlineSearch />
-          </span>
-        </div>
+        <Logo />
+        <Search />
 
         <div className="suggest-menu-container">
           {isLoggedIn ? (
             <>
-              <Link to="/proposer" className="suggestLink-navbar">
-                <button className="suggest-btn" type="button">
-                  Proposer un lieu
-                </button>
-              </Link>
+              <Suggest />
+
               <button
                 type="button"
                 className="menu-btn"
@@ -151,7 +107,13 @@ const NavBar = () => {
           )}
         </div>
       </div>
+    </>
+  );
+};
 
+export default NavBar;
+
+/*
       <div
         className={`${
           location.pathname === '/'
@@ -175,6 +137,28 @@ const NavBar = () => {
           <AiOutlineControl /> Filtre
         </button>
       </div>
+
+       <div className="search-container">
+          <input
+            type="text"
+            placeholder="Rechercher un Lieu"
+            name=""
+            id=""
+            value={searchInput}
+            onChange={handleChange}
+          />
+          <span className="search-btn">
+            <AiOutlineSearch />
+          </span>
+        </div>
+
+        <Link to="/proposer" className="suggestLink-navbar">
+                <button className="suggest-btn" type="button">
+                  Proposer un lieu
+                </button>
+              </Link>
+
+
 
       <div
         className={`mobilebar-container ${
@@ -209,8 +193,35 @@ const NavBar = () => {
           <BsFillPersonFill /> {isLoggedIn ? 'Profil' : 'Connexion'}
         </button>
       </div>
-    </>
-  );
-};
 
-export default NavBar;
+
+
+        const [isBottom, setIsBottom] = useState(false);
+
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY;
+
+    if (scrollTop + windowHeight >= documentHeight) {
+      setIsBottom(true);
+    } else {
+      setIsBottom(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+
+    const { searchInput, setSearchInput } = useContext(SearchInput);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchInput(e.target.value);
+  };
+*/

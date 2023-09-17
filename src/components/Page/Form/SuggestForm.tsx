@@ -3,8 +3,8 @@ import { CategoriesList, CenturiesList, TagsList } from '../../contexts';
 import Cookies from 'js-cookie';
 import './SuggestForm.scss';
 import { ICategories, ICenturies, ITags } from '../../../@types/index';
-import FieldInput from './Field/FieldInput';
-import FieldTextarea from './Field/FieldTextarea';
+import FieldInput from '../../Utils/Field/FieldInput';
+import FieldTextarea from '../../Utils/Field/FieldTextarea';
 
 const SuggestForm = () => {
   const [name, setName] = useState<string>('');
