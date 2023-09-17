@@ -7,7 +7,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import Error404 from '../Error/Error404';
 import MapPlaces from '../MapPlaces/MapPlaces';
 import { SinglePlace } from '../contexts';
-import Icon from '../Categories/Icon';
+import Icon from '../Utils/Categories/Icon';
 import { IPlaceData } from '../../@types/index';
 
 const Place: React.FC = () => {

@@ -6,9 +6,11 @@ import './MapPlaces.scss';
 import { SelectedCategory, SinglePlace } from '../contexts';
 import L from 'leaflet';
 import { IPictures, IPlaceData } from '../../@types/index';
+import CustomMarker from './CustomMarker';
 
 const MapPlaces = () => {
   const { singlePlaceData } = useContext(SinglePlace);
+  const { selectedCategory } = useContext(SelectedCategory);
   const [placesData, setPlacesData] = useState<IPlaceData | undefined>(
     undefined
   );
@@ -16,6 +18,10 @@ const MapPlaces = () => {
 
   const location = useLocation();
   const { id, slug } = useParams<{ id?: string; slug?: string }>();
+  const urlPlace = location.pathname.includes(`/${id}/${slug}`);
+
+  let defaultMapCenter: [number, number] = [45.71301, 5.12916];
+  let singlePlaceCenter: [number, number] | null = null;
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/places`)
@@ -27,8 +33,6 @@ const MapPlaces = () => {
         console.error('Pas bon', error);
       });
   }, []);
-
-  const { selectedCategory } = useContext(SelectedCategory);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -43,10 +47,6 @@ const MapPlaces = () => {
     }
   }, [selectedCategory]);
 
-  let defaultMapCenter: [number, number] = [45.71301, 5.12916];
-
-  let singlePlaceCenter: [number, number] | null = null;
-
   if (singlePlaceData) {
     const [latStr, lngStr] = singlePlaceData?.coordinate.split('/');
     const lat = parseFloat(latStr);
@@ -56,16 +56,14 @@ const MapPlaces = () => {
     }
   }
 
-  const customMarkerIcon = new L.Icon({
-    iconUrl:
-      'https://ik.imagekit.io/v4u5l9d7p/marker-icon.png?updatedAt=1694013187611',
-  });
-
-  return location.pathname.includes(`/${id}/${slug}`) ? (
+  return (
     <MapContainer
       center={singlePlaceCenter || defaultMapCenter}
-      zoom={15}
-      style={{ width: '100%', height: '80vh' }}
+      zoom={urlPlace ? 15 : 6}
+      style={
+        urlPlace ? { width: '100%', height: '80vh' } : { width: '', height: '' }
+      }
+      className={urlPlace ? '' : 'map-container'}
     >
       <TileLayer
         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -73,103 +71,27 @@ const MapPlaces = () => {
         zoomOffset={-1}
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker
-        position={singlePlaceCenter || defaultMapCenter}
-        icon={L.divIcon({ className: 'custom-marker', iconSize: [24, 24] })}
-      >
-        <Popup className="pop-up">
-          <p>{singlePlaceData?.name}</p>
-        </Popup>
-      </Marker>
-      {Array.isArray(placesData) &&
-        placesData.map((data, index: number) => {
-          const { id, slug, coordinate, name, pictures } = data;
-          if (coordinate) {
-            const [latStr, lngStr] = coordinate.split('/');
-            const lat = parseFloat(latStr);
-            const lng = parseFloat(lngStr);
-            if (!isNaN(lat) && !isNaN(lng)) {
-              return (
-                <Marker
-                  key={index}
-                  position={[lat, lng]}
-                  icon={customMarkerIcon}
-                >
-                  <Popup className="pop-up">
-                    <Link
-                      to={`/${id}/${slug}`}
-                      key={id}
-                      className="pop-up-title"
-                    >
-                      <p>{name}</p>
-                    </Link>
-                    {pictures.map((picture: IPictures, picIndex: number) => (
-                      <img
-                        key={picIndex}
-                        src={picture.url}
-                        alt={picture.name}
-                        className="pop-up-img"
-                      />
-                    ))}
-                  </Popup>
-                </Marker>
-              );
-            }
-          }
-          return null;
-        })}
-    </MapContainer>
-  ) : (
-    <MapContainer
-      center={defaultMapCenter}
-      zoom={6}
-      className="map-container"
-      // style={{ width: '100%', height: '70vh' }}
-    >
-      <TileLayer
-        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-        tileSize={512}
-        zoomOffset={-1}
-        attribution='Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      {Array.isArray(placesCardData) &&
-        placesCardData.map((data, index: number) => {
-          const { id, slug, coordinate, name, pictures } = data;
-          if (coordinate) {
-            const [latStr, lngStr] = coordinate.split('/');
-            const lat = parseFloat(latStr);
-            const lng = parseFloat(lngStr);
-            if (!isNaN(lat) && !isNaN(lng)) {
-              return (
-                <Marker
-                  key={index}
-                  position={[lat, lng]}
-                  icon={customMarkerIcon}
-                >
-                  <Popup className="pop-up">
-                    <Link
-                      to={`/${id}/${slug}`}
-                      key={id}
-                      className="pop-up-link"
-                    >
-                      <p className="pop-up-title">{name}</p>
-
-                      {pictures.map((picture: IPictures, picIndex: number) => (
-                        <img
-                          key={picIndex}
-                          src={picture.url}
-                          alt={picture.name}
-                          className="pop-up-img"
-                        />
-                      ))}
-                    </Link>
-                  </Popup>
-                </Marker>
-              );
-            }
-          }
-          return null;
-        })}
+      {urlPlace ? (
+        <Marker
+          position={singlePlaceCenter || defaultMapCenter}
+          icon={L.divIcon({ className: 'custom-marker', iconSize: [24, 24] })}
+        >
+          <Popup className="pop-up">
+            <p>{singlePlaceData?.name}</p>
+          </Popup>
+        </Marker>
+      ) : (
+        ''
+      )}
+      {urlPlace
+        ? Array.isArray(placesData) &&
+          placesData.map((data, index: number) => (
+            <CustomMarker key={index} data={data} />
+          ))
+        : Array.isArray(placesCardData) &&
+          placesCardData.map((data, index: number) => (
+            <CustomMarker key={index} data={data} />
+          ))}
     </MapContainer>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import Icon from './Icon';
-import { CategoriesList, SelectedCategory } from '../contexts/index';
+import { CategoriesList, SelectedCategory } from '../../contexts/index';
 
 import './Categories.scss';
-import { ICategories } from '../../@types';
+import { ICategories } from '../../../@types';
 
 const Categories = () => {
   const categoriesList = useContext(CategoriesList);
