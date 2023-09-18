@@ -5,6 +5,7 @@ import { Context } from '../App/App';
 import Cookies from 'js-cookie';
 import { getUser } from '../Auth/Login/Login';
 import Field from '../Utils/Field/FieldInput';
+import apiUrl from '../App/config';
 
 const UserEditProfil = () => {
   const context = useContext(Context);
@@ -27,17 +28,14 @@ const UserEditProfil = () => {
   const handleEdit = async (e: any, token: any) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/users/${userData.id}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ firstname, lastname, pseudonym }),
-        }
-      );
+      const response = await fetch(`${apiUrl}/users/${userData.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ firstname, lastname, pseudonym }),
+      });
       if (response.ok) {
         getUser(token);
         console.log('Les données ont bien été changées');

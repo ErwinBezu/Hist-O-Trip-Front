@@ -5,6 +5,7 @@ import './SignUp.scss';
 import { BsCheckLg } from 'react-icons/bs';
 import { FaInfoCircle, FaTimes } from 'react-icons/fa';
 import { Context } from '../../App/App';
+import apiUrl from '../../App/config';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -62,7 +63,7 @@ const SignUp = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8080/api/users/signup', {
+      const response = await fetch(`${apiUrl}/users/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

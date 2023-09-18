@@ -4,10 +4,11 @@ import SignUp from '../SignUp/SignUp';
 import './Login.scss';
 import { Context } from '../../App/App';
 import { AiOutlineClose } from 'react-icons/ai';
+import apiUrl from '../../App/config';
 
 export const getUser = async (token: any) => {
   try {
-    const response = await fetch('http://localhost:8080/api/users/@me', {
+    const response = await fetch(`${apiUrl}/users/@me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

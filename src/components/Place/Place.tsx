@@ -9,6 +9,7 @@ import MapPlaces from '../MapPlaces/MapPlaces';
 import { SinglePlace } from '../contexts';
 import Icon from '../Utils/Categories/Icon';
 import { IPlaceData } from '../../@types/index';
+import apiUrl from '../App/config';
 
 const Place: React.FC = () => {
   const [singlePlaceData, setSinglePlaceData] = useState<
@@ -21,7 +22,7 @@ const Place: React.FC = () => {
 
   useEffect(() => {
     if (id && slug) {
-      fetch(`http://localhost:8080/api/places/${id}`)
+      fetch(`${apiUrl}/places/${id}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.id === parseInt(id) && data.slug === slug) {

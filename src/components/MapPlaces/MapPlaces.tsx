@@ -7,6 +7,7 @@ import { SelectedCategory, SinglePlace } from '../contexts';
 import L from 'leaflet';
 import { IPictures, IPlaceData } from '../../@types/index';
 import CustomMarker from './CustomMarker';
+import apiUrl from '../App/config';
 
 const MapPlaces = () => {
   const { singlePlaceData } = useContext(SinglePlace);
@@ -24,7 +25,7 @@ const MapPlaces = () => {
   let singlePlaceCenter: [number, number] | null = null;
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/places`)
+    fetch(`${apiUrl}/places`)
       .then((response) => response.json())
       .then((data) => {
         setPlacesData(data);
@@ -36,9 +37,7 @@ const MapPlaces = () => {
 
   useEffect(() => {
     if (selectedCategory) {
-      fetch(
-        `http://localhost:8080/api/places/categories/${selectedCategory.id}`
-      )
+      fetch(`${apiUrl}/places/categories/${selectedCategory.id}`)
         .then((response) => response.json())
         .then((data) => {
           setPlacesCardData(data);

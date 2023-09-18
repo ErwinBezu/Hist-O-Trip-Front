@@ -5,7 +5,7 @@ import MobileBar from './NavBar/MobileBar';
 
 import './Header.scss';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className="header-container">
       <NavBar />

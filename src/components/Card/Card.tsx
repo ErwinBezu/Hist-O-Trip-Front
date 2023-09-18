@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Card.scss';
-
-import Place from '../Place/Place';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Context } from '../App/App';
 import {
   SelectedCategory,
@@ -16,24 +14,15 @@ import {
 } from '../contexts';
 import MapPlaces from '../MapPlaces/MapPlaces';
 import { IPlaceData } from '../../@types/index';
-import UserProfil from '../UserProfil/UserProfil';
-import Filter from '../Header/Filter/Filter';
-import UserEditProfil from '../UserProfil/UserEditProfil';
-import Login from '../Auth/Login/Login';
-import SignUp from '../Auth/SignUp/SignUp';
+import apiUrl from '../App/config';
 
 const Card: React.FC = () => {
   const [visibleCards, setVisibleCards] = React.useState<number>(12);
   const [placesCardData, setPlacesCardData] = useState<IPlaceData[]>([]);
   const {
-    editVisible,
-    isLoggedIn,
-    signUpModal,
     isVisible,
-    setIsVisible,
-    menueVisible,
+
     setMenueVisible,
-    loginModal,
   } = useContext<any>(Context);
 
   const { selectedCategory, setSelectedCategory } =
@@ -42,7 +31,6 @@ const Card: React.FC = () => {
   const { selectedPeriod } = useContext(SelectedPeriod);
   const { selectedTag } = useContext(SelectedTag);
   const { searchInput } = useContext(SearchInput);
-  const url = 'http://localhost:8080/';
 
   const { selectedCenturies, setSelectedCenturies } =
     useContext(SelectedCenturies);
@@ -67,7 +55,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (searchInput) {
-      fetch(`${url}api/places?search=${searchInput}`)
+      fetch(`${apiUrl}/places?search=${searchInput}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -80,7 +68,7 @@ const Card: React.FC = () => {
   useEffect(() => {
     if (selectedCategory && !isVisible) {
       resetVisibleCards();
-      fetch(`${url}api/places/categories/${selectedCategory.id}`)
+      fetch(`${apiUrl}/places/categories/${selectedCategory.id}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -92,7 +80,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedCentury) {
-      fetch(`${url}api/places/centuries/${selectedCentury.id}`)
+      fetch(`${apiUrl}places/centuries/${selectedCentury.id}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -104,7 +92,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (SelectedPeriod) {
-      fetch(`${url}api/places/centuries/${selectedPeriod?.period}`)
+      fetch(`${apiUrl}/places/centuries/${selectedPeriod?.period}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -116,7 +104,7 @@ const Card: React.FC = () => {
 
   useEffect(() => {
     if (selectedTag) {
-      fetch(`${url}api/places/tags/${selectedTag.id}`)
+      fetch(`${apiUrl}/places/tags/${selectedTag.id}`)
         .then((response) => response.json())
         .then((data) => {
           const shuffledData = shuffleArray(data);
@@ -129,7 +117,7 @@ const Card: React.FC = () => {
   useEffect(() => {
     if (isFilterSubmitted) {
       try {
-        fetch(`${url}api/places/filter`, {
+        fetch(`${apiUrl}/places/filter`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

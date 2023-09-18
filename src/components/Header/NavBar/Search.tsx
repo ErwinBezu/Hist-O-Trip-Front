@@ -8,6 +8,8 @@ const Search = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(e.target.value);
   };
+
+  console.log(searchInput);
   return (
     <div className="search-container">
       <input

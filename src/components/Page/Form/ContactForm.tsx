@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import Field from '../../Utils/Field/FieldInput';
 import FieldTextarea from '../../Utils/Field/FieldTextarea';
 import './ContactForm.scss';
+import apiUrl from '../../App/config';
 
 const ContactForm = () => {
   const [pseudonym, setPseudonym] = useState<string>('');
@@ -28,7 +29,7 @@ const ContactForm = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8080/api/contact', {
+      const response = await fetch(`${apiUrl}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

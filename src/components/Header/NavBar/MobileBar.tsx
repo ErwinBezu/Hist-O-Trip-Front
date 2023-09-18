@@ -5,19 +5,6 @@ import { BsFillPersonFill } from 'react-icons/bs';
 
 import { Context } from '../../App/App';
 
-type ContextType = {
-  isVisible: boolean;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  menueVisible: boolean;
-  setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  editVisible: boolean;
-  setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  signUpModal: boolean;
-  setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 const MobileBar = () => {
   const context = useContext(Context);
 

@@ -5,13 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { AiOutlineControl } from 'react-icons/ai';
 import Categories from '../../Utils/Categories/Categories';
 
-type ContextType = {
-  isVisible: boolean;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  menueVisible: boolean;
-  setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 const FilterBar = () => {
   const context = useContext(Context);
 

@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from '../Home/Home';
 import Place from '../Place/Place';
 import './App.scss';
@@ -10,6 +10,7 @@ import SuggestForm from '../Page/Form/SuggestForm';
 import ContactForm from '../Page/Form/ContactForm';
 import Cookies from 'js-cookie';
 import { CategoriesList, CenturiesList, TagsList } from '../contexts';
+import apiUrl from './config';
 
 type ContextType = {
   isVisible: boolean;
@@ -48,7 +49,7 @@ const App: React.FC = () => {
   const [token, setToken] = useState();
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/categories')
+    fetch(`${apiUrl}/categories`)
       .then((response) => response.json())
       .then((data) => {
         setCategoriesList(data);
@@ -57,7 +58,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/tags')
+    fetch(`${apiUrl}/tags`)
       .then((response) => response.json())
       .then((data) => {
         setTagsList(data);
@@ -66,7 +67,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/centuries')
+    fetch(`${apiUrl}/centuries`)
       .then((response) => response.json())
       .then((data) => {
         setCenturiesList(data);

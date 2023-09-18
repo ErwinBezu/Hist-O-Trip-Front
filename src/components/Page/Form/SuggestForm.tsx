@@ -5,6 +5,7 @@ import './SuggestForm.scss';
 import { ICategories, ICenturies, ITags } from '../../../@types/index';
 import FieldInput from '../../Utils/Field/FieldInput';
 import FieldTextarea from '../../Utils/Field/FieldTextarea';
+import apiUrl from '../../App/config';
 
 const SuggestForm = () => {
   const [name, setName] = useState<string>('');
@@ -45,7 +46,7 @@ const SuggestForm = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8080/api/places/add', {
+      const response = await fetch(`${apiUrl}/places/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
