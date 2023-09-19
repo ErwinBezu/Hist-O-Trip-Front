@@ -11,7 +11,11 @@ import {
 } from '../../contexts';
 import { AiOutlineClose } from 'react-icons/ai';
 
-const Filter = ({ setIsVisible }) => {
+const Filter = ({
+  setIsVisible,
+}: {
+  setIsVisible: (isVisible: boolean) => void;
+}) => {
   const { setIsFilterSubmitted } = useContext(MainSearchFilter);
   const { setSelectedTags } = useContext(SelectedTags);
   const { setSelectedCenturies } = useContext(SelectedCenturies);

@@ -112,124 +112,157 @@ const FilterFooter = () => {
   return (
     <>
       <div className="filterFooter-container">
-        <div className="oneFilter-container">
-          <h2
-            className={`${
-              selectedFilter === 'categories'
-                ? ' oneFilter-title active'
-                : 'oneFilter-title'
-            }`}
-            onClick={() => setSelectedFilter('categories')}
-          >
-            Categories
-          </h2>
-          {selectedFilter === 'categories' && (
-            <ul className="oneFilter-list">
-              {randomCategories.map((category) => (
-                <li
-                  className={`${
-                    selectedCategory === category
-                      ? 'oneFilter-item selected'
-                      : 'oneFilter-item'
-                  }`}
-                  key={category.id}
-                  onClick={() => handleCategorySelect(category)}
-                >
-                  {category.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <h1 className="filterFooter-title">
+          Des idées pour vos prochaines découvertes{' '}
+        </h1>
+        <div className="filters-container">
+          <div className="oneFilter-container">
+            <button
+              className={`${
+                selectedFilter === 'categories'
+                  ? ' oneFilter-title active'
+                  : 'oneFilter-title'
+              }`}
+              onClick={() => setSelectedFilter('categories')}
+            >
+              Categories
+            </button>
+            {selectedFilter === 'categories' && (
+              <ul className="oneFilter-list">
+                {randomCategories.map((category) => (
+                  <li
+                    className={`${
+                      selectedCategory === category
+                        ? 'oneFilter-item selected'
+                        : 'oneFilter-item'
+                    }`}
+                    key={category.id}
+                    aria-label={category.name}
+                    onClick={() => handleCategorySelect(category)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleCategorySelect(category);
+                      }
+                    }}
+                    tabIndex={0}
+                  >
+                    {category.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-        <div className="oneFilter-container">
-          <h2
-            className={`oneFilter-title ${
-              selectedFilter === 'centuries'
-                ? ' oneFilter-title active'
-                : 'oneFilter-title'
-            }`}
-            onClick={() => setSelectedFilter('centuries')}
-          >
-            Siècles
-          </h2>
-          {selectedFilter === 'centuries' && (
-            <ul className="oneFilter-list">
-              {randomCenturies.map((century) => (
-                <li
-                  className={`${
-                    selectedCentury === century
-                      ? 'oneFilter-item selected'
-                      : 'oneFilter-item'
-                  }`}
-                  key={century.id}
-                  onClick={() => handleCenturySelect(century)}
-                >
-                  {century.century}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+          <div className="oneFilter-container">
+            <button
+              className={`oneFilter-title ${
+                selectedFilter === 'centuries'
+                  ? ' oneFilter-title active'
+                  : 'oneFilter-title'
+              }`}
+              onClick={() => setSelectedFilter('centuries')}
+            >
+              Siècles
+            </button>
+            {selectedFilter === 'centuries' && (
+              <ul className="oneFilter-list">
+                {randomCenturies.map((century) => (
+                  <li
+                    className={`${
+                      selectedCentury === century
+                        ? 'oneFilter-item selected'
+                        : 'oneFilter-item'
+                    }`}
+                    key={century.id}
+                    aria-label={century.century}
+                    onClick={() => handleCenturySelect(century)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleCenturySelect(century);
+                      }
+                    }}
+                    tabIndex={0}
+                  >
+                    {century.century}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-        <div className="oneFilter-container">
-          <h2
-            className={`oneFilter-title ${
-              selectedFilter === 'periods'
-                ? ' oneFilter-title active'
-                : ' oneFilter-title'
-            }`}
-            onClick={() => setSelectedFilter('periods')}
-          >
-            Périodes
-          </h2>
-          {selectedFilter === 'periods' && (
-            <ul className="oneFilter-list">
-              {filteredPeriods.map((century) => (
-                <li
-                  className={`${
-                    selectedPeriod === century
-                      ? 'oneFilter-item selected'
-                      : 'oneFilter-item'
-                  }`}
-                  key={century.period}
-                  onClick={() => handlePeriodSelect(century)}
-                >
-                  {century.period}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+          <div className="oneFilter-container">
+            <button
+              className={`oneFilter-title ${
+                selectedFilter === 'periods'
+                  ? ' oneFilter-title active'
+                  : ' oneFilter-title'
+              }`}
+              onClick={() => setSelectedFilter('periods')}
+            >
+              Périodes
+            </button>
+            {selectedFilter === 'periods' && (
+              <ul className="oneFilter-list">
+                {filteredPeriods.map((century) => (
+                  <li
+                    className={`${
+                      selectedPeriod === century
+                        ? 'oneFilter-item selected'
+                        : 'oneFilter-item'
+                    }`}
+                    key={century.period}
+                    aria-label={century.period}
+                    onClick={() => handlePeriodSelect(century)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handlePeriodSelect(century);
+                      }
+                    }}
+                    tabIndex={0}
+                  >
+                    {century.period}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-        <div className="oneFilter-container">
-          <h2
-            className={`oneFilter-title ${
-              selectedFilter === 'tags'
-                ? ' oneFilter-title active'
-                : ' oneFilter-title'
-            }`}
-            onClick={() => setSelectedFilter('tags')}
-          >
-            Tags
-          </h2>
-          {selectedFilter === 'tags' && (
-            <ul className="oneFilter-list">
-              {randomTags.map((tag) => (
-                <li
-                  className={`${
-                    selectedTag === tag
-                      ? 'oneFilter-item selected'
-                      : 'oneFilter-item'
-                  }`}
-                  key={tag.id}
-                  onClick={() => handleTagSelect(tag)}
-                >
-                  {tag.name}
-                </li>
-              ))}
-            </ul>
-          )}
+          <div className="oneFilter-container">
+            <button
+              className={`oneFilter-title ${
+                selectedFilter === 'tags'
+                  ? ' oneFilter-title active'
+                  : ' oneFilter-title'
+              }`}
+              onClick={() => setSelectedFilter('tags')}
+            >
+              Tags
+            </button>
+            {selectedFilter === 'tags' && (
+              <ul className="oneFilter-list">
+                {randomTags.map((tag) => (
+                  <li
+                    className={`${
+                      selectedTag === tag
+                        ? 'oneFilter-item selected'
+                        : 'oneFilter-item'
+                    }`}
+                    key={tag.id}
+                    aria-label={tag.name}
+                    onClick={() => handleTagSelect(tag)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleTagSelect(tag);
+                      }
+                    }}
+                    tabIndex={0}
+                  >
+                    {tag.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </>

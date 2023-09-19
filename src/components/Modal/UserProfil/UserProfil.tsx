@@ -17,14 +17,7 @@ const UserProfil = () => {
   if (!context) {
     return null;
   }
-  const {
-    isLoggedIn,
-    setIsLoggedIn,
-    editVisible,
-    setEditVisible,
-    setMenueVisible,
-    menueVisible,
-  } = context;
+  const { setEditVisible, setMenueVisible } = context;
   // ! Fin du code à verifier
 
   return (

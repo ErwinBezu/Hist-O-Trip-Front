@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 import { IPictures } from '../../../@types';
 import L from 'leaflet';
 
-const CustomMarker = ({ data }) => {
+interface ICustomMarkerData {
+  id: number;
+  slug: string;
+  coordinate: string;
+  name: string;
+  pictures: IPictures[];
+}
+
+const CustomMarker: React.FC<{ data: ICustomMarkerData }> = ({ data }) => {
   const customMarkerIcon = new L.Icon({
     iconUrl:
       'https://ik.imagekit.io/v4u5l9d7p/marker-icon.png?updatedAt=1694013187611',

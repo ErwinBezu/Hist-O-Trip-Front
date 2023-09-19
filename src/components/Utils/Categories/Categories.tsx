@@ -25,17 +25,25 @@ const Categories = () => {
   };
 
   return (
-    <nav className="categories-container">
+    <nav className="categories-container" role="navigation">
       <ul className="categories-list">
         {categoriesList.map((category: ICategories) => (
           <li
+            role="menuitem"
             className={
               category === selectedCategory
                 ? 'category-item category-item--active'
                 : 'category-item'
             }
             key={category.id}
+            aria-label={category.name}
             onClick={() => handleCategorySelect(category)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleCategorySelect(category);
+              }
+            }}
+            tabIndex={0}
           >
             <Icon name={category.icon} />
             <span className="category-name">{category.name}</span>
