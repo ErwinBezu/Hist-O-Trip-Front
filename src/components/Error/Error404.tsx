@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../Header/Header';
+import Header from '../Common/Header/Header';
 import './Error404.scss';
 import { Link } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Header from '../Common/Header/Header';
+import Footer from '../Common/Footer/Footer';
 import { Outlet } from 'react-router-dom';
 
 const Page: React.FC = () => {

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from '../Home/Home';
-import Place from '../Place/Place';
+import Place from '../Page/Place/Place';
 import './App.scss';
 import React, { createContext, useEffect, useState } from 'react';
 import Error404 from '../Error/Error404';
