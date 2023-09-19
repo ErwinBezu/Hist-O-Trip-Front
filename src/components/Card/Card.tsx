@@ -53,64 +53,49 @@ const Card: React.FC = () => {
     return newArray;
   };
 
+  const fetchPlacesCardData = (url: string) => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const shuffledData = shuffleArray(data);
+        setPlacesCardData(shuffledData);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     if (searchInput) {
-      fetch(`${apiUrl}/places?search=${searchInput}`)
-        .then((response) => response.json())
-        .then((data) => {
-          const shuffledData = shuffleArray(data);
-          setPlacesCardData(shuffledData);
-        })
-        .catch((err) => console.error(err));
+      const url = `${apiUrl}/places?search=${searchInput}`;
+      fetchPlacesCardData(url);
     }
   }, [searchInput]);
 
   useEffect(() => {
     if (selectedCategory && !isVisible) {
       resetVisibleCards();
-      fetch(`${apiUrl}/places/categories/${selectedCategory.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          const shuffledData = shuffleArray(data);
-          setPlacesCardData(shuffledData);
-        })
-        .catch((err) => console.error(err));
+      const url = `${apiUrl}/places/categories/${selectedCategory.id}`;
+      fetchPlacesCardData(url);
     }
   }, [selectedCategory]);
 
   useEffect(() => {
     if (selectedCentury) {
-      fetch(`${apiUrl}places/centuries/${selectedCentury.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          const shuffledData = shuffleArray(data);
-          setPlacesCardData(shuffledData);
-        })
-        .catch((err) => console.error(err));
+      const url = `${apiUrl}/places/centuries/${selectedCentury.id}`;
+      fetchPlacesCardData(url);
     }
   }, [selectedCentury]);
 
   useEffect(() => {
-    if (SelectedPeriod) {
-      fetch(`${apiUrl}/places/centuries/${selectedPeriod?.period}`)
-        .then((response) => response.json())
-        .then((data) => {
-          const shuffledData = shuffleArray(data);
-          setPlacesCardData(shuffledData);
-        })
-        .catch((err) => console.error(err));
+    if (selectedPeriod) {
+      const url = `${apiUrl}/places/centuries/${selectedPeriod.period}`;
+      fetchPlacesCardData(url);
     }
   }, [selectedPeriod]);
 
   useEffect(() => {
     if (selectedTag) {
-      fetch(`${apiUrl}/places/tags/${selectedTag.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          const shuffledData = shuffleArray(data);
-          setPlacesCardData(shuffledData);
-        })
-        .catch((err) => console.error(err));
+      const url = `${apiUrl}/places/tags/${selectedTag.id}`;
+      fetchPlacesCardData(url);
     }
   }, [selectedTag]);
 

@@ -1,20 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import './MapPlaces.scss';
 import { SelectedCategory, SinglePlace } from '../contexts';
 import L from 'leaflet';
-import { IPictures, IPlaceData } from '../../@types/index';
+import { IPlaceData } from '../../@types/index';
 import CustomMarker from './CustomMarker';
-import apiUrl from '../App/config';
+import { fetchDataList, usePlacesList } from '../Api/ApiDataList';
 
 const MapPlaces = () => {
   const { singlePlaceData } = useContext(SinglePlace);
   const { selectedCategory } = useContext(SelectedCategory);
-  const [placesData, setPlacesData] = useState<IPlaceData | undefined>(
-    undefined
-  );
   const [placesCardData, setPlacesCardData] = useState<IPlaceData[]>([]);
 
   const location = useLocation();
@@ -24,27 +21,8 @@ const MapPlaces = () => {
   let defaultMapCenter: [number, number] = [45.71301, 5.12916];
   let singlePlaceCenter: [number, number] | null = null;
 
-  useEffect(() => {
-    fetch(`${apiUrl}/places`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPlacesData(data);
-      })
-      .catch((error) => {
-        console.error('Pas bon', error);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (selectedCategory) {
-      fetch(`${apiUrl}/places/categories/${selectedCategory.id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setPlacesCardData(data);
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [selectedCategory]);
+  const placesData = usePlacesList();
+  fetchDataList(`places/categories/${selectedCategory?.id}`, setPlacesCardData);
 
   if (singlePlaceData) {
     const [latStr, lngStr] = singlePlaceData?.coordinate.split('/');

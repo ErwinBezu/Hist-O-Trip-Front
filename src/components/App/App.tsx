@@ -10,7 +10,11 @@ import SuggestForm from '../Page/Form/SuggestForm';
 import ContactForm from '../Page/Form/ContactForm';
 import Cookies from 'js-cookie';
 import { CategoriesList, CenturiesList, TagsList } from '../contexts';
-import apiUrl from './config';
+import {
+  useCategoriesList,
+  useTagsList,
+  useCenturiesList,
+} from '../Api/ApiDataList';
 
 type ContextType = {
   isVisible: boolean;
@@ -41,39 +45,12 @@ const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
   const [loginModal, setLoginModal] = useState(false);
 
-  const [categoriesList, setCategoriesList] = useState([]);
-  const [centuriesList, setCenturiesList] = useState([]);
-  const [tagsList, setTagsList] = useState([]);
-
   const [userData, setUserData] = useState();
   const [token, setToken] = useState();
 
-  useEffect(() => {
-    fetch(`${apiUrl}/categories`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategoriesList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/tags`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTagsList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/centuries`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCenturiesList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  const categoriesList = useCategoriesList();
+  const centuriesList = useCenturiesList();
+  const tagsList = useTagsList();
 
   return (
     <CenturiesList.Provider value={centuriesList}>
