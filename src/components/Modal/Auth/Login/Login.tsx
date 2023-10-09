@@ -58,19 +58,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const {
-    setLoginModal,
-    menueVisible,
-    setMenueVisible,
-    signUpModal,
-    setSignUpModal,
-    isLoggedIn,
-    setIsLoggedIn,
-    userData,
-    setUserData,
-    token,
-    setToken,
-  } = useContext<any>(Context);
+  const { setLoginModal, setSignUpModal, setIsLoggedIn, token, setToken } =
+    useContext<any>(Context);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

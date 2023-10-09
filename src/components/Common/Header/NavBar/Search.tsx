@@ -9,7 +9,6 @@ const Search = () => {
     setSearchInput(e.target.value);
   };
 
-  console.log(searchInput);
   return (
     <div className="search-container">
       <input

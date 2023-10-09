@@ -11,14 +11,12 @@ const UserProfil = () => {
     window.location.reload();
   };
 
-  // ! a verifier le fonctionnement
   const context = useContext(Context);
 
   if (!context) {
     return null;
   }
   const { setEditVisible, setMenueVisible } = context;
-  // ! Fin du code à verifier
 
   return (
     <div className="profil-modal">
