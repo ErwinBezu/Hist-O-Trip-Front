@@ -1,10 +1,10 @@
 /* eslint-disable react/function-component-definition */
 import { FC, useEffect, useState } from 'react';
 import './Home.scss';
-import Header from '../Header/Header';
-import Card from '../Card/Card';
-import Footer from '../Footer/Footer';
-import FilterFooter from '../FilterFooter/FilterFooter';
+import Header from '../Common/Header/Header';
+import Card from './Card/Card';
+import Footer from '../Common/Footer/Footer';
+import FilterFooter from './FilterFooter/FilterFooter';
 
 import {
   SearchInput,

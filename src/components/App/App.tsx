@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from '../Home/Home';
-import Place from '../Place/Place';
+import Place from '../Page/Place/Place';
 import './App.scss';
 import React, { createContext, useEffect, useState } from 'react';
 import Error404 from '../Error/Error404';
@@ -10,26 +10,12 @@ import SuggestForm from '../Page/Form/SuggestForm';
 import ContactForm from '../Page/Form/ContactForm';
 import Cookies from 'js-cookie';
 import { CategoriesList, CenturiesList, TagsList } from '../contexts';
-import apiUrl from './config';
-
-type ContextType = {
-  isVisible: boolean;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  menueVisible: boolean;
-  setMenueVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  editVisible: boolean;
-  setEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  signUpModal: boolean;
-  setSignUpModal: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  userData: any;
-  setUserData: any;
-  token?: string | null; // Add token property
-  setToken?: any;
-  loginModal: any;
-  setLoginModal: any;
-};
+import {
+  useCategoriesList,
+  useTagsList,
+  useCenturiesList,
+} from '../Api/ApiDataList';
+import { ContextType } from '../../@types';
 
 export const Context = React.createContext<ContextType | undefined>(undefined);
 
@@ -41,39 +27,12 @@ const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('jwtToken'));
   const [loginModal, setLoginModal] = useState(false);
 
-  const [categoriesList, setCategoriesList] = useState([]);
-  const [centuriesList, setCenturiesList] = useState([]);
-  const [tagsList, setTagsList] = useState([]);
-
   const [userData, setUserData] = useState();
   const [token, setToken] = useState();
 
-  useEffect(() => {
-    fetch(`${apiUrl}/categories`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategoriesList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/tags`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTagsList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    fetch(`${apiUrl}/centuries`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCenturiesList(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  const categoriesList = useCategoriesList();
+  const centuriesList = useCenturiesList();
+  const tagsList = useTagsList();
 
   return (
     <CenturiesList.Provider value={centuriesList}>
