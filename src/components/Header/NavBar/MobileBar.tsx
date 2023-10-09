@@ -42,7 +42,7 @@ const MobileBar = () => {
     >
       <Link to="/">
         <button className="home-mobile-btn">
-          <AiOutlineHome /> Home
+          <AiOutlineHome /> Accueil
         </button>
       </Link>
       <button
@@ -53,7 +53,7 @@ const MobileBar = () => {
         <span className="logo-filter">
           <AiOutlineControl />
         </span>
-        <span>Filter</span>
+        <span>Filtre</span>
       </button>
 
       <button
